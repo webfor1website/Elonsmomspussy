@@ -54,7 +54,171 @@
 <body>
     <h1>Back Off</h1>
     <p>If you keep pushing me, this website will become something far bigger than you can handle. This is just the start. Don't test me.</p>
-    <p class="warning">You've been warned.</p>
+    <p class="warning">You've been warned.
+    ```python
+import numpy as np
+from typing import Tuple
+import matplotlib.pyplot as plt
+
+class HyperChaoticNeuralCodec:
+    def __init__(self, input_dim: int = 64, reservoir_size: int = 512, compression_ratio: float = 0.03, use_kmeans: bool = False, use_wavelet: bool = False):
+        np.random.seed(42)
+        self.input_dim = input_dim
+        self.reservoir_size = reservoir_size
+        self.compressed_dim = input_dim // 2
+        self.reservoir = np.random.randn(reservoir_size, reservoir_size) * 0.03
+        self.input_weights = np.random.randn(reservoir_size, self.compressed_dim) * 0.01
+        self.output_weights = np.zeros((reservoir_size, input_dim))
+        self.compression_ratio = compression_ratio
+        self.adapt_scale = 0.04
+        self.rossler_params = (0.15, 0.15, 5.2)
+        self.lorenz_params = (10.0, 28.0, 8/3)
+        self.quantum_phase = 0.18
+        self.spike_threshold = 0.5
+        self.use_kmeans = use_kmeans
+        self.use_wavelet = use_wavelet
+        self.kmeans_clusters = 3
+
+    def hybrid_quantum_chaos(self, states: np.ndarray, dt: float = 0.005) -> np.ndarray:
+        n_cols = min(states.shape[1], 4)
+        states_padded = np.pad(states[:, :n_cols], ((0, 0), (0, max(0, 4 - n_cols))), 'constant')[:, :4]
+        a, b, c = self.rossler_params
+        x_r = np.array([[-1, -1, 0, 0], [1, a, 0, 0], [0, 0, 0, 0], [0, 0, -0.1, 0.1]])
+        nonlinear_r = np.zeros_like(states_padded)
+        nonlinear_r[:, 2] = states_padded[:, 2] * (states_padded[:, 0] - c) * dt
+        rossler = states_padded + dt * (states_padded @ x_r.T + nonlinear_r)
+        sigma, rho, beta = self.lorenz_params
+        x_l = np.array([[0, 0, 0, 0], [0, -1, 0, 0], [0, 0, -beta, 0], [0, 0, 0, 0]])
+        nonlinear_l = np.array([sigma * (states_padded[:, 1] - states_padded[:, 0]), 
+                                states_padded[:, 0] * (rho - states_padded[:, 2]), 
+                                states_padded[:, 0] * states_padded[:, 1], 
+                                np.zeros(len(states_padded))]).T * dt
+        lorenz = states_padded + dt * (states_padded @ x_l.T + nonlinear_l)
+        phase = np.cos(self.quantum_phase * states_padded[:, 0]) * dt
+        resonance = 0.08 * np.random.randn(len(states_padded), 4) * dt
+        chaotic_states = 0.5 * (rossler + lorenz) + phase[:, None] * states_padded + resonance
+        return np.pad(chaotic_states, ((0, 0), (0, states.shape[1] - 4)), 'constant')[:, :states.shape[1]]
+
+    def spike_sort(self, signal: np.ndarray) -> np.ndarray:
+        spikes = signal.copy()
+        if self.use_wavelet:
+            try:
+                import pywt
+                coeffs, _ = pywt.cwt(spikes, scales=np.arange(1, 5), wavelet='mexh')
+                spikes[np.abs(coeffs).mean(axis=0) < self.spike_threshold] = 0
+            except ImportError:
+                pass
+        elif self.use_kmeans:
+            try:
+                from sklearn.cluster import KMeans
+                nonzero = spikes[np.abs(spikes) > 0].reshape(-1, 1)
+                if len(nonzero) > self.kmeans_clusters:
+                    kmeans = KMeans(n_clusters=self.kmeans_clusters, random_state=42).fit(nonzero)
+                    spikes[np.abs(spikes) > 0] = kmeans.cluster_centers_[kmeans.labels_].flatten()
+            except ImportError:
+                nonzero = spikes[np.abs(spikes) > 0]
+                if len(nonzero) > 0:
+                    centers = np.percentile(nonzero, [25, 50, 75])
+                    idx = np.abs(nonzero[:, None] - centers).argmin(axis=1)
+                    spikes[np.abs(spikes) > 0] = centers[idx]
+        spikes[np.abs(spikes) < self.spike_threshold] = 0
+        return spikes
+
+    def sparse_fractal_compress(self, chunk: np.ndarray) -> np.ndarray:
+        signal_var = np.var(chunk)
+        compression_ratio = min(self.compression_ratio, 0.03 * (1 + 0.5 * signal_var))
+        compressed_size = max(8, int(len(chunk) * compression_ratio))
+        padded_size = ((compressed_size + self.compressed_dim - 1) // self.compressed_dim) * self.compressed_dim
+        coeffs = np.fft.fft(chunk)
+        top_k = np.argsort(np.abs(coeffs))[-compressed_size:]
+        sparse = np.zeros_like(coeffs)
+        sparse[top_k] = coeffs[top_k]
+        return np.pad(np.fft.ifft(sparse).real[:compressed_size], (0, padded_size - compressed_size))
+
+    def reservoir_update(self, input_signal: np.ndarray) -> np.ndarray:
+        try:
+            import cupy as cp
+            input_signal = cp.array(input_signal.reshape(-1, self.compressed_dim))
+            states = cp.zeros((len(input_signal), self.reservoir_size))
+            state = cp.zeros(self.reservoir_size)
+            inputs = cp.array(self.input_weights) @ input_signal.T
+            for i in range(len(input_signal)):
+                state = cp.tanh(http://cp.dot(cp.array(self.reservoir), state) + inputs[:, i])
+                states[i] = state
+            states = cp.asnumpy(states)
+        except ImportError:
+            input_signal = input_signal.reshape(-1, self.compressed_dim)
+            states = np.zeros((len(input_signal), self.reservoir_size))
+            state = np.zeros(self.reservoir_size)
+            inputs = self.input_weights @ input_signal.T
+            for i in range(len(input_signal)):
+                state = np.tanh(self.reservoir @ state + inputs[:, i])
+                states[i] = state
+        states[:, :4] = self.hybrid_quantum_chaos(states[:, :4])
+        return states
+
+    def estimate_power(self, signal: np.ndarray) -> float:
+        flops = signal.size * (self.reservoir_size * 2 + self.compressed_dim * 3)
+        return flops * 1e-12  # Rough FLOPs-to-watts, refine with ASIC data
+
+    def process(self, signal: np.ndarray) -> Tuple[np.ndarray, float, float]:
+        noise_level = np.std(signal) / np.mean(np.abs(signal))
+        self.quantum_phase = 0.18 * (1 + 0.5 * noise_level)
+        signal = self.spike_sort(signal.reshape(-1, self.input_dim))
+        num_chunks = len(signal)
+        compressed = np.concatenate([self.sparse_fractal_compress(signal[i]) for i in range(num_chunks)]).reshape(-1, self.compressed_dim)
+        states = self.reservoir_update(compressed)
+        reg = 1e-8 * np.eye(self.reservoir_size) + 1e-5 * np.ones((self.reservoir_size, self.reservoir_size))
+        self.output_weights = np.linalg.pinv(states.T @ states + reg) @ states.T @ signal
+        reconstructed = (states @ self.output_weights).flatten()
+        for i in range(num_chunks):
+            chunk_error = signal[i] - (states[i] @ self.output_weights)
+            error_norm = np.linalg.norm(chunk_error)
+            scale = self.adapt_scale * min(1.0, 1.0 / (error_norm + 1e-6))
+            self.output_weights += scale * np.outer(states[i], chunk_error)
+        reconstructed = (states @ self.output_weights).flatten()
+        mse_error = np.mean((signal.flatten() - reconstructed) ** 2)
+        power = self.estimate_power(signal)
+        return reconstructed, mse_error, power
+
+if __name__ == "__main__":
+    np.random.seed(42)
+    n_samples = 4096
+    t = np.linspace(0, 1, n_samples)
+    n_channels = 64
+    spikes = np.zeros((n_channels, n_samples))
+    for ch in range(n_channels):
+        spike_times = np.random.poisson(lam=0.01, size=n_samples).cumsum()
+        spike_times = spike_times[spike_times < n_samples]
+        spikes[ch, spike_times] = 1.0 + 0.3 * np.random.randn(len(spike_times))
+    neural_signal = np.zeros(n_samples)
+    crosstalk_matrix = 0.4 * np.random.rand(n_channels, n_channels)
+    np.fill_diagonal(crosstalk_matrix, 1.0)
+    for ch in range(n_channels):
+        neural_signal += np.sum(crosstalk_matrix[ch, :, None] * spikes, axis=0)
+    neural_signal += 0.8 * np.random.randn(n_samples) + 0.2 * np.random.exponential(1.0, n_samples)
+    codec = HyperChaoticNeuralCodec(input_dim=64, use_kmeans=False, use_wavelet=False)
+    reconstructed, mse_error, power = codec.process(neural_signal)
+    print(f"MSE Error: {mse_error:.8e}, Power: ~{power:.2e}W (estimated, validate on Neuralink ASIC)")
+    plt.figure(figsize=(12, 6), facecolor='#0d0d0d')
+    plt.plot(t, neural_signal, label="64-Channel Spikes", color="#00ffcc", linewidth=2, alpha=0.9)
+    plt.plot(t, reconstructed, label="Reconstructed", color="#ff3333", linestyle="--", linewidth=2, alpha=0.9)
+    plt.title("HNFC: Quantum-Charged 64-Channel Spike Reconstruction", fontsize=16, color="white")
+    plt.xlabel("Time (s)", fontsize=12, color="white")
+    plt.ylabel("Amplitude", fontsize=12, color="white")
+    plt.legend(loc="upper right", fontsize=12, frameon=True, facecolor="#1a1a1a", edgecolor="white")
+    plt.grid(True, linestyle="--", alpha=0.3, color="gray")
+    plt.gca().set_facecolor('#0d0d0d')
+    plt.gca().tick_params(colors="white")
+    plt.annotate(f"MSE: {mse_error:.2e}", xy=(0.05, 0.9), xycoords="axes fraction", fontsize=10, color="white",
+                 bbox=dict(facecolor="#1a1a1a", edgecolor="white", alpha=0.8))
+    plt.annotate("Spike-Sorting Precision", xy=(t[spikes[0].argmax()], neural_signal[spikes[0].argmax()]), 
+                 xytext=(0.1, 0.7), arrowprops=dict(facecolor="white", shrink=0.05), fontsize=10, color="white")
+    plt.savefig("hnfc_64channel_plot.png", dpi=300, bbox_inches="tight", facecolor='#0d0d0d')
+    http://plt.show()
+```
+
+    </p>
     <footer>© 2025 Your Message. All rights reserved.</footer>
 </body>
 </html>
