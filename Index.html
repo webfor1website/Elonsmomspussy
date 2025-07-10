@@ -11,6 +11,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             background: #0d0d0d;
             font-family: 'Courier New', monospace;
             overflow: hidden;
@@ -35,20 +36,38 @@
             transition: opacity 1s;
         }
         .visible { opacity: 1; }
+        #livestream-link {
+            color: #33ccff;
+            font-size: 1.5em;
+            margin-top: 15px;
+            text-decoration: underline;
+            text-shadow: 0 0 5px #33ccff;
+        }
+        #livestream-link a {
+            color: inherit;
+            text-decoration: none;
+        }
+        #livestream-link a:hover {
+            text-shadow: 0 0 15px #33ccff;
+        }
     </style>
 </head>
 <body>
     <div id="countdown">Loading...</div>
     <div id="post-message">Grok 4 is LIVE! Check @xAI for the reveal! 🚀</div>
+    <div id="livestream-link">
+        Watch Live: <a href="https://x.com/xAI" target="_blank">xAI Livestream</a>
+    </div>
     <script>
         function updateCountdown() {
             const now = new Date();
             const target = new Date("July 09, 2025 20:00:00 MST"); // 8:00 PM MST
             let diff = target - now;
 
+            const countdown = document.getElementById("countdown");
             const message = document.getElementById("post-message");
             if (diff <= 0) {
-                document.getElementById("countdown").style.display = "none";
+                countdown.style.display = "none";
                 message.classList.add("visible");
                 return;
             }
@@ -57,12 +76,9 @@
             const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
             const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
 
-            document.getElementById("countdown").innerText = 
-                `Grok 4 Launch: ${hours}h ${minutes}m ${seconds}s`;
+            countdown.innerText = `Grok 4 Launch: ${hours}h ${minutes}m ${seconds}s`;
         }
 
         setInterval(updateCountdown, 1000); // Update every second
         updateCountdown(); // Initial call
-    </script>
-</body>
-</html>
+    </script
