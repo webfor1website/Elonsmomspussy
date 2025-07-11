@@ -3,85 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grok 4 Countdown - xAI Launch</title>
+    <title>Elon Musk: Allegations and Controversies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: #0d0d0d;
-            font-family: 'Courier New', monospace;
-            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f8f9fa;
         }
-        #countdown {
-            color: #00ffcc;
-            font-size: 2.5em;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-            animation: pulse 2s infinite;
+        .navbar {
+            background-color: #0d0d0d;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
         }
-        #post-message {
-            color: #ff3333;
-            font-size: 1.2em;
-            margin-top: 20px;
-            opacity: 0;
-            transition: opacity 1s;
+        .section {
+            padding: 50px 0;
         }
-        .visible { opacity: 1; }
-        #livestream-link {
-            color: #33ccff;
-            font-size: 1.5em;
-            margin-top: 15px;
-            text-decoration: underline;
-            text-shadow: 0 0 5px #33ccff;
+        .section h2 {
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #dc3545;
         }
-        #livestream-link a {
-            color: inherit;
+        .card {
+            background-color: #2c2c2c;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .disclaimer {
+            background-color: #3d2c2c;
+            border-left: 5px solid #dc3545;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #0d0d0d;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .source-link {
+            color: #17a2b8;
             text-decoration: none;
         }
-        #livestream-link a:hover {
-            text-shadow: 0 0 15px #33ccff;
+        .source-link:hover {
+            text-decoration: underline;
+        }
+        .unverified {
+            color: #dc3545;
+            font-style: italic;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div id="countdown">00h 41m 00s</div> <!-- Initial value for safety -->
-    <div id="post-message">Grok 4 is LIVE! Check @xAI for the reveal! 🚀</div>
-    <div id="livestream-link">
-        Watch Live: <a href="https://x.com/xAI" target="_blank">xAI Livestream</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Musk Allegations</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#early-years">Early Years</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#relationships">Relationships</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#business">Business</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recent">Recent</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#personal">Personal Allegations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sources">Sources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Disclaimer Modal -->
+    <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="disclaimerModalLabel">Legal Disclaimer</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This website presents allegations and controversies involving Elon Musk as reported in public sources or submitted anonymously. <strong>Factual claims</strong> are backed by credible publications, while <strong>unverified claims</strong> (e.g., from X posts or anonymous submissions) are clearly labeled and should be treated with skepticism. This site is for educational purposes only and does not intend to defame, harass, or harm. Publishing defamatory content carries significant legal risks, including lawsuits for libel or slander. Consult a legal professional before publishing similar content. The creators are not liable for misuse of this information.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script>
-        function updateCountdown() {
-            const now = new Date();
-            const target = new Date("July 09, 2025 20:00:00 MST"); // 8:00 PM MST
-            let diff = target - now;
 
-            const countdown = document.getElementById("countdown");
-            const message = document.getElementById("post-message");
-            if (diff <= 0) {
-                countdown.style.display = "none";
-                message.classList.add("visible");
-                return;
-            }
+    <!-- Main Content -->
+    <div class="container">
+        <section id="home" class="section">
+            <h2>Welcome</h2>
+            <div class="disclaimer">
+                <p><strong>Legal Notice:</strong> This site compiles allegations and controversies about Elon Musk, sourced from credible and unverified sources, including anonymous submissions. Factual claims are verified; unverified claims are labeled. <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Read full disclaimer</a>.</p>
+            </div>
+            <p>This website documents reported legal and ethical controversies involving Elon Musk, from his early years to recent events, for educational purposes. All claims are sourced transparently, with links to original reports where available.</p>
+        </section>
 
-            const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-            const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-            const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        <section id="early-years" class="section">
+            <h2>Early Years</h2>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#early-years-content" aria-expanded="false" aria-controls="early-years-content">
+                    Family Background Allegations
+                </div>
+                <div id="early-years-content" class="collapse card-body">
+                    <p><strong>Unverified Claim:</strong> An X post alleges Musk’s father, Errol Musk, abused a minor, and Elon covered it up by inviting him to the US. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                    <p>No verified criminal allegations from Musk’s early years in South Africa or Canada are documented in credible sources. Musk reported being bullied at school, including a severe beating requiring hospitalization. <span class="source-link">[Source: <a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank">Wikipedia, 2025]</a></span></p>
+                </div>
+            </div>
+        </section>
 
-            countdown.innerText = `Grok 4 Launch: ${hours}h ${minutes}m ${seconds}s`;
-        }
+        <section id="relationships" class="section">
+            <h2>Relationships and Allegations</h2>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#justine-content" aria-expanded="false" aria-controls="justine-content">
+                    Justine Musk (Ex-Wife, 2000–2008)
+                </div>
+                <div id="justine-content" class="collapse card-body">
+                    <p>Controversial divorce with disputes over custody and support. Justine described Musk as lacking empathy and treating her as a “trophy wife.” <span class="source-link">[Source: <a href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/" target="_blank">Marie Claire, 2010]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#talulah-content" aria-expanded="false" aria-controls="talulah-content">
+                    Talulah Riley (Ex-Wife, 2010–2012, 2013–2016)
+                </div>
+                <div id="talulah-content" class="collapse card-body">
+                    <p>Volatile relationship with two marriages and divorces. No criminal allegations, but Riley influenced Musk’s Twitter acquisition. <span class="source-link">[Source: <a href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter" target="_blank">The Guardian, 2022]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#amber-content" aria-expanded="false" aria-controls="amber-content">
+                    Amber Heard (Ex-Girlfriend, 2016–2018)
+                </div>
+                <div id="amber-content" class="collapse card-body">
+                    <p>Alleged legal battle over frozen embryos; Musk reportedly sued for rights. <span class="source-link">[Source: <a href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html" target="_blank">Daily Mail, 2021]</a></span></p>
+                    <p><strong>Unverified Claim:</strong> Musk hired men to follow Heard post-breakup. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#grimes-content" aria-expanded="false" aria-controls="grimes-content">
+                    Grimes (Ex-Girlfriend, 2018–2021)
+                </div>
+                <div id="grimes-content" class="collapse card-body">
+                    <p>Custody disputes over three children. Grimes alleged Musk ignored a child’s medical crisis. <span class="source-link">[Source: <a href="https://timesofindia.indiatimes.com/life-style/relationships/love-sex/elon-musks-biggest-relationship-controversies-and-breakup-dramas/photostory/108013279.cms" target="_blank">Times of India, 2024]</a></span></p>
+                    <p><strong>Unverified Claim:</strong> Alleged involvement in “threesomes and drug orgies” with models. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#shivon-content" aria-expanded="false" aria-controls="shivon-content">
+                    Shivon Zilis (Neuralink Executive, Ongoing)
+                </div>
+                <div id="shivon-content" class="collapse card-body">
+                    <p>Alleged inappropriate workplace relationship; Musk encouraged her to have children and offered to be a sperm donor. <span class="source-link">[Source: <a href="https://www.ndtv.com/world-news/sex-abuse-drug-use-5-shocking-allegations-against-elon-musk-in-new-report-5874566" target="_blank">NDTV, 2024]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#ashley-content" aria-expanded="false" aria-controls="ashley-content">
+                    Ashley St. Clair (2024–Present)
+                </div>
+                <div id="ashley-content" class="collapse card-body">
+                    <p>Alleged failure to acknowledge child and reduced child support payments. <span class="source-link">[Source: <a href="https://www.eonline.com/news/1396655/elon-musks-dating-history" target="_blank">E! Online, 2023]</a></span></p>
+                </div>
+            </div>
+        </section>
 
-        // Ensure it runs immediately and every second
-        updateCountdown(); // Force initial update
-        setInterval(updateCountdown, 1000); // Update every second
-    </script>
+        <section id="business" class="section">
+            <h2>Business Controversies</h2>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#spacex-content" aria-expanded="false" aria-controls="spacex-content">
+                    SpaceX Sexual Harassment Lawsuits
+                </div>
+                <div id="spacex-content" class="collapse card-body">
+                    <p>Fired employees filed lawsuits alleging sexual harassment by Musk and retaliation for reporting. <span class="source-link">[Source: <a href="https://www.bloomberg.com/news/articles/2024-06-12/elon-musk-sued-by-ex-spacex-employees-over-sexual-harassment-retaliation" target="_blank">Bloomberg, 2024]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#twitter-content" aria-expanded="false" aria-controls="twitter-content">
+                    Twitter/X Content Moderation (2023)
+                </div>
+                <div id="twitter-content" class="collapse card-body">
+                    <p>Reinstated account posting illegal content, raising concerns about platform safety. <span class="source-link">[Source: <a href="https://www.washingtonpost.com/technology/2023/02/07/twitter-musk-content-moderation/" target="_blank">Washington Post, 2023]</a></span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="recent" class="section">
+            <h2>Recent Allegations</h2>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#voter-content" aria-expanded="false" aria-controls="voter-content">
+                    Voter Registration Controversy (2024)
+                </div>
+                <div id="voter-content" class="collapse card-body">
+                    <p>Accused of offering $1M to swing-state voters, potentially violating election laws. <span class="source-link">[Source: <a href="https://www.thenation.com/article/politics/elon-musk-voter-fraud/" target="_blank">The Nation, 2024]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#doge-content" aria-expanded="false" aria-controls="doge-content">
+                    DOGE Conflicts of Interest (2024–2025)
+                </div>
+                <div id="doge-content" class="collapse card-body">
+                    <p>Alleged misuse of DOGE role to benefit Starlink; accessed personal data unlawfully. <span class="source-link">[Source: <a href="https://www.theguardian.com/us-news/2025/feb/10/elon-musk-doge-controversy" target="_blank">The Guardian, 2025]</a></span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#drug-content" aria-expanded="false" aria-controls="drug-content">
+                    Drug Use Allegations (2025)
+                </div>
+                <div id="drug-content" class="collapse card-body">
+                    <p>Reported heavy use of ketamine, ecstasy, and other drugs, raising concerns about behavior. <span class="source-link">[Source: <a href="https://www.nytimes.com/2025/05/30/us/politics/elon-musk-drugs-family.html" target="_blank">New York Times, 2025]</a></span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="personal" class="section">
+            <h2>Personal Allegations</h2>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#personal-content" aria-expanded="false" aria-controls="personal-content">
+                    Anonymous Allegations of Psychological Influence
+                </div>
+                <div id="personal-content" class="collapse card-body">
+                    <p><strong>Unverified Claim:</strong> An anonymous individual alleges Musk exerted psychological influence, causing distress and near-suicide attempts. No specific details or evidence provided. <span class="unverified">[Source: Anonymous Submission - Unverified]</span></p>
+                    <p><strong>Note:</strong> These claims are unverified and lack corroborating evidence. Readers should approach with caution.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sources" class="section">
+            <h2>Sources</h2>
+            <ul>
+                <li><a class="source-link" href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/">Marie Claire, 2010 - Justine Musk Divorce</a></li>
+                <li><a class="source-link" href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter">The Guardian, 2022 - Talulah Riley</a></li>
+                <li><a class="source-link" href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html">Daily Mail, 2021 - Amber Heard</a></li>
+                <li><a class="source-link" href="https://timesofindia.indiatimes.com/life-style/relationships/love-sex/elon-musks-biggest-relationship-controversies-and-breakup-dramas/photostory/108013279.cms">Times of India, 2024 - Grimes</a></li>
+                <li><a class="source-link" href="https://www.ndtv.com/world-news/sex-abuse-drug-use-5-shocking-allegations-against-elon-musk-in-new-report-5874566">NDTV, 2024 - Shivon Zilis</a></li>
+                <li><a class="source-link" href="https://www.eonline.com/news/1396655/elon-musks-dating-history">E! Online, 2023 - Ashley St. Clair</a></li>
+                <li><a class="source-link" href="https://www.bloomberg.com/news/articles/2024-06-12/elon-musk-sued-by-ex-spacex-employees-over-sexual-harassment-retaliation">Bloomberg, 2024 - SpaceX Lawsuits</a></li>
+                <li><a class="source-link" href="https://www.washingtonpost.com/technology/2023/02/07/twitter-musk-content-moderation/">Washington Post, 2023 - Twitter/X Moderation</a></li>
+                <li><a class="source-link" href="https://www.thenation.com/article/politics/elon-musk-voter-fraud/">The Nation, 2024 - Voter Registration</a></li>
+                <li><a class="source-link" href="https://www.theguardian.com/us-news/2025/feb/10/elon-musk-doge-controversy">The Guardian, 2025 - DOGE</a></li>
+                <li><a class="source-link" href="https://www.nytimes.com/2025/05/30/us/politics/elon-musk-drugs-family.html">New York Times, 2025 - Drug Use</a></li>
+                <li><a class="source-link" href="https://en.wikipedia.org/wiki/Elon_Musk">Wikipedia, 2025 - Early Years</a></li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <p>For inquiries or corrections, please contact us at [insert contact method]. Anonymous submissions are reviewed but must be verified for inclusion.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Musk Allegations. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
