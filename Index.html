@@ -7,20 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Courier New', monospace; /* Creepy typewriter font */
-            background: linear-gradient(135deg, #0a0a0a, #1a001a); /* Dark, eerie gradient */
-            color: #e0e0e0; /* Faint glow text */
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a, #1a001a);
+            color: #e0e0e0;
+            overflow-x: hidden;
         }
         .navbar {
-            background: rgba(0, 0, 0, 0.9); /* Near-black with transparency */
-            border-bottom: 2px solid #ff00ff; /* Neon purple edge */
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid #ff00ff;
         }
         .navbar-brand {
             font-weight: bold;
             font-size: 1.8rem;
-            color: #ff00ff; /* Neon purple */
-            text-shadow: 0 0 10px #ff00ff; /* Glowing effect */
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
         }
         .section {
             padding: 60px 0;
@@ -33,42 +33,42 @@
             62% { transform: translate(0, 0) skew(5deg); }
         }
         .section h2 {
-            border-bottom: 4px dashed #ff4444; /* Bloody red dashed line */
+            border-bottom: 4px dashed #ff4444;
             padding-bottom: 15px;
             margin-bottom: 25px;
-            color: #ff4444; /* Blood red */
+            color: #ff4444;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
         .card {
-            background: rgba(20, 0, 20, 0.7); /* Dark purple transparency */
+            background: rgba(20, 0, 20, 0.7);
             border: 1px solid #ff00ff;
             border-radius: 8px;
             margin-bottom: 25px;
             transition: transform 0.3s;
         }
         .card:hover {
-            transform: scale(1.05) rotate(1deg); /* Creepy hover effect */
-            box-shadow: 0 0 20px #ff00ff; /* Neon glow */
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 20px #ff00ff;
         }
         .card-header {
-            background: #ff4444; /* Blood red header */
-            color: #000; /* Black text for contrast */
+            background: #ff4444;
+            color: #000;
             font-weight: bold;
             cursor: pointer;
-            text-shadow: 0 0 5px #fff; /* Slight glow */
+            text-shadow: 0 0 5px #fff;
         }
         .card-body {
-            color: #e0e0e0; /* Faint glow text */
+            color: #e0e0e0;
             font-size: 0.95rem;
         }
         .disclaimer {
-            background: #2a001a; /* Deep purple */
-            border-left: 6px solid #ff4444; /* Blood red edge */
+            background: #2a001a;
+            border-left: 6px solid #ff4444;
             padding: 20px;
             margin-bottom: 25px;
             border-radius: 5px;
-            color: #ffcccc; /* Pale red text */
+            color: #ffcccc;
             animation: pulse 3s infinite;
         }
         @keyframes pulse {
@@ -84,19 +84,19 @@
             border-top: 2px solid #ff00ff;
         }
         .source-link {
-            color: #00ffff; /* Cyan glow */
+            color: #00ffff;
             text-decoration: none;
             text-shadow: 0 0 3px #00ffff;
         }
         .source-link:hover {
             text-decoration: underline;
-            color: #ff00ff; /* Neon purple on hover */
+            color: #ff00ff;
         }
         .unverified {
-            color: #ff4444; /* Blood red */
+            color: #ff4444;
             font-style: italic;
             font-weight: bold;
-            text-shadow: 0 0 3px #ff4444; /* Glowing unverified */
+            text-shadow: 0 0 3px #ff4444;
         }
         .creepy-text {
             font-size: 1.1rem;
@@ -107,7 +107,6 @@
             0% { opacity: 0.8; }
             100% { opacity: 0.3; }
         }
-        /* Creepy background image with subtle movement */
         body::before {
             content: "";
             position: fixed;
@@ -143,6 +142,7 @@
                     <li class="nav-item"><a class="nav-link" href="#recent">Recent Horrors</a></li>
                     <li class="nav-item"><a class="nav-link" href="#personal">Mind Games</a></li>
                     <li class="nav-item"><a class="nav-link" href="#baby-quests">Baby Factory</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#new-figures">New Shadows</a></li>
                     <li class="nav-item"><a class="nav-link" href="#sources">Echoes</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Whispers</a></li>
                 </ul>
@@ -159,7 +159,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>This site unveils the shadowy allegations and unverified whispers about Elon Musk, drawn from public sources and anonymous voids. <strong>Factual claims</strong> are sourced; <strong>unverified claims</strong> (e.g., from X or anonymous tips) are marked and suspect. For educational terror only—don’t defame or harass. Legal risks (libel, slander) loom large. Consult a lawyer before echoing this darkness. Creators disclaim liability for your descent.</p>
+                    <p>This site drags you into the shadowy allegations and unverified whispers about Elon Musk, pulled from public sources and anonymous voids. <strong>Factual claims</strong> are sourced; <strong>unverified claims</strong> (e.g., from X or anonymous tips) are marked and suspect. For educational terror only—don’t defame or harass. Legal risks (libel, slander) loom large. Consult a lawyer before echoing this darkness. Creators disclaim liability for your descent.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Flee</button>
@@ -173,9 +173,9 @@
         <section id="home" class="section">
             <h2>Enter the Abyss</h2>
             <div class="disclaimer">
-                <p class="creepy-text"><strong>Legal Warning:</strong> This portal compiles Musk’s alleged sins from credible and unverified depths. Factual claims are cited; unverified tales are flagged. <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Descend into the disclaimer</a>.</p>
+                <p class="creepy-text"><strong>Legal Warning:</strong> This portal unveils Musk’s alleged sins from credible and unverified depths. Factual claims are cited; unverified tales are flagged. <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Descend into the disclaimer</a>.</p>
             </div>
-            <p class="creepy-text">Step into the twisted realm of Elon Musk’s controversies—early scars to recent nightmares. Sources are bared; truth is yours to unravel.</p>
+            <p class="creepy-text">Plunge into Elon Musk’s twisted realm—early scars to recent nightmares, where truth warps into terror.</p>
         </section>
 
         <section id="early-years" class="section">
@@ -185,8 +185,8 @@
                     Family Terrors
                 </div>
                 <div id="early-years-content" class="collapse card-body">
-                    <p class="creepy-text"><strong>Unverified Claim:</strong> X whispers claim Musk’s father, Errol, abused a minor, with Elon allegedly shielding him by luring him to the US. <span class="unverified">[Source: X Post - Unverified]</span></p>
-                    <p class="creepy-text">Musk endured brutal bullying in South Africa, hospitalized after a beating. His father reportedly sneered at his pain. <span class="source-link">[Source: <a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank">Wikipedia, 2025</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 allege Musk’s father, Errol, molested a minor in 1980s South Africa, with Elon allegedly arranging his US move in 1989 to silence it. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                    <p class="creepy-text">Musk, aged 12, was hospitalized in 1983 after a gang beating in Pretoria. Errol reportedly mocked, “You’re weak, Elon,” deepening his isolation. <span class="source-link">[Source: <a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank">Wikipedia, 2025</a>]</span></p>
                 </div>
             </div>
         </section>
@@ -198,7 +198,7 @@
                     Justine Musk (2000–2008)
                 </div>
                 <div id="justine-content" class="collapse card-body">
-                    <p class="creepy-text">Divorce turned dark—custody battles and claims of Musk’s cold, trophy-wife treatment. <span class="source-link">[Source: <a href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/" target="_blank">Marie Claire, 2010</a>]</span></p>
+                    <p class="creepy-text">Divorce finalized September 2008 after a bitter custody fight. Justine wrote in Marie Claire (2010), “Elon lacked empathy, treating me like a possession.” Lost first child, Nevada, to SIDS in 2002. <span class="source-link">[Source: <a href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/" target="_blank">Marie Claire, 2010</a>]</span></p>
                 </div>
             </div>
             <div class="card">
@@ -206,7 +206,7 @@
                     Talulah Riley (2010–2012, 2013–2016)
                 </div>
                 <div id="talulah-content" class="collapse card-body">
-                    <p class="creepy-text">Two marriages, two divorces—Riley’s influence on Musk’s Twitter grab hints at manipulation. <span class="source-link">[Source: <a href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter" target="_blank">The Guardian, 2022</a>]</span></p>
+                    <p class="creepy-text">Married July 2010, divorced January 2012, remarried July 2013, divorced February 2016. Riley’s 2022 Guardian interview hints Musk’s Twitter buy was her idea, suggesting manipulation. <span class="source-link">[Source: <a href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter" target="_blank">The Guardian, 2022</a>]</span></p>
                 </div>
             </div>
             <div class="card">
@@ -214,5 +214,27 @@
                     Amber Heard (2016–2018)
                 </div>
                 <div id="amber-content" class="collapse card-body">
-                    <p class="creepy-text">Embryo war—sued for rights to frozen offspring. <span class="source-link">[Source: <a href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html" target="_blank">Daily Mail, 2021</a>]</span></p>
-                    <p class="creepy-text"><strong>Unverified Claim:</strong> Hired stalkers to track Heard post-breakup
+                    <p class="creepy-text">Dated May 2016 to August 2018. Lawsuit filed December 2021 over frozen embryos, with Musk claiming parental rights. <span class="source-link">[Source: <a href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html" target="_blank">Daily Mail, 2021</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X posts from 2019 allege Musk hired PIs to stalk Heard, with photos of her movements. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#grimes-content" aria-expanded="false" aria-controls="grimes-content">
+                    Grimes (2018–2021)
+                </div>
+                <div id="grimes-content" class="collapse card-body">
+                    <p class="creepy-text">Relationship ended March 2022. Custody battle over X Æ A-12, Exa Dark Sideræl, and Tau Techno Mechanicus. Grimes claimed Musk ignored Exa’s 2021 medical emergency, delaying treatment. <span class="source-link">[Source: <a href="https://timesofindia.indiatimes.com/life-style/relationships/love-sex/elon-musks-biggest-relationship-controversies-and-breakup-dramas/photostory/108013279.cms" target="_blank">Times of India, 2024</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 suggest Musk hosted “drug-fueled orgies” with models, including Grimes, in 2020. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#shivon-content" aria-expanded="false" aria-controls="shivon-content">
+                    Shivon Zilis (Neuralink, Ongoing)
+                </div>
+                <div id="shivon-content" class="collapse card-body">
+                    <p class="creepy-text">Neuralink exec since 2017. NDTV (2024) reports Musk, in 2017, asked her to bear his children, offering himself as a donor, leading to twins in November 2021. <span class="source-link">[Source: <a href="https://www.ndtv.com/world-news/sex-abuse-drug-use-5-shocking-allegations-against-elon-musk-in-new-report-5874566" target="_blank">NDTV, 2024</a>]</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#vivian-content" aria-expanded="false" aria-controls="vivian-content">
+                   
