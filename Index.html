@@ -11,10 +11,13 @@
             background: linear-gradient(135deg, #0a0a0a, #1a001a);
             color: #e0e0e0;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         .navbar {
             background: rgba(0, 0, 0, 0.9);
             border-bottom: 2px solid #ff00ff;
+            padding: 10px 0;
         }
         .navbar-brand {
             font-weight: bold;
@@ -22,8 +25,30 @@
             color: #ff00ff;
             text-shadow: 0 0 10px #ff00ff;
         }
+        .enter-btn {
+            background: #ff4444;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px #fff;
+            transition: transform 0.3s;
+        }
+        .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ff4444;
+        }
+        .content {
+            padding: 60px 20px;
+            display: none; /* Hidden until "Enter" is clicked */
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         .section {
-            padding: 60px 0;
             position: relative;
             animation: glitch 2s infinite;
         }
@@ -31,14 +56,6 @@
             2%, 64% { transform: translate(2px, 0) skew(0deg); }
             4%, 60% { transform: translate(-2px, 0) skew(0deg); }
             62% { transform: translate(0, 0) skew(5deg); }
-        }
-        .section h2 {
-            border-bottom: 4px dashed #ff4444;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            color: #ff4444;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
         .card {
             background: rgba(20, 0, 20, 0.7);
@@ -82,6 +99,9 @@
             padding: 25px 0;
             text-align: center;
             border-top: 2px solid #ff00ff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
         .source-link {
             color: #00ffff;
@@ -124,117 +144,148 @@
             100% { transform: translate(-100px, 100px); }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const enterBtn = document.querySelector('.enter-btn');
+            const content = document.querySelector('.content');
+
+            enterBtn.addEventListener('click', function() {
+                content.style.display = 'block';
+                enterBtn.style.display = 'none'; // Hide button after click
+                // Add creepy sound effect (optional, requires audio file)
+                const audio = new Audio('https://www.soundjay.com/buttons/beep-01a.mp3');
+                audio.play().catch(error => console.log("Audio failed:", error));
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Musk’s Dark Abyss</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Enter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#early-years">Origins</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#relationships">Entanglements</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#business">Empire</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#recent">Recent Horrors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#personal">Mind Games</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#baby-quests">Baby Factory</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#new-figures">New Shadows</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sources">Echoes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Whispers</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
 
-    <!-- Disclaimer Modal -->
-    <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="disclaimerModalLabel">Warning: Enter at Your Own Risk</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>This site drags you into the shadowy allegations and unverified whispers about Elon Musk, pulled from public sources and anonymous voids. <strong>Factual claims</strong> are sourced; <strong>unverified claims</strong> (e.g., from X or anonymous tips) are marked and suspect. For educational terror only—don’t defame or harass. Legal risks (libel, slander) loom large. Consult a lawyer before echoing this darkness. Creators disclaim liability for your descent.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Flee</button>
-                </div>
-            </div>
-        </div>
+    <!-- Enter Button -->
+    <div class="text-center mt-5">
+        <button class="enter-btn">Enter the Abyss</button>
     </div>
 
     <!-- Main Content -->
-    <div class="container">
-        <section id="home" class="section">
-            <h2>Enter the Abyss</h2>
-            <div class="disclaimer">
-                <p class="creepy-text"><strong>Legal Warning:</strong> This portal unveils Musk’s alleged sins from credible and unverified depths. Factual claims are cited; unverified tales are flagged. <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Descend into the disclaimer</a>.</p>
-            </div>
-            <p class="creepy-text">Plunge into Elon Musk’s twisted realm—early scars to recent nightmares, where truth warps into terror.</p>
-        </section>
+    <div class="content container">
+        <div class="disclaimer">
+            <p class="creepy-text"><strong>Legal Warning:</strong> This portal unveils Musk’s alleged sins from credible and unverified depths. Factual claims are cited; unverified tales are flagged. <a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">Descend into the disclaimer</a>.</p>
+        </div>
 
-        <section id="early-years" class="section">
-            <h2>Origins of the Shadow</h2>
+        <!-- Disclaimer Modal -->
+        <div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="disclaimerModalLabel">Warning: Enter at Your Own Risk</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This site drags you into the shadowy allegations and unverified whispers about Elon Musk, pulled from public sources and anonymous voids. <strong>Factual claims</strong> are sourced; <strong>unverified claims</strong> (e.g., from X or anonymous tips) are marked and suspect. For educational terror only—don’t defame or harass. Legal risks (libel, slander) loom large. Consult a lawyer before echoing this darkness. Creators disclaim liability for your descent.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Flee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scandal Cards -->
+        <div class="section">
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#early-years-content" aria-expanded="false" aria-controls="early-years-content">
-                    Family Terrors
+                    Origins of the Shadow: Family Terrors
                 </div>
                 <div id="early-years-content" class="collapse card-body">
-                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 allege Musk’s father, Errol, molested a minor in 1980s South Africa, with Elon allegedly arranging his US move in 1989 to silence it. <span class="unverified">[Source: X Post - Unverified]</span></p>
-                    <p class="creepy-text">Musk, aged 12, was hospitalized in 1983 after a gang beating in Pretoria. Errol reportedly mocked, “You’re weak, Elon,” deepening his isolation. <span class="source-link">[Source: <a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank">Wikipedia, 2025</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 allege Musk’s father, Errol, molested a minor in 1980s South Africa. Elon allegedly arranged his 1989 US move to silence it. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                    <p class="creepy-text">At 12, Musk was hospitalized in 1983 after a Pretoria gang beating. Errol sneered, “You’re weak, Elon,” fueling his isolation. <span class="source-link">[Source: <a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank">Wikipedia, 2025</a>]</span></p>
                 </div>
             </div>
-        </section>
 
-        <section id="relationships" class="section">
-            <h2>Entanglements</h2>
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#justine-content" aria-expanded="false" aria-controls="justine-content">
-                    Justine Musk (2000–2008)
+                    Entanglements: Justine Musk (2000–2008)
                 </div>
                 <div id="justine-content" class="collapse card-body">
-                    <p class="creepy-text">Divorce finalized September 2008 after a bitter custody fight. Justine wrote in Marie Claire (2010), “Elon lacked empathy, treating me like a possession.” Lost first child, Nevada, to SIDS in 2002. <span class="source-link">[Source: <a href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/" target="_blank">Marie Claire, 2010</a>]</span></p>
+                    <p class="creepy-text">Divorce finalized September 2008 after a bitter custody fight. Justine’s 2010 Marie Claire article: “Elon lacked empathy, treating me like a possession.” Lost son Nevada to SIDS in 2002, straining their bond. <span class="source-link">[Source: <a href="https://www.marieclaire.com/celebrity/news/a5554/elon-musk-divorce/" target="_blank">Marie Claire, 2010</a>]</span></p>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#talulah-content" aria-expanded="false" aria-controls="talulah-content">
-                    Talulah Riley (2010–2012, 2013–2016)
+                    Entanglements: Talulah Riley (2010–2012, 2013–2016)
                 </div>
                 <div id="talulah-content" class="collapse card-body">
-                    <p class="creepy-text">Married July 2010, divorced January 2012, remarried July 2013, divorced February 2016. Riley’s 2022 Guardian interview hints Musk’s Twitter buy was her idea, suggesting manipulation. <span class="source-link">[Source: <a href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter" target="_blank">The Guardian, 2022</a>]</span></p>
+                    <p class="creepy-text">Married July 2010, divorced January 2012, remarried July 2013, divorced February 2016. Riley’s 2022 Guardian interview suggests Musk’s Twitter buy was her idea, hinting at control. <span class="source-link">[Source: <a href="https://www.theguardian.com/technology/2022/oct/28/talulah-riley-elon-musk-twitter" target="_blank">The Guardian, 2022</a>]</span></p>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#amber-content" aria-expanded="false" aria-controls="amber-content">
-                    Amber Heard (2016–2018)
+                    Entanglements: Amber Heard (2016–2018)
                 </div>
                 <div id="amber-content" class="collapse card-body">
-                    <p class="creepy-text">Dated May 2016 to August 2018. Lawsuit filed December 2021 over frozen embryos, with Musk claiming parental rights. <span class="source-link">[Source: <a href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html" target="_blank">Daily Mail, 2021</a>]</span></p>
+                    <p class="creepy-text">Dated May 2016 to August 2018. Lawsuit filed December 2021 over frozen embryos; Musk claimed parental rights. <span class="source-link">[Source: <a href="https://www.dailymail.co.uk/news/article-10160757/Elon-Musk-Amber-Heard-legal-battle-frozen-embryos.html" target="_blank">Daily Mail, 2021</a>]</span></p>
                     <p class="creepy-text"><strong>Unverified Claim:</strong> X posts from 2019 allege Musk hired PIs to stalk Heard, with photos of her movements. <span class="unverified">[Source: X Post - Unverified]</span></p>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#grimes-content" aria-expanded="false" aria-controls="grimes-content">
-                    Grimes (2018–2021)
+                    Entanglements: Grimes (2018–2021)
                 </div>
                 <div id="grimes-content" class="collapse card-body">
-                    <p class="creepy-text">Relationship ended March 2022. Custody battle over X Æ A-12, Exa Dark Sideræl, and Tau Techno Mechanicus. Grimes claimed Musk ignored Exa’s 2021 medical emergency, delaying treatment. <span class="source-link">[Source: <a href="https://timesofindia.indiatimes.com/life-style/relationships/love-sex/elon-musks-biggest-relationship-controversies-and-breakup-dramas/photostory/108013279.cms" target="_blank">Times of India, 2024</a>]</span></p>
-                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 suggest Musk hosted “drug-fueled orgies” with models, including Grimes, in 2020. <span class="unverified">[Source: X Post - Unverified]</span></p>
+                    <p class="creepy-text">Ended March 2022. Custody battle over X Æ A-12, Exa Dark Sideræl, and Tau Techno Mechanicus. Grimes claimed Musk ignored Exa’s 2021 medical emergency, delaying treatment for days. <span class="source-link">[Source: <a href="https://timesofindia.indiatimes.com/life-style/relationships/love-sex/elon-musks-biggest-relationship-controversies-and-breakup-dramas/photostory/108013279.cms" target="_blank">Times of India, 2024</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X rumors from 2023 suggest Musk hosted “drug-fueled orgies” with models, including Grimes, in 2020 LA mansion. <span class="unverified">[Source: X Post - Unverified]</span></p>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#shivon-content" aria-expanded="false" aria-controls="shivon-content">
-                    Shivon Zilis (Neuralink, Ongoing)
+                    Baby Factory: Shivon Zilis (Neuralink, Ongoing)
                 </div>
                 <div id="shivon-content" class="collapse card-body">
-                    <p class="creepy-text">Neuralink exec since 2017. NDTV (2024) reports Musk, in 2017, asked her to bear his children, offering himself as a donor, leading to twins in November 2021. <span class="source-link">[Source: <a href="https://www.ndtv.com/world-news/sex-abuse-drug-use-5-shocking-allegations-against-elon-musk-in-new-report-5874566" target="_blank">NDTV, 2024</a>]</span></p>
+                    <p class="creepy-text">Neuralink exec since 2017. NDTV (2024) reports Musk, in 2017, asked her to bear his children, offering himself as a donor, resulting in twins born November 2021. <span class="source-link">[Source: <a href="https://www.ndtv.com/world-news/sex-abuse-drug-use-5-shocking-allegations-against-elon-musk-in-new-report-5874566" target="_blank">NDTV, 2024</a>]</span></p>
+                    <p class="creepy-text"><strong>Unverified Claim:</strong> X posts allege Musk pressured Zilis with Neuralink job threats if she refused. <span class="unverified">[Source: X Post - Unverified]</span></p>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header" data-bs-toggle="collapse" data-bs-target="#vivian-content" aria-expanded="false" aria-controls="vivian-content">
-                   
+                    Entanglements: Vivian Jenna Wilson
+                </div>
+                <div id="vivian-content" class="collapse card-body">
+                    <p class="creepy-text">Transgender daughter. Musk’s June 2024 claim: “Tricked into approving gender care, it killed my son.” Vivian’s NBC interview (2024) details harassment for being queer, calling Musk’s stance abusive. <span class="source-link">[Source: <a href="https://www.nbcnews.com/nbc-out/out-news/elon-musks-transgender-daughter-first-interview-says-berated-queer-chil-rcna163614" target="_blank">NBC News, 2024</a>]</span></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#spacex-content" aria-expanded="false" aria-controls="spacex-content">
+                    Empire: SpaceX Sexual Harassment
+                </div>
+                <div id="spacex-content" class="collapse card-body">
+                    <p class="creepy-text">June 2024 lawsuit by fired SpaceX employees alleges Musk made lewd comments, e.g., “I’d tap that,” and retaliated against complaints. <span class="source-link">[Source: <a href="https://www.bloomberg.com/news/articles/2024-06-12/elon-musk-sued-by-ex-spacex-employees-over-sexual-harassment-retaliation" target="_blank">Bloomberg, 2024</a>]</span></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#twitter-content" aria-expanded="false" aria-controls="twitter-content">
+                    Empire: Twitter/X Content Moderation (2023)
+                </div>
+                <div id="twitter-content" class="collapse card-body">
+                    <p class="creepy-text">February 2023: Reinstated accounts posting illegal content, e.g., child exploitation, sparking safety outcry. <span class="source-link">[Source: <a href="https://www.washingtonpost.com/technology/2023/02/07/twitter-musk-content-moderation/" target="_blank">Washington Post, 2023</a>]</span></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" data-bs-toggle="collapse" data-bs-target="#coercive-content" aria-expanded="false" aria-controls="coercive-content">
+                    Empire: Coercive Control (2023)
+                </div>
+                <div id="coercive-content
