@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HyperChaoticNeuralCodec: Chaos-driven XAI for Neuralink-scale BCI signal processing.">
-    <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, futuristic, SPARK">
-    <title>HyperChaoticNeuralCodec - Chaos Fucking Unleashed</title>
+    <meta name="description" content="HyperChaoticNeuralCodec: A cryptic XAI dream for Neuralink-scale chaos signal processing.">
+    <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
+    <title>HyperChaoticNeuralCodec - Cryptic Fucking Chaos</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -17,38 +17,39 @@
             color: #e0e0e0; 
             font-family: 'Courier New', monospace; 
             overflow-x: hidden; 
+            position: relative;
         }
         .neon-text { 
             text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffcc; 
-            animation: glitch 1s linear infinite; 
+            animation: glitch 0.5s linear infinite; 
         }
         .neon-button { 
             background: #ff3333; 
             border: 2px solid #ff3333; 
             color: #fff; 
-            padding: 10px 20px; 
-            border-radius: 5px; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
             transition: all 0.3s ease; 
         }
         .neon-button:hover { 
-            box-shadow: 0 0 15px #ff3333, 0 0 30px #ff3333; 
+            box-shadow: 0 0 20px #ff3333, 0 0 40px #ff3333; 
             background: #0d0d0d; 
             color: #ff3333; 
         }
         .code-block { 
             background: #1a1a1a; 
-            border: 2px solid #00ffcc; 
-            padding: 20px; 
-            border-radius: 10px; 
+            border: 3px solid #00ffcc; 
+            padding: 25px; 
+            border-radius: 12px; 
             max-height: 600px; 
             overflow-y: auto; 
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3); 
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.4); 
         }
         .parallax { 
             background-attachment: fixed; 
             background-position: center; 
             background-size: cover; 
-            background-image: url('https://example.com/futuristic-bg.jpg'); 
+            background-image: url('https://example.com/cyberpunk-bg.jpg'); 
         }
         .neural-orb { 
             position: fixed; 
@@ -58,38 +59,50 @@
             height: 100%; 
             z-index: -1; 
         }
+        .lightning-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -2; 
+            opacity: 0.7; 
+        }
         .puzzle-input { 
             background: #1a1a1a; 
-            border: 2px solid #00ffcc; 
-            padding: 10px; 
+            border: 3px solid #00ffcc; 
+            padding: 12px; 
             color: #00ffcc; 
-            border-radius: 5px; 
+            border-radius: 8px; 
         }
         .hint { 
             color: #ff3333; 
-            font-size: 0.9em; 
+            font-size: 1em; 
             text-shadow: 0 0 5px #ff3333; 
         }
-        @keyframes glitch {
-            2%, 64% { transform: translate(2px, 0) skew(0deg); }
-            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-            62% { transform: translate(0, 0) skew(5deg); }
-        }
         .feature-card { 
-            transition: transform 0.3s ease; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
         }
         .feature-card:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 0 20px #00ffcc; 
+            transform: scale(1.1); 
+            box-shadow: 0 0 30px #00ffcc; 
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px) skew(2deg); }
+            20%, 40%, 60%, 80% { transform: translate(2px, -2px) skew(-2deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Lightning Canvas -->
+    <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
+
     <!-- Hero -->
     <section class="h-screen flex items-center justify-center parallax">
         <div class="text-center">
-            <h1 class="text-7xl neon-text">HyperChaoticNeuralCodec</h1>
-            <p class="text-2xl text-gray-300 mt-4">Chaos-Driven XAI for Neuralink-Scale Signal Processing</p>
+            <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
+            <p class="text-3xl text-gray-300 mt-4">A Cryptic XAI Dream for Neuralink Chaos</p>
         </div>
     </section>
 
@@ -97,21 +110,21 @@
     <div id="neural-orb" class="neural-orb"></div>
 
     <!-- Main -->
-    <main class="p-8 max-w-6xl mx-auto relative">
+    <main class="p-10 max-w-7xl mx-auto relative">
         <!-- Puzzle-Locked Code -->
-        <section class="mb-12">
-            <h2 class="text-3xl neon-text mb-4">Crack This Shit to See the Code</h2>
-            <p class="text-gray-300 mb-4">Decode this cipher to find the single-digit key (1-9, you fuck):</p>
-            <p class="text-neon-text mb-4">“Fwoslq wkh frgh zlwk nhb: 5”</p>
-            <input type="text" id="key-input" class="puzzle-input mb-4" placeholder="Enter the key (1 digit)">
+        <section class="mb-16">
+            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Chaotic Fuck</h2>
+            <p class="text-gray-300 mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
+            <p class="text-neon-text mb-6">“Fwoslq wkh frgh zlwk nhb: 5”</p>
+            <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
             <button class="neon-button" onclick="checkKey()">Unlock the Fucking Chaos</button>
-            <div id="hint-container" class="mt-4">
+            <div id="hint-container" class="mt-6">
                 <p class="hint" id="hint-20" style="display: none;">Hint (20s): Prime number between 1-10.</p>
-                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Fingers on one hand, asshole.</p>
+                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Fingers on one hand, dipshit.</p>
                 <p class="hint" id="hint-60" style="display: none;">Hint (60s): Carbon’s atomic number (protons).</p>
             </div>
             <div id="code-container" style="display: none;">
-                <button class="neon-button mb-4" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
+                <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
                 <pre class="code-block"><code id="hnfc-code" class="language-python">
 import numpy as np
 import torch
@@ -230,7 +243,7 @@ class NeuroCosmicNexus(nn.Module):
         with torch.no_grad():
             self.cock_noise += self.shaft_rate * feedback
             self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
-            self.head_space += self.shaft_rate * feedback * 0.5  # More dick vibes
+            self.head_space += self.shaft_rate * feedback * 0.5
 
 # Multi-modal fusion
 class MultiModalFusion(nn.Module):
@@ -249,8 +262,17 @@ class MultiModalFusion(nn.Module):
         fused, _ = self.fusion(combined, combined, combined)
         return fused.mean(dim=0)
 
-# Main class
+# NeoGrokCosmos (super dick from three dicks)
 class NeoGrokCosmos:
+    #   _____      _____      _____  
+    #  /     \    /     \    /     \ 
+    # /_______\  /_______\  /_______\
+    # |  ***  |  |  ***  |  |  ***  | 
+    # |  ***  |  |  ***  |  |  ***  | 
+    # |_______|  |_______|  |_______|
+    #          \  |  ***  |  /
+    #           \ |  ***  | /
+    #            \|_______|/
     def __init__(self, train_csv="path/to/train.csv"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.brainstorm = nn.parallel.DistributedDataParallel(BrainStorm().to(self.device), device_ids=[self.device])
@@ -376,23 +398,23 @@ if __name__ == "__main__":
         </section>
 
         <!-- Features -->
-        <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-6 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-xl neon-text mb-2">Neural Architecture Search</h3>
-                <p class="text-gray-300">Evolves like Neuralink’s adaptive BCI interfaces, rewiring itself for max chaos.</p>
+        <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4">TriadSynapse NAS</h3>
+                <p class="text-gray-300">Three chaotic forces unite like Neuralink’s BCI, evolving into a super-intelligent core.</p>
             </div>
-            <div class="p-6 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-xl neon-text mb-2">Multi-Modal Fusion</h3>
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4">Multi-Modal Fusion</h3>
                 <p class="text-gray-300">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
             </div>
-            <div class="p-6 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-xl neon-text mb-2">Distributed Computing</h3>
-                <p class="text-gray-300">Scales like SpaceX’s Thunder clusters, ready for cosmic workloads.</p>
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4">Distributed Computing</h3>
+                <p class="text-gray-300">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="text-center mb-12">
+        <section class="text-center mb-16">
             <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
         </section>
     </main>
@@ -404,8 +426,8 @@ if __name__ == "__main__":
     <!-- |  ***  | -->
     <!-- |  ***  | -->
     <!-- |_______| -->
-    <footer class="p-4 text-center bg-gray-800">
-        <p class="text-gray-400">© 2025 HNFC Team - Powered by SPARK, Bitches</p>
+    <footer class="p-6 text-center bg-gray-800">
+        <p class="text-gray-400">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
     </footer>
 
     <!-- Scripts -->
@@ -420,28 +442,63 @@ if __name__ == "__main__":
             const key = document.getElementById('key-input').value;
             if (key === '5') {
                 document.getElementById('code-container').style.display = 'block';
-                alert('You cracked it, you chaotic fuck!');
+                alert('You cracked the chaos, you badass fuck!');
             } else {
-                alert('Wrong key, dipshit. It’s one digit. Try again.');
+                alert('Wrong fucking key. It’s one digit. Get it together.');
             }
         }
 
         // Copy Code
         function copyCode(id) {
             const code = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, motherfucker!'));
+            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
         }
 
-        // Neural Orb
+        // Lightning Flashes
+        const lightningCanvas = document.getElementById('lightning-canvas');
+        const lCtx = lightningCanvas.getContext('2d');
+        lightningCanvas.width = window.innerWidth;
+        lightningCanvas.height = window.innerHeight;
+        function drawLightning() {
+            if (Math.random() < 0.05) {
+                lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
+                lCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                lCtx.lineWidth = 3;
+                lCtx.beginPath();
+                let x = Math.random() * lightningCanvas.width;
+                let y = 0;
+                lCtx.moveTo(x, y);
+                for (let i = 0; i < 10; i++) {
+                    x += (Math.random() - 0.5) * 100;
+                    y += lightningCanvas.height / 10;
+                    lCtx.lineTo(x, y);
+                }
+                lCtx.stroke();
+                setTimeout(() => lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height), 100);
+            }
+        }
+        setInterval(drawLightning, 100);
+
+        // Neural Orb with TriadSynapse
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('neural-orb').appendChild(renderer.domElement);
-        const geometry = new THREE.SphereGeometry(2, 32, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
-        const orb = new THREE.Mesh(geometry, material);
+        const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
+        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
+        const orb = new THREE.Mesh(orbGeometry, orbMaterial);
         scene.add(orb);
+        // Triad nodes
+        const triadNodes = [
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 }))
+        ];
+        triadNodes[0].position.set(2, 2, 0);
+        triadNodes[1].position.set(-2, 2, 0);
+        triadNodes[2].position.set(0, -2, 0);
+        triadNodes.forEach(node => scene.add(node));
         const particles = new THREE.Points(
             new THREE.BufferGeometry().setFromPoints(
                 Array.from({ length: 1000 }, () => new THREE.Vector3(
@@ -455,39 +512,58 @@ if __name__ == "__main__":
         document.addEventListener('mousemove', (e) => {
             orb.rotation.x = e.clientY * 0.005;
             orb.rotation.y = e.clientX * 0.005;
+            triadNodes.forEach((node, i) => {
+                node.position.x += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                node.position.y += Math.cos(Date.now() * 0.001 + i) * 0.01;
+            });
         });
         function animate() {
             requestAnimationFrame(animate);
             orb.rotation.z += 0.005;
             particles.rotation.z += 0.002;
+            if (Math.random() < 0.05) {
+                particles.geometry.attributes.position.array.forEach((_, i) => {
+                    if (i % 3 === 0) {
+                        particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.1;
+                        particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.1;
+                    }
+                });
+                particles.geometry.attributes.position.needsUpdate = true;
+            }
             renderer.render(scene, camera);
         }
         animate();
 
         // Neural Net Canvas
-        const canvas = document.getElementById('neural-net');
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
+        canvas.style.opacity = '0.4';
+        document.querySelector('main').appendChild(canvas);
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         function drawNeuralNet() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.strokeStyle = `rgba(0, 255, 204, ${Math.min(1, window.scrollY / 500)})`;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 3;
             for (let i = 0; i < 6; i++) {
                 ctx.beginPath();
-                ctx.arc(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 20, 10, 0, Math.PI * 2);
+                ctx.arc(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 30, 12, 0, Math.PI * 2);
                 ctx.stroke();
                 if (i < 5) {
-                    ctx.moveTo(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 20);
-                    ctx.lineTo(100 + (i + 1) * 150, 200 + Math.sin(Date.now() * 0.001) * 20);
+                    ctx.moveTo(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 30);
+                    ctx.lineTo(100 + (i + 1) * 150, 200 + Math.sin(Date.now() * 0.001) * 30);
                     ctx.stroke();
                 }
             }
         }
         drawNeuralNet();
-        window.addEventListener('scroll', () => {
-            drawNeuralNet();
-        });
+        window.addEventListener('scroll', drawNeuralNet);
         setInterval(drawNeuralNet, 50);
     </script>
 </body>
