@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HyperChaoticNeuralCodec: A lightning-fucked XAI dream for Neuralink chaos.">
+    <meta name="description" content="HyperChaoticNeuralCodec: A lightning-charged XAI dream for Neuralink chaos.">
     <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
-    <title>HyperChaoticNeuralCodec - Insane Fucking Chaos</title>
+    <title>HyperChaoticNeuralCodec - Fucking Chaotic Dream</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -14,15 +14,15 @@
     <style>
         body { 
             background: linear-gradient(45deg, #0d0d0d, #1a1a1a); 
-            color: #ff00ff; 
+            color: #333333; 
             font-family: 'Courier New', monospace; 
             overflow-x: hidden; 
             position: relative;
-            animation: pulse-bg 4s infinite;
+            animation: pulse-bg 5s infinite;
         }
         .neon-text { 
-            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff; 
-            animation: glitch 0.4s linear infinite; 
+            text-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333, 0 0 20px #ff3333; 
+            animation: glitch 0.5s linear infinite; 
         }
         .neon-button { 
             background: #ff3333; 
@@ -39,12 +39,12 @@
         }
         .code-block { 
             background: #1a1a1a; 
-            border: 3px solid #ff00ff; 
+            border: 3px solid #ff3333; 
             padding: 25px; 
             border-radius: 12px; 
             max-height: 600px; 
             overflow-y: auto; 
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4); 
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.4); 
         }
         .parallax { 
             background-attachment: fixed; 
@@ -69,20 +69,29 @@
             z-index: -2; 
             opacity: 0.8; 
         }
-        .data-storm { 
+        .hud-overlay { 
             position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -3; 
-            opacity: 0.2; 
+            top: 20px; 
+            right: 20px; 
+            width: 200px; 
+            height: 100px; 
+            z-index: 1; 
+            opacity: 0.5; 
+        }
+        .triad-glyph { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 20px; 
+            width: 100px; 
+            height: 100px; 
+            z-index: 1; 
+            opacity: 0.7; 
         }
         .puzzle-input { 
             background: #1a1a1a; 
-            border: 3px solid #ff00ff; 
+            border: 3px solid #ff3333; 
             padding: 12px; 
-            color: #ff00ff; 
+            color: #333333; 
             border-radius: 8px; 
         }
         .hint { 
@@ -95,7 +104,7 @@
         }
         .feature-card:hover { 
             transform: scale(1.1); 
-            box-shadow: 0 0 30px #ff00ff; 
+            box-shadow: 0 0 30px #ff3333; 
         }
         .lightning-flash { 
             text-shadow: 0 0 10px #ffffff !important; 
@@ -103,8 +112,8 @@
         }
         @keyframes glitch {
             0%, 100% { transform: translate(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); }
-            20%, 40%, 60%, 80% { transform: translate(3px, -3px) skew(-3deg); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px) skew(2deg); }
+            20%, 40%, 60%, 80% { transform: translate(2px, -2px) skew(-2deg); }
         }
         @keyframes pulse-bg {
             0% { background: linear-gradient(45deg, #0d0d0d, #1a1a1a); }
@@ -113,7 +122,7 @@
         }
         @keyframes lightning-pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
@@ -121,14 +130,17 @@
     <!-- Lightning Canvas -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
 
-    <!-- Data Storm Canvas -->
-    <canvas id="data-storm" class="data-storm"></canvas>
+    <!-- Holographic HUD -->
+    <canvas id="hud-overlay" class="hud-overlay"></canvas>
+
+    <!-- TriadSynapse Glyph -->
+    <canvas id="triad-glyph" class="triad-glyph"></canvas>
 
     <!-- Hero -->
     <section class="h-screen flex items-center justify-center parallax">
         <div class="text-center">
             <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
-            <p class="text-3xl text-white mt-4">Lightning-Fucked XAI Chaos for Neuralink</p>
+            <p class="text-3xl text-white mt-4">Lightning-Charged XAI Chaos for Neuralink</p>
         </div>
     </section>
 
@@ -139,7 +151,7 @@
     <main class="p-10 max-w-7xl mx-auto relative">
         <!-- Puzzle-Locked Code -->
         <section class="mb-16">
-            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Insane Motherfucker</h2>
+            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Chaotic Motherfucker</h2>
             <p class="text-white mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
             <p class="text-neon-text mb-6 cipher-text">“Fwoslq wkh frgh zlwk nhb: 5”</p>
             <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
@@ -468,7 +480,7 @@ if __name__ == "__main__":
             const key = document.getElementById('key-input').value;
             if (key === '5') {
                 document.getElementById('code-container').style.display = 'block';
-                alert('You cracked the chaos, you insane fuck!');
+                alert('You cracked the chaos, you badass fuck!');
             } else {
                 alert('Wrong fucking key. It’s one digit. Get it together.');
             }
@@ -486,11 +498,11 @@ if __name__ == "__main__":
         lightningCanvas.width = window.innerWidth;
         lightningCanvas.height = window.innerHeight;
         function drawLightning() {
-            if (Math.random() < 0.15) {
+            if (Math.random() < 0.1) {
                 lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
                 lCtx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-                lCtx.lineWidth = 6;
-                lCtx.shadowBlur = 30;
+                lCtx.lineWidth = 5;
+                lCtx.shadowBlur = 20;
                 lCtx.shadowColor = '#ff3333';
                 lCtx.beginPath();
                 let x = Math.random() * lightningCanvas.width;
@@ -500,11 +512,11 @@ if __name__ == "__main__":
                     x += (Math.random() - 0.5) * 150;
                     y += lightningCanvas.height / 8;
                     lCtx.lineTo(x, y);
-                    if (Math.random() < 0.4) {
+                    if (Math.random() < 0.3) {
                         let forkX = x;
                         let forkY = y;
                         lCtx.moveTo(forkX, forkY);
-                        for (let j = 0; j < 5; j++) {
+                        for (let j = 0; j < 3; j++) {
                             forkX += (Math.random() - 0.5) * 100;
                             forkY += lightningCanvas.height / 16;
                             lCtx.lineTo(forkX, forkY);
@@ -512,42 +524,72 @@ if __name__ == "__main__":
                     }
                 }
                 lCtx.stroke();
-                document.body.style.opacity = '0.7';
+                document.body.style.opacity = '0.8';
                 document.querySelectorAll('.neon-text, .text-white, .hint').forEach(el => el.classList.add('lightning-flash'));
                 setTimeout(() => {
                     lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
-                    lCtx.globalAlpha = 0.3;
-                    lCtx.stroke();
                     document.body.style.opacity = '1';
                     document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash'));
-                }, 150);
+                }, 100);
                 // Optional thunder sound (uncomment to enable)
                 // new Audio('https://example.com/thunder.mp3').play();
+                // Optional glitch sound (uncomment to enable)
+                // if (Math.random() < 0.2) new Audio('https://example.com/glitch.mp3').play();
             }
         }
         setInterval(drawLightning, 100);
 
-        // Data Storm
-        const dataStormCanvas = document.getElementById('data-storm');
-        const dsCtx = dataStormCanvas.getContext('2d');
-        dataStormCanvas.width = window.innerWidth;
-        dataStormCanvas.height = window.innerHeight;
-        const binary = '01';
-        const drops = [];
-        for (let i = 0; i < 50; i++) {
-            drops.push({ x: Math.random() * dataStormCanvas.width, y: Math.random() * dataStormCanvas.height, speed: Math.random() * 5 + 2 });
+        // Holographic HUD
+        const hudCanvas = document.getElementById('hud-overlay');
+        const hudCtx = hudCanvas.getContext('2d');
+        hudCanvas.width = 200;
+        hudCanvas.height = 100;
+        function drawHUD() {
+            hudCtx.clearRect(0, 0, hudCanvas.width, hudCanvas.height);
+            hudCtx.strokeStyle = '#ff3333';
+            hudCtx.lineWidth = 1;
+            hudCtx.font = '10px monospace';
+            hudCtx.fillStyle = '#ff3333';
+            hudCtx.fillText(`NEURAL LOAD: ${Math.floor(Math.random() * 100)}%`, 10, 20);
+            hudCtx.fillText(`SYNAPSE RATE: ${Math.random().toFixed(2)} GHz`, 10, 40);
+            hudCtx.beginPath();
+            for (let i = 0; i < 10; i++) {
+                hudCtx.moveTo(50 + i * 10, 80);
+                hudCtx.lineTo(50 + i * 10, 80 - Math.random() * 20);
+            }
+            hudCtx.stroke();
+            if (Math.random() < 0.1) {
+                hudCtx.globalAlpha = 0.5;
+                hudCtx.fillRect(0, 0, hudCanvas.width, hudCanvas.height);
+                hudCtx.globalAlpha = 1;
+            }
         }
-        function drawDataStorm() {
-            dsCtx.clearRect(0, 0, dataStormCanvas.width, dataStormCanvas.height);
-            dsCtx.fillStyle = '#ff00ff';
-            dsCtx.font = '12px monospace';
-            drops.forEach(drop => {
-                dsCtx.fillText(binary[Math.floor(Math.random() * 2)], drop.x, drop.y);
-                drop.y += drop.speed;
-                if (drop.y > dataStormCanvas.height) drop.y = 0;
-            });
+        setInterval(drawHUD, 100);
+
+        // TriadSynapse Glyph
+        const glyphCanvas = document.getElementById('triad-glyph');
+        const glyphCtx = glyphCanvas.getContext('2d');
+        glyphCanvas.width = 100;
+        glyphCanvas.height = 100;
+        function drawGlyph() {
+            glyphCtx.clearRect(0, 0, glyphCanvas.width, glyphCanvas.height);
+            glyphCtx.strokeStyle = '#ff3333';
+            glyphCtx.lineWidth = 2;
+            glyphCtx.beginPath();
+            const offset = Math.sin(Date.now() * 0.002) * 5;
+            glyphCtx.moveTo(50, 20 + offset);
+            glyphCtx.lineTo(80 + offset, 80);
+            glyphCtx.lineTo(20 - offset, 80);
+            glyphCtx.closePath();
+            glyphCtx.stroke();
+            if (Math.random() < 0.1) {
+                glyphCtx.globalAlpha = 0.7;
+                glyphCtx.fillStyle = '#ff3333';
+                glyphCtx.fill();
+                glyphCtx.globalAlpha = 1;
+            }
         }
-        setInterval(drawDataStorm, 50);
+        setInterval(drawGlyph, 50);
 
         // Neural Orb with TriadSynapse
         const scene = new THREE.Scene();
@@ -556,7 +598,7 @@ if __name__ == "__main__":
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('neural-orb').appendChild(renderer.domElement);
         const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
-        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true });
+        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: true });
         const orb = new THREE.Mesh(orbGeometry, orbMaterial);
         scene.add(orb);
         // Triad nodes
@@ -589,24 +631,26 @@ if __name__ == "__main__":
                 const t = Date.now() * 0.002 + i;
                 node.position.x = Math.sin(t) * 2;
                 node.position.y = Math.cos(t) * 2;
-                if (Math.random() < 0.15) {
-                    node.position.lerp(new THREE.Vector3(0, 0, 0), 0.1); // Merge to super node
+                if (Math.random() < 0.1) {
+                    node.position.lerp(new THREE.Vector3(0, 0, 0), 0.05);
                     node.material.color.set(0xffffff);
-                    setTimeout(() => node.material.color.set(0xff3333), 200);
+                    setTimeout(() => node.material.color.set(0xff3333), 150);
                 }
             });
         });
         function animate() {
             requestAnimationFrame(animate);
-            orb.rotation.z += 0.007;
-            particles.rotation.z += 0.003;
-            particles.geometry.attributes.position.array.forEach((_, i) => {
-                if (i % 3 === 0 && Math.random() < 0.15) {
-                    particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.3;
-                    particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.3;
-                }
-            });
-            particles.geometry.attributes.position.needsUpdate = true;
+            orb.rotation.z += 0.005;
+            particles.rotation.z += 0.002;
+            if (Math.random() < 0.1) {
+                particles.geometry.attributes.position.array.forEach((_, i) => {
+                    if (i % 3 === 0) {
+                        particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.4;
+                        particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.4;
+                    }
+                });
+                particles.geometry.attributes.position.needsUpdate = true;
+            }
             renderer.render(scene, camera);
         }
         animate();
@@ -626,15 +670,15 @@ if __name__ == "__main__":
         canvas.height = window.innerHeight;
         function drawNeuralNet() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = `rgba(255, 0, 255, ${Math.min(1, window.scrollY / 500)})`;
+            ctx.strokeStyle = `rgba(255, 51, 51, ${Math.min(1, window.scrollY / 500)})`;
             ctx.lineWidth = 3;
             for (let i = 0; i < 6; i++) {
                 ctx.beginPath();
-                ctx.arc(100 + i * 150, 200 + Math.sin(Date.now() * 0.002) * 40, 12, 0, Math.PI * 2);
+                ctx.arc(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 30, 12, 0, Math.PI * 2);
                 ctx.stroke();
                 if (i < 5) {
-                    ctx.moveTo(100 + i * 150, 200 + Math.sin(Date.now() * 0.002) * 40);
-                    ctx.lineTo(100 + (i + 1) * 150, 200 + Math.sin(Date.now() * 0.002) * 40);
+                    ctx.moveTo(100 + i * 150, 200 + Math.sin(Date.now() * 0.001) * 30);
+                    ctx.lineTo(100 + (i + 1) * 150, 200 + Math.sin(Date.now() * 0.001) * 30);
                     ctx.stroke();
                 }
             }
@@ -645,7 +689,7 @@ if __name__ == "__main__":
 
         // Glitchy Text Swap
         function glitchText() {
-            if (Math.random() < 0.15) {
+            if (Math.random() < 0.1) {
                 const textElements = document.querySelectorAll('.neon-text');
                 textElements.forEach(el => {
                     const original = el.textContent;
@@ -656,7 +700,11 @@ if __name__ == "__main__":
                         else glitched += char;
                     }
                     el.textContent = glitched;
-                    setTimeout(() => el.textContent = original, 100);
+                    el.style.textShadow = '0 0 10px #ff3333';
+                    setTimeout(() => {
+                        el.textContent = original;
+                        el.style.textShadow = '0 0 5px #ff3333, 0 0 10px #ff3333, 0 0 20px #ff3333';
+                    }, 100);
                 });
             }
         }
