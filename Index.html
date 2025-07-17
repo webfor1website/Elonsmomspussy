@@ -1,203 +1,122 @@
-Hey dude! Here’s a beefed-up, cool `index.html` file for your GitHub website to showcase the **HyperChaoticNeuralCodec (HNFC)** code on `elonsmomspussy.com`. I’ve made it slick with a cyberpunk vibe, Tailwind CSS for styling, Prism.js for syntax highlighting, and some handy copy buttons. It’s built to display both the backend (`hnfc_backend.py`) and frontend (`App.tsx`) code from your fully recoded HNFC, as dropped on July 15, 2025, at 11:04 PM MST. Let’s crank it! 🚀
-
----
-
-### The `index.html` Code
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Showcase of the HyperChaoticNeuralCodec, a chaotic BCI signal processing tool for 1000+ channels.">
-    <meta name="keywords" content="BCI, chaos, neural codec, signal processing, Python, React">
-    <title>HyperChaoticNeuralCodec Showcase</title>
-    <!-- Tailwind CSS CDN -->
+    <title>HyperChaoticNeuralCodec - Futuristic XAI</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Prism.js for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-jsx.min.js"></script>
-    <!-- Favicon (Brain Emoji) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <style>
+        body { background: #0d0d0d; color: #e0e0e0; font-family: 'Courier New', monospace; }
+        .neon-text { text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+        .neon-button { background: #ff3333; border: 2px solid #ff3333; color: #fff; padding: 10px 20px; border-radius: 5px; transition: all 0.3s ease; }
+        .neon-button:hover { box-shadow: 0 0 10px #ff3333; background: #0d0d0d; color: #ff3333; }
+        .code-block { background: #1a1a1a; border: 1px solid #00ffcc; padding: 20px; border-radius: 10px; max-height: 500px; overflow-y: auto; }
+        .parallax { background-attachment: fixed; background-position: center; background-size: cover; }
+        .neural-net { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
+    </style>
 </head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4BX4PTB4P8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body>
+    <!-- Hero -->
+    <section class="h-screen flex items-center justify-center parallax" style="background-image: url('https://example.com/futuristic-bg.jpg');">
+        <div class="text-center">
+            <h1 class="text-6xl neon-text">HyperChaoticNeuralCodec</h1>
+            <p class="text-xl text-gray-300 mt-4">Unleashing Chaos for Advanced Signal Processing</p>
+        </div>
+    </section>
 
-  gtag('config', 'G-4BX4PTB4P8');
-</script>
-<body class="bg-gray-900 text-white font-mono">
-    <!-- Header -->
-    <header class="p-8 text-center bg-gray-800 shadow-lg">
-        <h1 class="text-4xl text-cyan-400">HyperChaoticNeuralCodec</h1>
-        <p class="text-lg text-gray-300 mt-2">A chaotic BCI codec for the future - Rated 10/10</p>
-    </header>
+    <!-- 3D Cube -->
+    <div id="cube-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
-    <!-- Main Content -->
-    <main class="p-8 max-w-6xl mx-auto">
-        <!-- Intro Section -->
+    <!-- Main -->
+    <main class="p-8 max-w-6xl mx-auto relative">
+        <canvas id="neural-net" class="neural-net"></canvas>
+
+        <!-- Code -->
         <section class="mb-12">
-            <h2 class="text-2xl text-cyan-400 mb-4">Yo, Chaos-Slaying Fam!</h2>
-            <p class="text-gray-300">
-                Dive into the **HyperChaoticNeuralCodec (HNFC)**—latest drop at 11:04 PM MST, July 15, 2025. 
-                This beast scales to 1000+ channels like a Neuralink titan, with Rössler-Lorenz hybrid chaos, 
-                prediction, anomaly detection, and a cyberpunk React UI. Check the code below and vibe with the chaos!
-            </p>
+            <h2 class="text-2xl neon-text mb-4">HNFC Code</h2>
+            <button class="neon-button mb-4" onclick="copyCode('hnfc-code')">Copy Code</button>
+            <pre class="code-block"><code id="hnfc-code" class="language-python">[Insert your 270-line Python code here]</code></pre>
         </section>
 
-        <!-- Backend Code Section -->
-        <section class="mb-12">
-            <h2 class="text-2xl text-cyan-400 mb-4">Backend Code (hnfc_backend.py)</h2>
-            <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded mb-4" onclick="copyCode('backend-code')">Copy Code</button>
-            <pre class="bg-gray-800 p-4 rounded-lg max-h-96 overflow-y-auto"><code id="backend-code" class="language-python">
-import numpy as np
-import pandas as pd
-import pywt
-from scipy.stats import entropy
-from sklearn.decomposition import FastICA
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from flask import Flask, request, jsonify
-from flask_socketio import SocketIO, emit
-import torch
-import torch.distributed as dist
-import torch.multiprocessing as mp
-import torch.cuda.amp as amp
-import shap
-import os
-import time
-import logging
-import boto3
-
-# Logging setup
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-# Flask app with SocketIO
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
-
-# AWS clients (optional, enable with credentials)
-s3_client = boto3.client('s3') if os.getenv('AWS_ACCESS_KEY_ID') else None
-dynamodb = boto3.resource('dynamodb') if os.getenv('AWS_ACCESS_KEY_ID') else None
-
-class HyperChaoticNeuralCodec:
-    def __init__(self, input_dim=1000, reservoir_size=512, compression_ratio=0.03, chaos_type='hybrid'):
-        self.input_dim = input_dim
-        self.reservoir_size = reservoir_size
-        self.compression_ratio = compression_ratio
-        self.compressed_dim = input_dim // 2
-        self.chaos_type = chaos_type
-        self.device = torch.device(f'cuda:{dist.get_rank()}' if torch.cuda.is_available() else 'cpu')
-        self.scaler = amp.GradScaler()  # Mixed precision
-        self.shap_cache = {}  # SHAP caching
-        
-        # Reservoir and weights (float16 for efficiency)
-        self.reservoir = torch.randn(reservoir_size, reservoir_size, device=self.device, dtype=torch.float16) * 0.03
-        self.input_weights = torch.randn(reservoir_size, self.compressed_dim, device=self.device, dtype=torch.float16) * 0.01
-        self.output_weights = torch.zeros(reservoir_size, input_dim, device=self.device, dtype=torch.float16)
-        
-        # Chaos params
-        self.rossler_params = (0.15, 0.15, 5.2)
-        self.lorenz_params = (10.0, 28.0, 8/3)
-        
-        # [Rest of the backend code continues...]
-        # Full code available in the GitHub repo linked below!
-            </code></pre>
-            <p class="text-gray-400 mt-2">Note: This is a snippet. The full backend code includes GPU-optimized chaos, SHAP caching, and cloud-ready AWS integration.</p>
+        <!-- Features -->
+        <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl neon-text mb-2">NAS</h3>
+                <p class="text-gray-300">Evolves its own architecture over time.</p>
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl neon-text mb-2">Multi-Modal</h3>
+                <p class="text-gray-300">Fuses text, image, and audio inputs.</p>
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl neon-text mb-2">Distributed</h3>
+                <p class="text-gray-300">Scales across GPUs.</p>
+            </div>
         </section>
 
-        <!-- Frontend Code Section -->
-        <section class="mb-12">
-            <h2 class="text-2xl text-cyan-400 mb-4">Frontend Code (App.tsx)</h2>
-            <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded mb-4" onclick="copyCode('frontend-code')">Copy Code</button>
-            <pre class="bg-gray-800 p-4 rounded-lg max-h-96 overflow-y-auto"><code id="frontend-code" class="language-jsx">
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import UploadPage from './components/UploadPage';
-import ProcessPage from './components/ProcessPage';
-import VisualizePage from './components/VisualizePage';
-import BenchmarkPage from './components/BenchmarkPage';
-
-const App: React.FC = () => (
-  <Router>
-    <div className="min-h-screen bg-cyberDark text-white font-mono">
-      <nav className="p-4 bg-gray-900 shadow-lg">
-        <ul className="flex space-x-6 justify-center">
-          <li><Link to="/" className="text-neonCyan hover:text-neonRed">Home</Link></li>
-          <li><Link to="/upload" className="text-neonCyan hover:text-neonRed">Upload</Link></li>
-          <li><Link to="/process" className="text-neonCyan hover:text-neonRed">Process</Link></li>
-          <li><Link to="/visualize" className="text-neonCyan hover:text-neonRed">Visualize</Link></li>
-          <li><Link to="/benchmark" className="text-neonCyan hover:text-neonRed">Benchmark</Link></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<div className="p-8 text-center"><h1 className="text-4xl text-neonCyan">HyperChaoticNeuralCodec</h1><p>Chaotic BCI Revolution</p></div>} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/process" element={<ProcessPage />} />
-        <Route path="/visualize" element={<VisualizePage />} />
-        <Route path="/benchmark" element={<BenchmarkPage />} />
-      </Routes>
-    </div>
-  </Router>
-);
-
-export default App;
-            </code></pre>
-            <p className="text-gray-400 mt-2">Note: This is the main App component. The full frontend includes SHAP plots, loading spinners, and data export—check the repo!</p>
+        <!-- CTA -->
+        <section class="text-center mb-12">
+            <a href="https://github.com/username/repo" class="neon-button">Join the Chaos</a>
         </section>
     </main>
 
     <!-- Footer -->
     <footer class="p-4 text-center bg-gray-800">
-        <p class="text-gray-400">© 2025 HyperChaoticNeuralCodec Team</p>
-        <p><a href="https://github.com/username/repo" class="text-cyan-400 hover:text-cyan-300" target="_blank">GitHub Repository</a></p>
+        <p class="text-gray-400">© 2025 HNFC Team</p>
     </footer>
 
-    <!-- Copy to Clipboard Script -->
+    <!-- Scripts -->
     <script>
+        // Copy Code
         function copyCode(id) {
             const code = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code copied to clipboard!');
-            });
+            navigator.clipboard.writeText(code).then(() => alert('Code copied!'));
         }
+
+        // 3D Cube
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('cube-container').appendChild(renderer.domElement);
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        camera.position.z = 5;
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Neural Net
+        const canvas = document.getElementById('neural-net');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        function drawNeuralNet() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#00ffcc';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.arc(100 + i * 200, 200, 10, 0, Math.PI * 2);
+                ctx.stroke();
+                if (i < 4) {
+                    ctx.moveTo(100 + i * 200, 200);
+                    ctx.lineTo(100 + (i + 1) * 200, 200);
+                    ctx.stroke();
+                }
+            }
+        }
+        drawNeuralNet();
     </script>
 </body>
 </html>
-```
-
----
-
-### How to Use It
-
-1. **Save It**: Drop this into your GitHub repo as `index.html`.
-2. **Insert Full Code**: Replace the placeholders (`# [Insert backend code here]` and `# [Insert App.tsx code here]`) with the full `hnfc_backend.py` and `App.tsx` code from your query if you want it all in one file. I’ve included snippets here to keep it clean—link to the full code in your repo if it’s massive.
-3. **Host It**: Push it to GitHub Pages (`https://username.github.io/repo`) or any static host. It’ll work like a charm!
-4. **Tweak It**: Update the GitHub link in the footer (`https://github.com/username/repo`) to point to your actual repo.
-
----
-
-### What Makes It Cool?
-
-- **Cyberpunk Vibe**: Dark theme with neon cyan and red accents—pure chaos-slaying energy.
-- **Syntax Highlighting**: Prism.js makes the Python and JSX code pop with a sleek, readable style.
-- **Copy Buttons**: One-click copying for both backend and frontend code—super handy.
-- **Responsive Design**: Tailwind CSS ensures it looks dope on any screen, from phones to giant monitors.
-- **Scalable Showcase**: Scrollable code blocks (`max-h-96 overflow-y-auto`) handle the full HNFC beast without breaking.
-- **SEO & Favicon**: Meta tags for search engines and a brain emoji favicon (🧠) for extra flair.
-
----
-
-### Notes for You
-
-- **Code Snippets**: I included snippets of `hnfc_backend.py` and `App.tsx` here. The full backend is a beast with GPU-optimized chaos, SHAP caching, and AWS integration—same with the frontend’s SHAP plots and spinners. Link to your GitHub repo for the complete versions!
-- **Beefed Up**: It’s more than a basic HTML skeleton—modern styling, interactivity, and a layout that screams “genius-level vibes.”
-- **Domain**: You said `elonsmomspussy.com`—I kept it professional, assuming it’s a placeholder. Adjust the branding if it’s real!
-
-This should slay as a showcase for your HNFC on GitHub. Hit me up if you want more tweaks or chaos-infused upgrades! 😎
