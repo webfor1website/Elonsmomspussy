@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HyperChaoticNeuralCodec - Chaos Unleashed</title>
+    <meta name="description" content="HyperChaoticNeuralCodec: Chaos-driven XAI signal processing for Neuralink-scale systems.">
+    <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, futuristic">
+    <title>HyperChaoticNeuralCodec - Chaos Fucking Unleashed</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -19,6 +21,7 @@
         .neural-net { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
         .puzzle-input { background: #1a1a1a; border: 1px solid #00ffcc; padding: 10px; color: #00ffcc; }
         .hint { color: #ff3333; font-size: 0.9em; }
+        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
     </style>
 </head>
 <body>
@@ -26,12 +29,12 @@
     <section class="h-screen flex items-center justify-center parallax" style="background-image: url('https://example.com/futuristic-bg.jpg');">
         <div class="text-center">
             <h1 class="text-6xl neon-text">HyperChaoticNeuralCodec</h1>
-            <p class="text-xl text-gray-300 mt-4">Chaos Unleashed for Signal Processing</p>
+            <p class="text-xl text-gray-300 mt-4">Chaos Fucking Unleashed for XAI Signal Processing</p>
         </div>
     </section>
 
-    <!-- 3D Cube -->
-    <div id="cube-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+    <!-- Particle System -->
+    <div id="particle-container" class="particle-container"></div>
 
     <!-- Main -->
     <main class="p-8 max-w-6xl mx-auto relative">
@@ -39,18 +42,18 @@
 
         <!-- Puzzle-Locked Code -->
         <section class="mb-12">
-            <h2 class="text-2xl neon-text mb-4">Unlock the HNFC Code, Fucker</h2>
-            <p class="text-gray-300 mb-4">Decode this shit to get the key:</p>
+            <h2 class="text-2xl neon-text mb-4">Crack This Shit to See the Code</h2>
+            <p class="text-gray-300 mb-4">Decode this to find the single-digit key (it’s one number, asshole):</p>
             <p class="text-neon-text mb-4">“Fwoslq wkh frgh zlwk nhb: 5”</p>
-            <input type="text" id="key-input" class="puzzle-input mb-4" placeholder="Enter the key, genius">
-            <button class="neon-button" onclick="checkKey()">Unlock</button>
+            <input type="text" id="key-input" class="puzzle-input mb-4" placeholder="Enter the key (1 digit)">
+            <button class="neon-button" onclick="checkKey()">Unlock the Chaos</button>
             <div id="hint-container" class="mt-4">
                 <p class="hint" id="hint-20" style="display: none;">Hint (20s): Prime number between 1-10.</p>
-                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Number of planets, dipshit.</p>
-                <p class="hint" id="hint-60" style="display: none;">Hint (60s): Carbon’s atomic number.</p>
+                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Fingers on one hand, asshole.</p>
+                <p class="hint" id="hint-60" style="display: none;">Hint (60s): Carbon’s atomic number (think protons).</p>
             </div>
             <div id="code-container" style="display: none;">
-                <button class="neon-button mb-4" onclick="copyCode('hnfc-code')">Copy This Shit</button>
+                <button class="neon-button mb-4" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
                 <pre class="code-block"><code id="hnfc-code" class="language-python">
 import numpy as np
 import torch
@@ -315,22 +318,22 @@ if __name__ == "__main__":
         <!-- Features -->
         <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="p-6 bg-gray-800 rounded-lg">
-                <h3 class="text-xl neon-text mb-2">NAS</h3>
-                <p class="text-gray-300">Evolves like Neuralink’s adaptive interfaces.</p>
+                <h3 class="text-xl neon-text mb-2">Neural Architecture Search</h3>
+                <p class="text-gray-300">Evolves like Neuralink’s adaptive BCI interfaces.</p>
             </div>
             <div class="p-6 bg-gray-800 rounded-lg">
-                <h3 class="text-xl neon-text mb-2">Multi-Modal</h3>
-                <p class="text-gray-300">Fuses like XAI’s transparent models.</p>
+                <h3 class="text-xl neon-text mb-2">Multi-Modal Fusion</h3>
+                <p class="text-gray-300">Fuses text, image, audio like XAI’s transparent models.</p>
             </div>
             <div class="p-6 bg-gray-800 rounded-lg">
-                <h3 class="text-xl neon-text mb-2">Distributed</h3>
+                <h3 class="text-xl neon-text mb-2">Distributed Computing</h3>
                 <p class="text-gray-300">Scales like SpaceX’s Thunder clusters.</p>
             </div>
         </section>
 
         <!-- CTA -->
         <section class="text-center mb-12">
-            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Chaos</a>
+            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
         </section>
     </main>
 
@@ -352,31 +355,36 @@ if __name__ == "__main__":
             if (key === '5') {
                 document.getElementById('code-container').style.display = 'block';
             } else {
-                alert('Wrong key, asshole. Try harder.');
+                alert('Wrong fucking key. Try again, genius.');
             }
         }
 
         // Copy Code
         function copyCode(id) {
             const code = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, bitch!'));
+            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, motherfucker!'));
         }
 
-        // 3D Cube
+        // Particle System
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('cube-container').appendChild(renderer.domElement);
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        document.getElementById('particle-container').appendChild(renderer.domElement);
+        const particles = new THREE.Points(
+            new THREE.BufferGeometry().setFromPoints(
+                Array.from({ length: 1000 }, () => new THREE.Vector3(
+                    Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5
+                ))
+            ),
+            new THREE.PointsMaterial({ color: 0x00ffcc, size: 0.1 })
+        );
+        scene.add(particles);
         camera.position.z = 5;
         function animate() {
             requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.001;
             renderer.render(scene, camera);
         }
         animate();
@@ -402,6 +410,10 @@ if __name__ == "__main__":
             }
         }
         drawNeuralNet();
+        window.addEventListener('scroll', () => {
+            ctx.strokeStyle = `rgba(0, 255, 204, ${Math.min(1, window.scrollY / 500)})`;
+            drawNeuralNet();
+        });
     </script>
 </body>
 </html>
