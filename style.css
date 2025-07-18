@@ -1,13 +1,11 @@
 html, body {
-    background: linear-gradient(45deg, #666666, #999999) !important;
+    background: linear-gradient(45deg, #666666, #999999);
     color: #333333;
     font-family: 'Courier New', monospace;
-    overflow-x: hidden;
-    position: relative;
-    animation: pulse-bg 5s infinite;
     margin: 0;
     padding: 0;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    animation: pulse-bg 5s infinite;
     transition: background 0.2s ease;
 }
 
@@ -50,7 +48,7 @@ html, body {
 .code-block {
     background: #1a1a1a;
     border: 3px solid #9900ff;
-    padding: 25px;
+    padding: 15px;
     border-radius: 12px;
     max-height: 600px;
     overflow-y: auto;
@@ -60,9 +58,8 @@ html, body {
 .parallax {
     background-position: center;
     background-size: cover;
-    background-image: url('https://example.com/cyberpunk-dark-bg.jpg');
-    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-    padding: env(safe-area-inset-top) 10px env(safe-area-inset-bottom);
+    min-height: calc(100vh - 60px);
+    padding: 60px 10px 10px;
 }
 
 .neural-orb {
@@ -71,24 +68,16 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ensure it’s behind content but visible */
+    z-index: -10;
 }
 
-.lightning-canvas, .shockwave-canvas, .ascii-rain, .neural-matrix, .neon-pulse, .hud-overlay, .triad-glyph {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2; /* Adjusted z-index to layer correctly */
-}
-
-.shockwave-canvas { z-index: -3; opacity: 0.5; }
-.ascii-rain { z-index: -4; opacity: 0.3; }
-.neural-matrix { z-index: -5; opacity: 0.2; }
-.neon-pulse { z-index: -6; opacity: 0.4; }
-.hud-overlay { top: env(safe-area-inset-top, 20px); right: 20px; width: 250px; height: 120px; z-index: 1; opacity: 0.6; }
-.triad-glyph { bottom: env(safe-area-inset-bottom, 20px); left: 20px; width: 120px; height: 120px; z-index: 1; opacity: 0.8; }
+.lightning-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -9; opacity: 0.8; }
+.shockwave-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -8; opacity: 0.5; }
+.ascii-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -7; opacity: 0.3; }
+.neural-matrix { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -6; opacity: 0.2; }
+.neon-pulse { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5; opacity: 0.4; }
+.hud-overlay { position: fixed; top: env(safe-area-inset-top, 20px); right: 20px; width: 250px; height: 120px; z-index: 5; opacity: 0.6; }
+.triad-glyph { position: fixed; bottom: env(safe-area-inset-bottom, 20px); left: 20px; width: 120px; height: 120px; z-index: 5; opacity: 0.8; }
 
 .puzzle-input {
     background: #1a1a1a;
@@ -98,26 +87,9 @@ html, body {
     border-radius: 8px;
 }
 
-.hint {
-    color: #000000;
-    font-size: 1em;
-    text-shadow: none;
-    font-weight: bold;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-}
-
-.hint.lightning-flash, .cipher-text.lightning-flash {
-    text-shadow: 0 0 5px #ffff00;
-}
-
-.cipher-text {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-    font-weight: bold;
-}
+.hint { color: #000000; font-size: 1em; text-shadow: none; font-weight: bold; word-break: break-word; overflow-wrap: break-word; max-width: 100%; }
+.hint.lightning-flash, .cipher-text.lightning-flash { text-shadow: 0 0 5px #ffff00; }
+.cipher-text { word-break: break-word; overflow-wrap: break-word; max-width: 100%; font-weight: bold; }
 
 .feature-card {
     background: rgba(26, 26, 26, 0.7);
@@ -128,15 +100,9 @@ html, body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-card:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px #9900ff;
-}
+.feature-card:hover { transform: scale(1.1); box-shadow: 0 0 30px #9900ff; }
 
-.lightning-flash {
-    text-shadow: 0 0 10px #ffff00 !important;
-    transition: text-shadow 0.1s ease;
-}
+.lightning-flash { text-shadow: 0 0 10px #ffff00 !important; transition: text-shadow 0.1s ease; }
 
 .nav-menu {
     background: #1a1a1a;
@@ -144,65 +110,46 @@ html, body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 20;
     padding: env(safe-area-inset-top) 0;
 }
 
-.nav-menu a {
-    color: #ffffff;
-    transition: all 0.3s ease;
-}
-
-.nav-menu a:hover {
-    text-shadow: 0 0 10px #9900ff;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-.dropdown-menu {
-    background: #1a1a1a;
-    border: 2px solid #9900ff;
-}
-
+.nav-menu a { color: #ffffff; transition: all 0.3s ease; }
+.nav-menu a:hover { text-shadow: 0 0 10px #9900ff; }
+.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu { background: #1a1a1a; border: 2px solid #9900ff; }
 .hamburger { display: none; }
 
-@keyframes glitch {
-    0%, 100% { transform: translate(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); }
-    20%, 40%, 60%, 80% { transform: translate(3px, -3px) skew(-3deg); }
+.cyber-dick {
+    position: fixed;
+    font-size: 12px;
+    font-family: monospace;
+    color: #9900ff;
+    text-shadow: 0 0 5px #ffff00;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-@keyframes pulse-bg {
-    0% { background: linear-gradient(45deg, #666666, #999999); }
-    50% { background: linear-gradient(45deg, #666666, #aaaaaa); }
-    100% { background: linear-gradient(45deg, #666666, #999999); }
+.content-container {
+    position: relative;
+    z-index: 10;
+    padding-top: 60px; /* Match nav height */
 }
 
-@keyframes lightning-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
+@keyframes glitch { 0%, 100% { transform: translate(0); } 10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); } 20%, 40%, 60%, 80% { transform: translate(3px, -3px) skew(-3deg); } }
+@keyframes pulse-bg { 0% { background: linear-gradient(45deg, #666666, #999999); } 50% { background: linear-gradient(45deg, #666666, #aaaaaa); } 100% { background: linear-gradient(45deg, #666666, #999999); } }
+@keyframes screen-shake { 0% { transform: translate(0, 0); } 25% { transform: translate(-5px, 5px); } 50% { transform: translate(5px, -5px); } 75% { transform: translate(-3px, 3px); } 100% { transform: translate(0, 0); } }
 
-@keyframes screen-shake {
-    0% { transform: translate(0, 0); }
-    25% { transform: translate(-5px, 5px); }
-    50% { transform: translate(5px, -5px); }
-    75% { transform: translate(-3px, 3px); }
-    100% { transform: translate(0, 0); }
-}
-
-@media only screen and (max-width: 430px) {
+@media (max-width: 430px) {
     h1 { font-size: 2rem; line-height: 1.1; }
     p.text-3xl { font-size: 1.25rem; }
     .neon-button { padding: 8px 16px; font-size: 0.9rem; }
     .code-block { padding: 15px; max-height: 400px; }
-    .hint, .cipher-text { font-size: 1.5rem; font-weight: bold; }
+    .hint, .cipher-text { font-size: 1.5rem; }
     .hud-overlay { width: 150px; height: 80px; top: calc(env(safe-area-inset-top, 10px) + 60px); right: 10px; }
     .triad-glyph { width: 80px; height: 80px; bottom: env(safe-area-inset-bottom, 10px); left: 10px; }
     .feature-card { padding: 15px; }
-    .parallax { min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); padding: env(safe-area-inset-top) 5px env(safe-area-inset-bottom); }
+    .parallax { min-height: calc(100vh - 60px); padding: env(safe-area-inset-top) 5px env(safe-area-inset-bottom); }
     canvas { transform: scale(0.9); }
     .nav-menu { padding: calc(env(safe-area-inset-top) + 10px) 0; }
     .nav-menu ul { display: none; }
