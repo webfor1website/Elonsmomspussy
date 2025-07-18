@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,13 +30,6 @@
             word-break: break-word;
             overflow-wrap: break-word;
             max-width: 100%;
-        }
-        .feature-heading { 
-            transition: text-shadow 0.3s ease, color 0.3s ease;
-        }
-        .feature-heading.flash-code { 
-            color: #ffff00;
-            text-shadow: 0 0 10px #ffff00;
         }
         .neon-button { 
             background: #9900ff; 
@@ -167,9 +160,8 @@
             word-break: break-word;
             overflow-wrap: break-word;
             max-width: 100%;
-            font-weight: bold;
         }
-        .hint.lightning-flash, .cipher-text.lightning-flash { 
+        .hint.lightning-flash { 
             text-shadow: 0 0 5px #ffff00; 
         }
         .feature-card { 
@@ -234,7 +226,7 @@
             p.text-3xl { font-size: 1.25rem; }
             .neon-button { padding: 8px 16px; font-size: 0.9rem; }
             .code-block { padding: 15px; max-height: 400px; }
-            .hint, .cipher-text { font-size: 1.5rem; font-weight: bold; }
+            .hint, .cipher-text { font-size: 1.25rem; font-weight: bold; }
             .hud-overlay { width: 150px; height: 80px; top: calc(env(safe-area-inset-top, 10px) + 60px); right: 10px; }
             .triad-glyph { width: 80px; height: 80px; bottom: env(safe-area-inset-bottom, 10px); left: 10px; }
             .feature-card { padding: 12px; }
@@ -256,8 +248,8 @@
             <div class="hamburger">☰</div>
             <ul class="flex space-x-4">
                 <li><a href="index.html" class="neon-text">Home</a></li>
-                <li><a href="about.html" class="neon-text">About</a></li>
-                <li><a href="specs.html" class="neon-text">Specs</a></li>
+                <li><a href="about.html" class="neon-text">About HNFC</a></li>
+                <li><a href="specs.html" class="neon-text">Tech Specs</a></li>
                 <li><a href="team.html" class="neon-text">Team</a></li>
                 <li class="dropdown relative">
                     <a href="#" class="neon-text">Crowdfunding</a>
@@ -318,8 +310,8 @@
             <div id="hint-container" class="mt-6">
                 <p class="hint" id="hint-0">Hint (0s): Prime number between 5-10.</p>
                 <p class="hint" id="hint-20" style="display: none;">Hint (20s): Two hands minus three, asshole.</p>
-                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</p>
-            </div>
+                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</pшегося
+
             <div id="code-container" style="display: none;">
                 <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
                 <pre class="code-block"><code id="hnfc-code" class="language-python">
@@ -597,15 +589,15 @@ if __name__ == "__main__":
         <!-- Features -->
         <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-1">TriadSynapse</h3>
+                <h3 class="text-2xl neon-text mb-4" id="feature-1">TriadSynapse NAS</h3>
                 <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
             </div>
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-2">MultiModalFusion</h3>
+                <h3 class="text-2xl neon-text mb-4" id="feature-2">Multi-Modal Fusion</h3>
                 <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
             </div>
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-3">DistributedChaos</h3>
+                <h3 class="text-2xl neon-text mb-4" id="feature-3">Distributed Computing</h3>
                 <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
             </div>
         </section>
@@ -653,26 +645,32 @@ if __name__ == "__main__":
             navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
         }
 
-        // Feature Heading Flash
+        // Feature Heading Glitch
         const featureHeadings = [
-            { id: 'feature-1', name: 'TriadSynapse', code: 'Q⚡B85URZJR92 SLL' },
-            { id: 'feature-2', name: 'MultiModalFusion', code: 'C1U3R⚡RNSYP C37MKF' },
-            { id: 'feature-3', name: 'DistributedChaos', code: 'HYXB3TREQQ∆ E3NFYH9ZK' }
+            { id: 'feature-1', original: 'TriadSynapse NAS', glitch: 'Q⚡B85URZJR92 SLL' },
+            { id: 'feature-2', original: 'Multi-Modal Fusion', glitch: 'C1U3R⚡RNSYP C37MKF' },
+            { id: 'feature-3', original: 'Distributed Computing', glitch: 'HYXB3TREQQ∆ E3NFYH9ZK' }
         ];
-        function flashFeatureHeadings() {
+        function glitchFeatureHeadings() {
             featureHeadings.forEach(feature => {
                 const el = document.getElementById(feature.id);
                 if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
-                    el.textContent = feature.code;
-                    el.classList.add('flash-code');
+                    el.textContent = feature.glitch;
+                    el.style.textShadow = '0 0 10px #ffff00';
                     setTimeout(() => {
-                        el.textContent = feature.name;
-                        el.classList.remove('flash-code');
-                    }, 1000);
+                        el.textContent = feature.original;
+                        el.style.textShadow = '0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff';
+                    }, 500);
                 }
             });
         }
-        setInterval(flashFeatureHeadings, 2000);
+        setInterval(glitchFeatureHeadings, 2000);
+
+        // Hamburger Menu Toggle
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            const nav = document.querySelector('.nav-menu');
+            nav.classList.toggle('active');
+        });
 
         // Lightning Flashes
         const lightningCanvas = document.getElementById('lightning-canvas');
@@ -731,10 +729,7 @@ if __name__ == "__main__":
             if (Math.random() < 0.01) {
                 stormMode = true;
                 document.body.style.background = 'linear-gradient(45deg, #ff3333, #ffff00)';
-                setTimeout(() => {
-                    stormMode = false;
-                    document.body.style.background = 'linear-gradient(45deg, #666666, #999999)';
-                }, 3000);
+                setTimeout(() => { stormMode = false; document.body.style.background = 'linear-gradient(45deg, #666666, #999999)'; }, 3000);
             }
         }, 5000);
 
@@ -747,9 +742,7 @@ if __name__ == "__main__":
         function drawShockwave() {
             if (Math.random() < 0.1 || stormMode) {
                 shockwaveRadius = 10;
-                setTimeout(() => {
-                    shockwaveRadius = 0;
-                }, 500);
+                setTimeout(() => { shockwaveRadius = 0; }, 500);
             }
             if (shockwaveRadius > 0) {
                 swCtx.clearRect(0, 0, shockwaveCanvas.width, shockwaveCanvas.height);
@@ -771,11 +764,9 @@ if __name__ == "__main__":
         pulseCanvas.height = window.innerHeight;
         let pulseRadius = 0;
         function drawNeonPulse() {
-            if (stormMode || shockwaveRadius > 0) {
+            if (Math.random() < 0.1 || stormMode) {
                 pulseRadius = 10;
-                setTimeout(() => {
-                    pulseRadius = 0;
-                }, 500);
+                setTimeout(() => { pulseRadius = 0; }, 500);
             }
             if (pulseRadius > 0) {
                 pulseCtx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
@@ -783,7 +774,7 @@ if __name__ == "__main__":
                 pulseCtx.arc(window.innerWidth / 2, window.innerHeight / 2, pulseRadius, 0, Math.PI * 2);
                 pulseCtx.strokeStyle = '#ffff00';
                 pulseCtx.lineWidth = 5;
-                pulseCtx.globalAlpha = 0.7;
+                pulseCtx.globalAlpha = 0.6;
                 pulseCtx.stroke();
                 pulseRadius += 15;
             }
@@ -797,7 +788,7 @@ if __name__ == "__main__":
         asciiCanvas.height = window.innerHeight;
         const asciiChars = ['∆', '⚡', '*', '8==D', '∆∆∆'];
         const drops = [];
-        for (let i = 0; i < (window.innerWidth < 430 ? 30 : 50); i++) {
+        for (let i = 0; i < 50; i++) {
             drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
         }
         function drawAsciiRain() {
@@ -811,15 +802,15 @@ if __name__ == "__main__":
                     drop.y = 0;
                     drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
                 }
-                if ((shockwaveRadius > 0 || stormMode) && (drop.char === '∆∆∆' || drop.char === '8==D')) {
+                if ((shockwaveRadius > 0 || stormMode) && (drop.char === '8==D' || drop.char === '∆∆∆')) {
+                    asciiCtx.fillStyle = '#ffff00';
+                    for (let i = 0; i < 5; i++) {
+                        asciiCtx.fillText('*', drop.x + (Math.random() - 0.5) * 20, drop.y + (Math.random() - 0.5) * 20);
+                    }
                     drop.char = '*';
                     drop.speed += 5;
-                    for (let i = 0; i < 5; i++) {
-                        let sparkX = drop.x + (Math.random() - 0.5) * 20;
-                        let sparkY = drop.y + (Math.random() - 0.5) * 20;
-                        asciiCtx.fillText('*', sparkX, sparkY);
-                    }
                     setTimeout(() => { drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; drop.speed = Math.random() * 5 + 2; }, 200);
+                    asciiCtx.fillStyle = '#9900ff';
                 }
             });
         }
@@ -838,9 +829,9 @@ if __name__ == "__main__":
             for (let x = 0; x < matrixCanvas.width; x += gridSize) {
                 for (let y = 0; y < matrixCanvas.height; y += gridSize) {
                     matrixCtx.beginPath();
-                    matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002 + (pulseRadius > 0 ? pulseRadius * 0.01 : 0)) * 2, 0, Math.PI * 2);
+                    matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002) * 2, 0, Math.PI * 2);
                     matrixCtx.stroke();
-                    if (Math.random() < 0.05 || pulseRadius > 0) {
+                    if ((Math.random() < 0.05 || shockwaveRadius > 0 || stormMode) && Math.random() < 0.2) {
                         matrixCtx.lineTo(x + Math.random() * gridSize, y + Math.random() * gridSize);
                         matrixCtx.stroke();
                     }
@@ -862,14 +853,14 @@ if __name__ == "__main__":
             hudCtx.fillStyle = '#9900ff';
             hudCtx.fillText(`BCI SYNC: ${Math.floor(Math.random() * 100)}%`, 10, 20);
             hudCtx.fillText(`NEURAL LOAD: ${Math.random().toFixed(2)} THz`, 10, 40);
-            hudCtx.fillText(`CHAOS METER: ${(stormMode || shockwaveRadius > 0) ? 100 : Math.floor(Math.random() * 100)}%`, 10, 60);
+            hudCtx.fillText(`CHAOS METER: ${stormMode ? 100 : Math.floor(Math.random() * 100)}%`, 10, 60);
             hudCtx.beginPath();
             const barWidth = hudCanvas.width - 20;
-            hudCtx.rect(10, 70, barWidth * ((stormMode || shockwaveRadius > 0) ? 1 : Math.random() * 0.5 + 0.5), 10);
+            hudCtx.rect(10, 70, barWidth * (stormMode ? 1 : Math.random() * 0.5 + 0.5), 10);
             hudCtx.fillStyle = shockwaveRadius > 0 ? '#ffff00' : '#9900ff';
             hudCtx.fill();
             hudCtx.stroke();
-            if (Math.random() < 0.1 || stormMode) {
+            if (Math.random() < 0.1 || shockwaveRadius > 0 || stormMode) {
                 hudCtx.globalAlpha = 0.6;
                 hudCtx.fillStyle = '#ffff00';
                 hudCtx.fillRect(0, 0, hudCanvas.width, hudCanvas.height);
@@ -892,23 +883,23 @@ if __name__ == "__main__":
             glyphCtx.strokeStyle = '#ffff00';
             glyphCtx.lineWidth = 3;
             glyphCtx.beginPath();
-            const offset = Math.sin(Date.now() * (stormMode ? 0.006 : 0.003)) * 7;
+            const offset = Math.sin(Date.now() * 0.005) * 7;
             glyphCtx.moveTo(glyphCanvas.width / 2, 20 + offset);
             glyphCtx.lineTo(glyphCanvas.width / 2 + 30 + offset, glyphCanvas.height - 30);
             glyphCtx.lineTo(glyphCanvas.width / 2 - 30 - offset, glyphCanvas.height - 30);
             glyphCtx.closePath();
             glyphCtx.stroke();
-            if (stormMode || shockwaveRadius > 0) {
-                glyphCtx.beginPath();
-                glyphCtx.arc(glyphCanvas.width / 2, glyphCanvas.height / 2, 40, 0, Math.PI * 2);
-                glyphCtx.strokeStyle = '#ffff00';
-                glyphCtx.globalAlpha = 0.5;
-                glyphCtx.stroke();
-                glyphCtx.globalAlpha = 1;
+            if (Math.random() < 0.1 || shockwaveRadius > 0 || stormMode) {
+                glyphCtx.globalAlpha = 0.8;
                 glyphCtx.fillStyle = '#9900ff';
+                glyphCtx.fill();
+                glyphCtx.beginPath();
+                glyphCtx.arc(glyphCanvas.width / 2, glyphCanvas.height / 2, 20, 0, Math.PI * 2);
+                glyphCtx.stroke();
                 for (let i = 0; i < 5; i++) {
                     glyphCtx.fillRect(Math.random() * glyphCanvas.width, Math.random() * glyphCanvas.height, 3, 3);
                 }
+                glyphCtx.globalAlpha = 1;
             }
         }
         setInterval(drawGlyph, 50);
@@ -920,27 +911,23 @@ if __name__ == "__main__":
         // Cyber-Dick Swarm
         const cyberDicks = document.getElementById('cyber-dicks');
         function addCyberDick() {
-            let count = (stormMode || shockwaveRadius > 0) ? 6 : 1;
-            for (let i = 0; i < count; i++) {
-                const dick = document.createElement('div');
-                dick.className = 'cyber-dick';
-                dick.textContent = '8==D';
-                const posX = Math.random() * (window.innerWidth - 50);
-                const posY = Math.random() * (window.innerHeight - 50);
-                if (stormMode && count > 1) {
-                    const offset = i * 20 - (count - 1) * 10;
-                    dick.style.left = `${window.innerWidth / 2 + offset}px`;
-                    dick.style.top = `${window.innerHeight / 2 + offset * 0.5}px`;
-                } else {
+            if (Math.random() < 0.05 || shockwaveRadius > 0 || stormMode) {
+                const count = stormMode ? 6 : shockwaveRadius > 0 ? 3 : 1;
+                for (let i = 0; i < count; i++) {
+                    const dick = document.createElement('div');
+                    dick.className = 'cyber-dick';
+                    dick.textContent = '8==D';
+                    const posX = stormMode ? (window.innerWidth / 2 + Math.sin(i * Math.PI / 3) * 50) : Math.random() * (window.innerWidth - 50);
+                    const posY = stormMode ? (window.innerHeight / 2 + Math.cos(i * Math.PI / 3) * 50) : Math.random() * (window.innerHeight - 50);
                     dick.style.left = `${posX}px`;
                     dick.style.top = `${posY}px`;
+                    cyberDicks.appendChild(dick);
+                    dick.style.opacity = '1';
+                    setTimeout(() => {
+                        dick.style.opacity = '0';
+                        setTimeout(() => dick.remove(), 200);
+                    }, 300);
                 }
-                cyberDicks.appendChild(dick);
-                dick.style.opacity = '1';
-                setTimeout(() => {
-                    dick.style.opacity = '0';
-                    setTimeout(() => dick.remove(), 200);
-                }, 300);
             }
         }
         setInterval(addCyberDick, 100);
@@ -984,7 +971,7 @@ if __name__ == "__main__":
                 const t = Date.now() * 0.003 + i;
                 node.position.x = Math.sin(t) * 2.5;
                 node.position.y = Math.cos(t) * 2.5;
-                if (Math.random() < 0.15 || stormMode) {
+                if (Math.random() < 0.15 || shockwaveRadius > 0 || stormMode) {
                     node.position.lerp(new THREE.Vector3(0, 0, 0), 0.1);
                     node.material.color.set(0xffff00);
                     setTimeout(() => node.material.color.set(0xff3333), 200);
@@ -995,14 +982,14 @@ if __name__ == "__main__":
             const touch = e.touches[0];
             orb.rotation.x = touch.clientY * 0.005;
             orb.rotation.y = touch.clientX * 0.005;
-            orb.style.transform = 'scale(1.1)';
+            orb.style.transform = 'scale(1.05)';
             setTimeout(() => { orb.style.transform = 'scale(1)'; }, 200);
         });
         function animate() {
             requestAnimationFrame(animate);
             orb.rotation.z += 0.007;
             particles.rotation.z += 0.004;
-            if (Math.random() < 0.15 || stormMode) {
+            if (Math.random() < 0.15 || shockwaveRadius > 0 || stormMode) {
                 particles.geometry.attributes.position.array.forEach((_, i) => {
                     if (i % 3 === 0) {
                         particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
@@ -1051,7 +1038,7 @@ if __name__ == "__main__":
         // Glitchy Text Swap
         function glitchText() {
             if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
-                const textElements = document.querySelectorAll('.neon-text');
+                const textElements = document.querySelectorAll('.neon-text:not(#feature-1, #feature-2, #feature-3)');
                 textElements.forEach(el => {
                     const original = el.textContent;
                     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡';
@@ -1070,11 +1057,6 @@ if __name__ == "__main__":
             }
         }
         setInterval(glitchText, 100);
-
-        // Hamburger Menu Toggle
-        document.querySelector('.hamburger').addEventListener('click', () => {
-            document.querySelector('.nav-menu').classList.toggle('active');
-        });
 
         // Resize Handler for Mobile
         window.addEventListener('resize', () => {
