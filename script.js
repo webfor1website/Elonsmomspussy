@@ -1,266 +1,228 @@
-console.log('Three.js loaded:', typeof THREE !== 'undefined' ? 'Yes' : 'No');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HyperChaoticNeuralCodec: A neon-yellow lightning-fucked XAI dream for Neuralink chaos.">
+    <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
+    <title>HyperChaoticNeuralCodec - Fucking Unhinged Chaos</title>
+</head>
+<body>
+    <!-- Loading Fallback -->
+    <div id="loading">Initializing Chaos...</div>
 
-window.onload = () => {
-    document.getElementById('loading').style.display = 'none';
-    alert('3 hints over 60 seconds, crack the cipher or you don’t deserve the code, fucker!');
-    document.getElementById('hint-0').style.display = 'block';
-};
-setTimeout(() => document.getElementById('hint-20').style.display = 'block', 20000);
-setTimeout(() => document.getElementById('hint-40').style.display = 'block', 40000);
+    <!-- Neural Orb Placeholder -->
+    <div id="neural-orb"></div>
 
-function checkKey() {
-    const key = document.getElementById('key-input').value;
-    if (key === '7') {
-        document.getElementById('code-container').style.display = 'block';
-        alert('You cracked the chaos, you unhinged fuck!');
-    } else {
-        alert('Wrong fucking key. It’s one digit. Get it together.');
-    }
-}
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Navigation Menu -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="specs.html">Specs</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li>
+                    <a href="#">Crowdfunding</a>
+                    <div>
+                        <a href="https://www.gofundme.com/f/hnfc-chaos-project">GoFundMe</a>
+                        <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project">Kickstarter</a>
+                        <a href="https://venmo.com/hnfc-chaos">Venmo Donation</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
 
-function copyCode(id) {
-    const code = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
-}
+        <!-- Hero -->
+        <section>
+            <div>
+                <h1>HyperChaoticNeuralCodec</h1>
+                <p>Neon-Yellow Lightning-Fucked XAI Chaos</p>
+            </div>
+        </section>
 
-const featureHeadings = [
-    { id: 'feature-1', name: 'TriadSynapse', code: 'Q⚡B85URZJR92 SLL' },
-    { id: 'feature-2', name: 'MultiModalFusion', code: 'C1U3R⚡RNSYP C37MKF' },
-    { id: 'feature-3', name: 'DistributedChaos', code: 'HYXB3TREQQ∆ E3NFYH9ZK' }
-];
-function flashFeatureHeadings() {
-    featureHeadings.forEach(feature => {
-        const el = document.getElementById(feature.id);
-        if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
-            el.textContent = feature.code;
-            el.classList.add('flash-code');
-            setTimeout(() => {
-                el.textContent = feature.name;
-                el.classList.remove('flash-code');
-            }, 1000);
-        }
-    });
-}
-setInterval(flashFeatureHeadings, 2000);
+        <main>
+            <!-- Puzzle-Locked Code -->
+            <section>
+                <h2>Crack This Cipher, You Unhinged Motherfucker</h2>
+                <p>Decode this to find the single-digit key (1-9, no bullshit):</p>
+                <p>“Ixpvgu xli kwwl jkyf ymj: 7”</p>
+                <input type="text" id="key-input" placeholder="Enter the key (1 digit, asshole)">
+                <button onclick="checkKey()">Unlock the Fucking Chaos</button>
+                <div id="hint-container">
+                    <p id="hint-0">Hint (0s): Prime number between 5-10.</p>
+                    <p id="hint-20" style="display: none;">Hint (20s): Two hands minus three, asshole.</p>
+                    <p id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</p>
+                </div>
+                <div id="code-container" style="display: none;">
+                    <button onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
+                    <pre><code id="hnfc-code" class="language-python">
+import numpy as np
+import torch
+import torch.nn as nn
+import aiohttp
+import asyncio
+from bs4 import BeautifulSoup
+from transformers import CLIPModel, CLIPProcessor, GPT2Tokenizer, GPT2LMHeadModel, T5Tokenizer, T5ForConditionalGeneration, Wav2Vec2Model, Wav2Vec2Processor
+from torch.utils.data import Dataset, DataLoader
+from torch.cuda.amp import autocast
+from torch.utils.data.distributed import DistributedSampler
+import torch.distributed as dist
+import logging
+import pandas as pd
+import shap
+from sklearn.cluster import KMeans
+import random
 
-const lightningCanvas = document.getElementById('lightning-canvas');
-const lCtx = lightningCanvas.getContext('2d');
-lightningCanvas.width = window.innerWidth;
-lightningCanvas.height = window.innerHeight;
-let stormMode = false;
-function drawLightning() {
-    let lightningChance = stormMode ? 0.2 : 0.1;
-    if (Math.random() < lightningChance) {
-        lCtx.beginPath();
-        let x = Math.random() * lightningCanvas.width;
-        let y = 0;
-        lCtx.moveTo(x, y);
-        for (let i = 0; i < 8; i++) {
-            x += (Math.random() - 0.5) * 150;
-            y += lightningCanvas.height / 8;
-            lCtx.lineTo(x, y);
-        }
-        lCtx.strokeStyle = '#ffff00';
-        lCtx.lineWidth = 6;
-        lCtx.shadowBlur = 20;
-        lCtx.shadowColor = '#9900ff';
-        lCtx.stroke();
-        document.querySelectorAll('.neon-text, .text-white, .hint, .cipher-text').forEach(el => el.classList.add('lightning-flash'));
-        setTimeout(() => document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash')), 300);
-    }
-}
-setInterval(drawLightning, 100);
-setInterval(() => { if (Math.random() < 0.01) { stormMode = true; setTimeout(() => stormMode = false, 3000); } }, 5000);
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-const shockwaveCanvas = document.getElementById('shockwave-canvas');
-const swCtx = shockwaveCanvas.getContext('2d');
-shockwaveCanvas.width = window.innerWidth;
-shockwaveCanvas.height = window.innerHeight;
-let shockwaveRadius = 0;
-function drawShockwave() {
-    if (Math.random() < 0.1 || stormMode) { shockwaveRadius = 10; setTimeout(() => shockwaveRadius = 0, 500); }
-    if (shockwaveRadius > 0) {
-        swCtx.beginPath();
-        swCtx.arc(window.innerWidth / 2, window.innerHeight / 2, shockwaveRadius, 0, Math.PI * 2);
-        swCtx.strokeStyle = '#ffff00';
-        swCtx.lineWidth = 3;
-        swCtx.globalAlpha = 0.5;
-        swCtx.stroke();
-        shockwaveRadius += 10;
-    }
-}
-setInterval(drawShockwave, 50);
+dist.init_process_group(backend='nccl')
+rank = dist.get_rank()
+world_size = dist.get_world_size()
 
-const pulseCanvas = document.getElementById('neon-pulse');
-const pulseCtx = pulseCanvas.getContext('2d');
-pulseCanvas.width = window.innerWidth;
-pulseCanvas.height = window.innerHeight;
-let pulseRadius = 0;
-function drawNeonPulse() {
-    if (stormMode || shockwaveRadius > 0) { pulseRadius = 10; setTimeout(() => pulseRadius = 0, 500); }
-    if (pulseRadius > 0) {
-        pulseCtx.beginPath();
-        pulseCtx.arc(window.innerWidth / 2, window.innerHeight / 2, pulseRadius, 0, Math.PI * 2);
-        pulseCtx.strokeStyle = '#ffff00';
-        pulseCtx.lineWidth = 5;
-        pulseCtx.globalAlpha = 0.7;
-        pulseCtx.stroke();
-        pulseRadius += 15;
-    }
-}
-setInterval(drawNeonPulse, 50);
+class QueryResponseDataset(Dataset):
+    def __init__(self, csv_file, clip_processor, clip_model, device):
+        self.data = pd.read_csv(csv_file)
+        self.clip_processor = clip_processor
+        self.clip_model = clip_model
+        self.device = device
+    def __len__(self): return len(self.data)
+    def __getitem__(self, idx):
+        query = self.data.iloc[idx]['query']
+        response = self.data.iloc[idx]['response']
+        query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
+        response_inputs = self.clip_processor(text=response, return_tensors="pt").to(self.device)
+        query_emb = self.clip_model.get_text_features(**query_inputs).squeeze()
+        response_emb = self.clip_model.get_text_features(**response_inputs).squeeze()
+        return query_emb, response_emb
 
-const asciiCanvas = document.getElementById('ascii-rain');
-const asciiCtx = asciiCanvas.getContext('2d');
-asciiCanvas.width = window.innerWidth;
-asciiCanvas.height = window.innerHeight;
-const asciiChars = ['∆', '⚡', '*', '8==D', '∆∆∆'];
-const drops = [];
-for (let i = 0; i < (window.innerWidth < 430 ? 30 : 50); i++) {
-    drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
-}
-function drawAsciiRain() {
-    asciiCtx.fillStyle = '#9900ff';
-    asciiCtx.font = window.innerWidth < 430 ? '10px monospace' : '12px monospace';
-    drops.forEach(drop => {
-        asciiCtx.fillText(drop.char, drop.x, drop.y);
-        drop.y += drop.speed;
-        if (drop.y > asciiCanvas.height) { drop.y = 0; drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; }
-        if ((stormMode || shockwaveRadius > 0) && drop.char === '8==D') {
-            drop.char = '∆∆∆';
-            drop.speed += 5;
-            for (let i = 0; i < 5; i++) {
-                let sparkX = drop.x + (Math.random() - 0.5) * 20;
-                let sparkY = drop.y + (Math.random() - 0.5) * 20;
-                asciiCtx.fillText('⚡', sparkX, sparkY);
-            }
-            setTimeout(() => { drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; drop.speed = Math.random() * 5 + 2; }, 200);
-        }
-    });
-}
-setInterval(drawAsciiRain, 50);
+class BrainStorm(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.compressor = nn.Sequential(nn.Linear(input_dim, 256), nn.ReLU(), nn.Linear(256, input_dim), nn.Tanh())
+        self.optimizer = torch.optim.Adam(self.compressor.parameters(), lr=0.001)
+    def forward(self, data): return self.compressor(data)
 
-const matrixCanvas = document.getElementById('neural-matrix');
-const matrixCtx = matrixCanvas.getContext('2d');
-matrixCanvas.width = window.innerWidth;
-matrixCanvas.height = window.innerHeight;
-function drawMatrixGrid() {
-    matrixCtx.strokeStyle = '#9900ff';
-    matrixCtx.lineWidth = 1;
-    const gridSize = window.innerWidth < 430 ? 30 : 50;
-    for (let x = 0; x < matrixCanvas.width; x += gridSize) {
-        for (let y = 0; y < matrixCanvas.height; y += gridSize) {
-            matrixCtx.beginPath();
-            matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002) * 2, 0, Math.PI * 2);
-            matrixCtx.stroke();
-        }
-    }
-}
-setInterval(drawMatrixGrid, 100);
+class TriadSynapse(nn.Module):
+    def __init__(self, input_dim=512, hidden_dim=256):
+        super().__init__()
+        self.generator_candidates = [nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+                                    nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+                                    nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())]
+        self.generator = self.generator_candidates[0]
+        self.critic = nn.Sequential(nn.Linear(input_dim, 64), nn.ReLU(), nn.Linear(64, 1), nn.Sigmoid())
+        self.refiner = nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Tanh())
+        self.adaptive_layer = nn.Linear(hidden_dim, hidden_dim)
+        self.iterations = 7
+        self.candidate_performances = [0.0] * len(self.generator_candidates)
+    def refine(self, input_data):
+        candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
+        self.generator = self.generator_candidates[candidate_idx]
+        current = input_data.clone()
+        validity = 0.0
+        for _ in range(self.iterations):
+            generated = self.generator(current)
+            validity = self.critic(generated).mean().item()
+            refined = self.refiner(generated)
+            current = self.adaptive_layer(refined)
+        self.candidate_performances[candidate_idx] = (self.candidate_performances[candidate_idx] + validity) / 2
+        return current, validity
 
-const hudCanvas = document.getElementById('hud-overlay');
-const hudCtx = hudCanvas.getContext('2d');
-hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
-hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
-function drawHUD() {
-    hudCtx.strokeStyle = '#9900ff';
-    hudCtx.lineWidth = 1;
-    hudCtx.font = window.innerWidth < 430 ? '8px monospace' : '10px monospace';
-    hudCtx.fillStyle = '#9900ff';
-    hudCtx.fillText(`BCI SYNC: ${Math.floor(Math.random() * 100)}%`, 10, 20);
-    hudCtx.fillText(`NEURAL LOAD: ${Math.random().toFixed(2)} THz`, 10, 40);
-    hudCtx.fillText(`CHAOS METER: ${(stormMode || shockwaveRadius > 0) ? 100 : Math.floor(Math.random() * 100)}%`, 10, 60);
-    hudCtx.beginPath();
-    const barWidth = hudCanvas.width - 20;
-    hudCtx.rect(10, 70, barWidth * ((stormMode || shockwaveRadius > 0) ? 1 : Math.random() * 0.5 + 0.5), 10);
-    hudCtx.fillStyle = shockwaveRadius > 0 ? '#ffff00' : '#9900ff';
-    hudCtx.fill();
-    hudCtx.stroke();
-}
-setInterval(drawHUD, 100);
+class NeuroCosmicNexus(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.triad = TriadSynapse(input_dim)
+        self.cock_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
+        self.shaft_rate = 0.001
+        self.head_space = torch.zeros(input_dim).to(self.device)
+    def sync(self, input_data): return self.triad.refine(input_data)
+    def evolve(self, feedback): pass
 
-const glyphCanvas = document.getElementById('triad-glyph');
-const glyphCtx = glyphCanvas.getContext('2d');
-glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
-glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
-function drawGlyph() {
-    glyphCtx.strokeStyle = '#ffff00';
-    glyphCtx.lineWidth = 3;
-    glyphCtx.beginPath();
-    const offset = Math.sin(Date.now() * (stormMode ? 0.006 : 0.003)) * 7;
-    glyphCtx.moveTo(glyphCanvas.width / 2, 20 + offset);
-    glyphCtx.lineTo(glyphCanvas.width / 2 + 30 + offset, glyphCanvas.height - 30);
-    glyphCtx.lineTo(glyphCanvas.width / 2 - 30 - offset, glyphCanvas.height - 30);
-    glyphCtx.closePath();
-    glyphCtx.stroke();
-}
-setInterval(drawGlyph, 50);
+class MultiModalFusion(nn.Module):
+    def __init__(self, embed_dim=512):
+        super().__init__()
+        self.text_proj = nn.Linear(embed_dim, embed_dim)
+        self.image_proj = nn.Linear(embed_dim, embed_dim)
+        self.audio_proj = nn.Linear(embed_dim, embed_dim)
+        self.fusion = nn.MultiheadAttention(embed_dim, num_heads=8)
+    def forward(self, text_emb, image_emb, audio_emb):
+        text_proj = self.text_proj(text_emb).unsqueeze(0)
+        image_proj = self.image_proj(image_emb).unsqueeze(0)
+        audio_proj = self.audio_proj(audio_emb).unsqueeze(0)
+        combined = torch.cat([text_proj, image_proj, audio_proj], dim=0)
+        fused, _ = self.fusion(combined, combined, combined)
+        return fused.mean(dim=0)
 
-const cyberDicks = document.getElementById('cyber-dicks');
-function addCyberDick() {
-    let count = (stormMode || shockwaveRadius > 0) ? 6 : 1;
-    for (let i = 0; i < count; i++) {
-        const dick = document.createElement('div');
-        dick.className = 'cyber-dick';
-        dick.textContent = '8==D';
-        const posX = Math.random() * (window.innerWidth - 50);
-        const posY = Math.random() * (window.innerHeight - 50);
-        dick.style.left = `${posX}px`;
-        dick.style.top = `${posY}px`;
-        cyberDicks.appendChild(dick);
-        dick.style.opacity = '1';
-        setTimeout(() => { dick.style.opacity = '0'; setTimeout(() => dick.remove(), 200); }, 300);
-    }
-}
-setInterval(addCyberDick, 100);
+class NeoGrokCosmos:
+    def __init__(self, train_csv="path/to/train.csv"):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.brainstorm = nn.parallel.DistributedDataParallel(BrainStorm().to(self.device), device_ids=[self.device])
+        self.nexus = nn.parallel.DistributedDataParallel(NeuroCosmicNexus().to(self.device), device_ids=[self.device])
+        self.clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(self.device)
+        self.clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+        self.wav2vec2_model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h").to(self.device)
+        self.wav2vec2_processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
+        self.tokenizer = GPT2Tokenizer.from_pretrained('distilgpt2')
+        self.llm = nn.parallel.DistributedDataParallel(GPT2LMHeadModel.from_pretrained('distilgpt2').to(self.device), device_ids=[self.device])
+        self.t5_tokenizer = T5Tokenizer.from_pretrained('t5-small')
+        self.t5_model = nn.parallel.DistributedDataParallel(T5ForConditionalGeneration.from_pretrained('t5-small').to(self.device), device_ids=[self.device])
+        self.fusion_layer = MultiModalFusion().to(self.device)
+        self.memory = []
+        self.cache = {}
+        self.losses = []
+        self.critic_scores = []
+        self.explanations = []
+        self.query_embeddings = []
+        self.query_count = 0
+        self.train_dataset = QueryResponseDataset(train_csv, self.clip_processor, self.clip_model, self.device)
+        self.train_sampler = DistributedSampler(self.train_dataset)
+        self.train_loader = DataLoader(self.train_dataset, batch_size=32, shuffle=False, sampler=self.train_sampler)
+    async def fetch_real_time_data(self, source="hackernews"): return []
+    def apply_vibe_filter(self, text, vibe, user_id=None): return text
+    async def process_query(self, query, vibe="witty", image=None, audio=None, user_id=None, num_candidates=3): return "Chaos Result"
+    def train_step(self, data, target): return 0.0
+    def train_brainstorm(self, epochs=5): pass
+    def cluster_queries(self): pass
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-if (!renderer) {
-    console.error('WebGLRenderer failed to initialize!');
-    document.getElementById('loading').textContent = 'WebGL Error - Chaos Aborted!';
-} else {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('neural-orb').appendChild(renderer.domElement);
-    const orbGeometry = new THREE.SphereGeometry(3, 32, 32); // Increased size for visibility
-    const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
-    const orb = new THREE.Mesh(orbGeometry, orbMaterial);
-    scene.add(orb);
-    camera.position.z = 5;
-    function animate() {
-        requestAnimationFrame(animate);
-        if (renderer && orb) {
-            orb.rotation.x += 0.005; // Added x rotation for better visibility
-            orb.rotation.z += 0.007;
-            renderer.render(scene, camera);
-        }
-    }
-    animate();
-}
+if __name__ == "__main__":
+    cosmos = NeoGrokCosmos(train_csv="path/to/train.csv")
+    query = "What’s the meaning of life?"
+    result = asyncio.run(cosmos.process_query(query, vibe="witty", audio=None, image=None))
+    print(result)
+                    </code></pre>
+                </div>
+            </section>
 
-document.querySelector('.hamburger').addEventListener('click', () => {
-    document.querySelector('.nav-menu').classList.toggle('active');
-});
+            <!-- Features -->
+            <section>
+                <div>
+                    <h3>TriadSynapse</h3>
+                    <p>Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
+                </div>
+                <div>
+                    <h3>MultiModalFusion</h3>
+                    <p>Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
+                </div>
+                <div>
+                    <h3>DistributedChaos</h3>
+                    <p>Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+                </div>
+            </section>
 
-window.addEventListener('resize', () => {
-    lightningCanvas.width = window.innerWidth;
-    lightningCanvas.height = window.innerHeight;
-    shockwaveCanvas.width = window.innerWidth;
-    shockwaveCanvas.height = window.innerHeight;
-    asciiCanvas.width = window.innerWidth;
-    asciiCanvas.height = window.innerHeight;
-    matrixCanvas.width = window.innerWidth;
-    matrixCanvas.height = window.innerHeight;
-    pulseCanvas.width = window.innerWidth;
-    pulseCanvas.height = window.innerHeight;
-    hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
-    hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
-    glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
-    glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
-    if (renderer) {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-    }
-});
+            <!-- CTA -->
+            <section>
+                <a href="https://github.com/yourusername/repo">Join the Fucking Chaos</a>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+        </footer>
+    </div>
+
+    <div id="cyber-dicks"></div>
+</body>
+</html>
