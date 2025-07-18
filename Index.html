@@ -10,6 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
+    <!-- Loading Fallback -->
+    <div id="loading" class="loading">Initializing Chaos...</div>
+
     <!-- Neural Orb (Base Layer) -->
     <div id="neural-orb" class="neural-orb"></div>
 
@@ -22,13 +25,13 @@
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
     <canvas id="triad-glyph" class="triad-glyph"></canvas>
 
-    <!-- Content Container to Avoid Overlap -->
+    <!-- Content Container -->
     <div class="content-container">
         <!-- Navigation Menu -->
         <nav class="nav-menu fixed top-0 w-full z-20 bg-gray-900 border-b-2 border-[#9900ff] p-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <div class="hamburger text-white text-2xl cursor-pointer">☰</div>
-                <ul class="flex space-x-6 text-white">
+                <ul class="flex space-x-6 text-white items-center">
                     <li><a href="index.html" class="neon-text">Home</a></li>
                     <li><a href="about.html" class="neon-text">About</a></li>
                     <li><a href="specs.html" class="neon-text">Specs</a></li>
@@ -47,9 +50,9 @@
 
         <!-- Hero -->
         <section class="parallax flex items-center justify-center min-h-[calc(100vh-60px)]">
-            <div class="text-center z-10">
-                <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
-                <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
+            <div class="text-center z-10 hero-content">
+                <h1 class="text-9xl neon-text">HyperChaoticNeuralCodec</h1>
+                <p class="text-4xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
             </div>
         </section>
 
