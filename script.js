@@ -1,4 +1,6 @@
-// Puzzle Logic
+// Debug: Check if Three.js is loaded
+console.log('Three.js loaded:', typeof THREE !== 'undefined' ? 'Yes' : 'No');
+
 window.onload = () => {
     alert('3 hints over 60 seconds, crack the cipher or you don’t deserve the code, fucker!');
     document.getElementById('hint-0').style.display = 'block';
@@ -16,13 +18,11 @@ function checkKey() {
     }
 }
 
-// Copy Code
 function copyCode(id) {
     const code = document.getElementById(id).textContent;
     navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
 }
 
-// Feature Heading Flash
 const featureHeadings = [
     { id: 'feature-1', name: 'TriadSynapse', code: 'Q⚡B85URZJR92 SLL' },
     { id: 'feature-2', name: 'MultiModalFusion', code: 'C1U3R⚡RNSYP C37MKF' },
@@ -43,7 +43,6 @@ function flashFeatureHeadings() {
 }
 setInterval(flashFeatureHeadings, 2000);
 
-// Lightning Flashes
 const lightningCanvas = document.getElementById('lightning-canvas');
 const lCtx = lightningCanvas.getContext('2d');
 lightningCanvas.width = window.innerWidth;
@@ -107,7 +106,6 @@ setInterval(() => {
     }
 }, 5000);
 
-// Neural Pulse Shockwave
 const shockwaveCanvas = document.getElementById('shockwave-canvas');
 const swCtx = shockwaveCanvas.getContext('2d');
 shockwaveCanvas.width = window.innerWidth;
@@ -116,9 +114,7 @@ let shockwaveRadius = 0;
 function drawShockwave() {
     if (Math.random() < 0.1 || stormMode) {
         shockwaveRadius = 10;
-        setTimeout(() => {
-            shockwaveRadius = 0;
-        }, 500);
+        setTimeout(() => { shockwaveRadius = 0; }, 500);
     }
     if (shockwaveRadius > 0) {
         swCtx.clearRect(0, 0, shockwaveCanvas.width, shockwaveCanvas.height);
@@ -133,7 +129,6 @@ function drawShockwave() {
 }
 setInterval(drawShockwave, 50);
 
-// Neon Pulse Wave
 const pulseCanvas = document.getElementById('neon-pulse');
 const pulseCtx = pulseCanvas.getContext('2d');
 pulseCanvas.width = window.innerWidth;
@@ -142,9 +137,7 @@ let pulseRadius = 0;
 function drawNeonPulse() {
     if (stormMode || shockwaveRadius > 0) {
         pulseRadius = 10;
-        setTimeout(() => {
-            pulseRadius = 0;
-        }, 500);
+        setTimeout(() => { pulseRadius = 0; }, 500);
     }
     if (pulseRadius > 0) {
         pulseCtx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
@@ -159,7 +152,6 @@ function drawNeonPulse() {
 }
 setInterval(drawNeonPulse, 50);
 
-// ASCII Art Rain
 const asciiCanvas = document.getElementById('ascii-rain');
 const asciiCtx = asciiCanvas.getContext('2d');
 asciiCanvas.width = window.innerWidth;
@@ -194,7 +186,6 @@ function drawAsciiRain() {
 }
 setInterval(drawAsciiRain, 50);
 
-// Neural Matrix Grid
 const matrixCanvas = document.getElementById('neural-matrix');
 const matrixCtx = matrixCanvas.getContext('2d');
 matrixCanvas.width = window.innerWidth;
@@ -218,7 +209,6 @@ function drawMatrixGrid() {
 }
 setInterval(drawMatrixGrid, 100);
 
-// Holographic HUD
 const hudCanvas = document.getElementById('hud-overlay');
 const hudCtx = hudCanvas.getContext('2d');
 hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
@@ -251,7 +241,6 @@ hudCanvas.addEventListener('touchstart', () => {
     setTimeout(() => { hudCanvas.style.transform = 'scale(1)'; }, 200);
 });
 
-// TriadSynapse Glyph
 const glyphCanvas = document.getElementById('triad-glyph');
 const glyphCtx = glyphCanvas.getContext('2d');
 glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
@@ -286,7 +275,6 @@ glyphCanvas.addEventListener('touchstart', () => {
     setTimeout(() => { glyphCanvas.style.transform = 'scale(1)'; }, 200);
 });
 
-// Cyber-Dick Swarm
 const cyberDicks = document.getElementById('cyber-dicks');
 function addCyberDick() {
     let count = (stormMode || shockwaveRadius > 0) ? 6 : 1;
@@ -314,7 +302,6 @@ function addCyberDick() {
 }
 setInterval(addCyberDick, 100);
 
-// Neural Orb with TriadSynapse
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -346,6 +333,26 @@ const particles = new THREE.Points(
 );
 scene.add(particles);
 camera.position.z = 5;
+function animate() {
+    requestAnimationFrame(animate);
+    if (!renderer || !orb) {
+        console.error('Renderer or orb not initialized!');
+        return;
+    }
+    orb.rotation.z += 0.007;
+    particles.rotation.z += 0.004;
+    if (Math.random() < 0.15 || stormMode) {
+        particles.geometry.attributes.position.array.forEach((_, i) => {
+            if (i % 3 === 0) {
+                particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
+                particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.5;
+            }
+        });
+        particles.geometry.attributes.position.needsUpdate = true;
+    }
+    renderer.render(scene, camera);
+}
+animate();
 document.addEventListener('mousemove', (e) => {
     orb.rotation.x = e.clientY * 0.005;
     orb.rotation.y = e.clientX * 0.005;
@@ -367,24 +374,7 @@ document.addEventListener('touchmove', (e) => {
     orb.style.transform = 'scale(1.1)';
     setTimeout(() => { orb.style.transform = 'scale(1)'; }, 200);
 });
-function animate() {
-    requestAnimationFrame(animate);
-    orb.rotation.z += 0.007;
-    particles.rotation.z += 0.004;
-    if (Math.random() < 0.15 || stormMode) {
-        particles.geometry.attributes.position.array.forEach((_, i) => {
-            if (i % 3 === 0) {
-                particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
-                particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.5;
-            }
-        });
-        particles.geometry.attributes.position.needsUpdate = true;
-    }
-    renderer.render(scene, camera);
-}
-animate();
 
-// Neural Net Canvas
 const canvas = document.createElement('canvas');
 canvas.style.position = 'absolute';
 canvas.style.top = '0';
@@ -417,7 +407,6 @@ drawNeuralNet();
 window.addEventListener('scroll', drawNeuralNet);
 setInterval(drawNeuralNet, 50);
 
-// Glitchy Text Swap
 function glitchText() {
     if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
         const textElements = document.querySelectorAll('.neon-text');
@@ -440,12 +429,10 @@ function glitchText() {
 }
 setInterval(glitchText, 100);
 
-// Hamburger Menu Toggle
 document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.nav-menu').classList.toggle('active');
 });
 
-// Resize Handler for Mobile
 window.addEventListener('resize', () => {
     lightningCanvas.width = window.innerWidth;
     lightningCanvas.height = window.innerHeight;
