@@ -3,203 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HyperChaoticNeuralCodec: A neon-yellow lightning-fucked XAI dream for Neuralink chaos.">
+    <meta name="description" content="HyperChaoticNeuralCodec: A neon-charged XAI dream for Neuralink chaos.">
     <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
-    <title>HyperChaoticNeuralCodec - Fucking Unhinged Chaos</title>
+    <title>HyperChaoticNeuralCodec - Unleashed Chaos</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
     <style>
-        body { 
-            background: linear-gradient(45deg, #666666, #999999); 
-            color: #333333; 
-            font-family: 'Courier New', monospace; 
-            overflow-x: hidden; 
+        body {
+            background: linear-gradient(45deg, #2a2a2a, #4a4a4a);
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
             position: relative;
-            animation: pulse-bg 5s infinite;
+            animation: pulse-bg 10s infinite ease-in-out;
         }
-        .neon-text { 
-            text-shadow: 0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff; 
-            animation: glitch 0.5s linear infinite; 
+        .neon-text {
+            text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff, 0 0 50px #ff00ff;
+            animation: glitch 0.3s linear infinite alternate;
+            letter-spacing: 2px;
         }
-        .neon-button { 
-            background: #9900ff; 
-            border: 3px solid #9900ff; 
-            color: #ffffff; 
-            padding: 12px 24px; 
-            border-radius: 8px; 
-            transition: all 0.3s ease; 
+        .neon-button {
+            background: transparent;
+            border: 3px solid #ff00ff;
+            color: #ff00ff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
         }
-        .neon-button:hover { 
-            box-shadow: 0 0 20px #9900ff, 0 0 40px #9900ff; 
-            background: #333333; 
-            color: #9900ff; 
+        .neon-button:hover {
+            background: #ff00ff;
+            color: #000000;
+            box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
         }
-        .code-block { 
-            background: #1a1a1a; 
-            border: 3px solid #9900ff; 
-            padding: 25px; 
-            border-radius: 12px; 
-            max-height: 600px; 
-            overflow-y: auto; 
-            box-shadow: 0 0 30px rgba(153, 0, 255, 0.4); 
+        .code-block {
+            background: #1a1a1a;
+            border: 3px solid #ff00ff;
+            padding: 25px;
+            border-radius: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
         }
-        .parallax { 
-            background-attachment: fixed; 
-            background-position: center; 
-            background-size: cover; 
-            background-image: url('https://example.com/cyberpunk-dark-bg.jpg'); 
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-image: url('https://example.com/cyberpunk-dark-bg.jpg');
         }
-        .neural-orb { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -1; 
+        .neural-orb {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.7;
         }
-        .lightning-canvas { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -2; 
-            opacity: 0.8; 
+        .lightning-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.9;
         }
-        .shockwave-canvas { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -3; 
-            opacity: 0.5; 
+        .shockwave-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            opacity: 0.6;
         }
-        .ascii-rain { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -4; 
-            opacity: 0.3; 
+        .ascii-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            opacity: 0.4;
         }
-        .hud-overlay { 
-            position: fixed; 
-            top: 20px; 
-            right: 20px; 
-            width: 250px; 
-            height: 120px; 
-            z-index: 1; 
-            opacity: 0.6; 
+        .hud-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+           gaben
+            width: 250px;
+            height: 120px;
+            z-index: 1;
+            opacity: 0.7;
         }
-        .triad-glyph { 
-            position: fixed; 
-            bottom: 20px; 
-            left: 20px; 
-            width: 120px; 
-            height: 120px; 
-            z-index: 1; 
-            opacity: 0.8; 
+        .triad-glyph {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+            opacity: 0.9;
         }
-        .cyber-dick { 
-            position: fixed; 
-            font-size: 12px; 
-            font-family: monospace; 
-            color: #9900ff; 
-            text-shadow: 0 0 5px #ffff00; 
-            opacity: 0; 
-            transition: opacity 0.2s ease; 
+        .cyber-dick {
+            position: fixed;
+            font-size: 14px;
+            font-family: monospace;
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ffff00;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .puzzle-input { 
-            background: #1a1a1a; 
-            border: 3px solid #9900ff; 
-            padding: 12px; 
-            color: #333333; 
-            border-radius: 8px; 
+        .puzzle-input {
+            background: #1a1a1a;
+            border: 3px solid #ff00ff;
+            padding: 12px;
+            color: #ffffff;
+            border-radius: 8px;
         }
-        .hint { 
-            color: #9900ff; 
-            font-size: 1em; 
-            text-shadow: 0 0 5px #9900ff; 
+        .hint {
+            color: #ff00ff;
+            font-size: 1.1em;
+            text-shadow: 0 0 5px #ff00ff;
         }
-        .feature-card { 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid #ff00ff;
         }
-        .feature-card:hover { 
-            transform: scale(1.1); 
-            box-shadow: 0 0 30px #9900ff; 
+        .feature-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 40px #ff00ff, 0 0 80px #ff00ff;
         }
-        .lightning-flash { 
-            text-shadow: 0 0 10px #ffff00 !important; 
-            transition: text-shadow 0.1s ease; 
+        .lightning-flash {
+            text-shadow: 0 0 15px #ffff00 !important;
+            animation: lightning-pulse 0.2s ease;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.95);
+            border-bottom: 2px solid #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+        .nav-tab {
+            color: #ff00ff;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: #ff00ff;
+            color: #000000;
+            box-shadow: 0 0 15px #ff00ff;
         }
         @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); }
-            20%, 40%, 60%, 80% { transform: translate(3px, -3px) skew(-3deg); }
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px) skew(2deg); }
+            40% { transform: translate(2px, -2px) skew(-2deg); }
+            60% { transform: translate(-2px, 0) skew(0); }
+            80% { transform: translate(2px, 0) skew(0); }
+            100% { transform: translate(0); }
         }
         @keyframes pulse-bg {
-            0% { background: linear-gradient(45deg, #666666, #999999); }
-            50% { background: linear-gradient(45deg, #666666, #aaaaaa); }
-            100% { background: linear-gradient(45deg, #666666, #999999); }
+            0% { background: linear-gradient(45deg, #2a2a2a, #4a4a4a); }
+            50% { background: linear-gradient(45deg, #2a2a2a, #6a6a6a); }
+            100% { background: linear-gradient(45deg, #2a2a2a, #4a4a4a); }
         }
         @keyframes lightning-pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            50% { opacity: 0.6; }
         }
     </style>
 </head>
 <body>
-    <!-- Lightning Canvas -->
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <ul class="flex justify-center space-x-4">
+                <li><a href="#project-info" class="nav-tab active" onclick="switchTab('project-info')">Project Info</a></li>
+                <li><a href="#team" class="nav-tab" onclick="switchTab('team')">Team</a></li>
+                <li><a href="#invest" class="nav-tab" onclick="switchTab('invest')">Invest</a></li>
+                <li><a href="#contact" class="nav-tab" onclick="switchTab('contact')">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Canvases -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
-
-    <!-- Shockwave Canvas -->
     <canvas id="shockwave-canvas" class="shockwave-canvas"></canvas>
-
-    <!-- ASCII Art Rain -->
     <canvas id="ascii-rain" class="ascii-rain"></canvas>
-
-    <!-- Holographic HUD -->
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
-
-    <!-- TriadSynapse Glyph -->
     <canvas id="triad-glyph" class="triad-glyph"></canvas>
-
-    <!-- Cyber-Dicks -->
     <div id="cyber-dicks"></div>
 
     <!-- Hero -->
     <section class="h-screen flex items-center justify-center parallax">
-        <div class="text-center">
-            <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
-            <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
+        <div class="text-center relative z-10">
+            <h1 class="text-9xl neon-text font-bold tracking-wider">HyperChaoticNeuralCodec</h1>
+            <p class="text-4xl text-white mt-6 neon-text">Neon-Charged XAI Chaos Unleashed</p>
+            <a href="#main-content" class="neon-button mt-8">Dive into the Chaos</a>
         </div>
+        <div id="neural-orb" class="neural-orb"></div>
     </section>
 
-    <!-- Neural Orb -->
-    <div id="neural-orb" class="neural-orb"></div>
-
     <!-- Main -->
-    <main class="p-10 max-w-7xl mx-auto relative">
-        <!-- Puzzle-Locked Code -->
-        <section class="mb-16">
-            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
-            <p class="text-white mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
-            <p class="text-neon-text mb-6 cipher-text">“Fwoslq wkh frgh zlwk nhb: 5”</p>
-            <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
-            <button class="neon-button" onclick="checkKey()">Unlock the Fucking Chaos</button>
-            <div id="hint-container" class="mt-6">
-                <p class="hint" id="hint-20" style="display: none;">Hint (20s): Prime number between 1-10.</p>
-                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Fingers on one hand, dipshit.</p>
-                <p class="hint" id="hint-60" style="display: none;">Hint (60s): Carbon’s atomic number (protons).</p>
+    <main id="main-content" class="p-10 max-w-7xl mx-auto relative">
+        <!-- Project Info Section -->
+        <section id="project-info" class="tab-content">
+            <h2 class="text-5xl neon-text mb-8 text-center">Project Information</h2>
+            <p class="text-white text-lg mb-6">HyperChaoticNeuralCodec is a groundbreaking fusion of XAI and Neuralink-inspired tech, designed to harness chaotic neural patterns for next-gen BCI applications. Powered by SPARK, it’s a wild ride into the future of human-machine synergy.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-2xl neon-text mb-4">Core Technology</h3>
+                    <p class="text-white">TriadSynapse NAS, multi-modal fusion, and distributed computing drive this beast.</p>
+                </div>
+                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-2xl neon-text mb-4">Mission</h3>
+                    <p class="text-white">To push the boundaries of chaos-driven intelligence and make BCI accessible to the masses.</p>
+                </div>
             </div>
-            <div id="code-container" style="display: none;">
-                <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
-                <pre class="code-block"><code id="hnfc-code" class="language-python">
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="tab-content hidden">
+            <h2 class="text-5xl neon-text mb-8 text-center">Our Team</h2>
+            <p class="text-white text-lg mb-6">Meet the chaotic minds behind HyperChaoticNeuralCodec, a crew of renegade coders, neuroscientists, and visionaries.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-2xl neon-text mb-4">Dr. Chaos</h3>
+                    <p class="text-white">Lead Neuroscientist. Master of neural storms.</p>
+                </div>
+                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-2xl neon-text mb-4">CodeSlinger</h3>
+                    <p class="text-white">Chief Architect. Writes code faster than lightning.</p>
+                </div>
+                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-2xl neon-text mb-4">NeonVibe</h3>
+                    <p class="text-white">UI/UX Wizard. Crafts chaos into beauty.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invest Section -->
+        <section id="invest" class="tab-content hidden">
+            <h2 class="text-5xl neon-text mb-8 text-center">Invest in the Chaos</h2>
+            <p class="text-white text-lg mb-6">Join the revolution. Invest in the future of chaotic intelligence and BCI innovation.</p>
+            <div class="text-center">
+                <a href="mailto:invest@hnfc.io" class="neon-button">Get Investment Details</a>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="tab-content hidden">
+            <h2 class="text-5xl neon-text mb-8 text-center">Contact Us</h2>
+            <p class="text-white text-lg mb-6">Got questions? Want to join the chaos? Reach out to us.</p>
+            <form class="max-w-lg mx-auto">
+                <input type="text" placeholder="Name" class="puzzle-input w-full mb-4" />
+                <input type="email" placeholder="Email" class="puzzle-input w-full mb-4" />
+                <textarea placeholder="Message" class="puzzle-input w-full mb-4" rows="5"></textarea>
+                <button type="submit" class="neon-button w-full">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Puzzle-Locked Code -->
+        <section id="code" class="tab-content mt-16">
+            <h2 class="text-5xl neon-text mb-8 text-center">Crack the Cipher</h2>
+            <p class="text-white text-lg mb-6 text-center">Decode this to unlock the chaotic code (single-digit key, 1-9):</p>
+            <p class="text-neon-text mb-6 text-center cipher-text">“Fwoslq wkh frgh zlwk nhb: 5”</p>
+            <div class="text-center">
+                <input type="text" id="key-input" class="puzzle-input mb-6 max-w-xs mx-auto" placeholder="Enter the key (1 digit)">
+                <button class="neon-button" onclick="checkKey()">Unlock the Chaos</button>
+            </div>
+            <div id="hint-container" class="mt-6 text-center">
+                <p class="hint" id="hint-20" style="display: none;">Hint (20s): Prime number between 1-10.</p>
+                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Fingers on one hand.</p>
+                <p class="hint" id="hint-60" style="display: none;">Hint (60s): Carbon’s atomic number.</p>
+            </div>
+            <div id="code-container" class="mt-8" style="display: none;">
+                <div class="text-center">
+                    <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy the Code</button>
+                </div>
+                <pre class="code-block mx-auto"><code id="hnfc-code" class="language-python">
 import numpy as np
 import torch
 import torch.nn as nn
@@ -405,7 +496,6 @@ class NeoGrokCosmos:
                 inputs = self.wav2vec2_processor(audio, return_tensors="pt", sampling_rate=16000).to(self.device)
                 with autocast():
                     audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
-            fused全世界
             fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_embedding)
             with autocast():
                 compressed = self.brainstorm(fused_embedding)
@@ -473,40 +563,45 @@ if __name__ == "__main__":
         </section>
 
         <!-- Features -->
-        <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">TriadSynapse NAS</h3>
-                <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
-            </div>
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">Multi-Modal Fusion</h3>
-                <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
-            </div>
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">Distributed Computing</h3>
-                <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+        <section id="features" class="tab-content mt-16">
+            <h2 class="text-5xl neon-text mb-8 text-center">Core Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-8 feature-card">
+                    <h3 class="text-2xl neon-text mb-4">TriadSynapse NAS</h3>
+                    <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
+                </div>
+                <div class="p-8 feature-card">
+                    <h3 class="text-2xl neon-text mb-4">Multi-Modal Fusion</h3>
+                    <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
+                </div>
+                <div class="p-8 feature-card">
+                    <h3 class="text-2xl neon-text mb-4">Distributed Computing</h3>
+                    <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+                </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="text-center mb-16">
-            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
+        <section class="text-center mt-16">
+            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Chaos</a>
         </section>
     </main>
 
-    <!-- Footer (dick shape in comments) -->
-    <!--   _____  -->
-    <!--  /     \ -->
-    <!-- /_______\ -->
-    <!-- |  ***  | -->
-    <!-- |  ***  | -->
-    <!-- |_______| -->
-    <footer class="p-6 text-center bg-gray-800">
-        <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+    <!-- Footer -->
+    <footer class="p-6 text-center bg-gray-800 mt-16">
+        <p class="text-white">© 2025 HNFC Team - Powered by SPARK</p>
     </footer>
 
     <!-- Scripts -->
     <script>
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`[href="#${tabId}"]`).classList.add('active');
+        }
+
         // Puzzle Logic
         let startTime = Date.now();
         setTimeout(() => document.getElementById('hint-20').style.display = 'block', 20000);
@@ -517,16 +612,16 @@ if __name__ == "__main__":
             const key = document.getElementById('key-input').value;
             if (key === '5') {
                 document.getElementById('code-container').style.display = 'block';
-                alert('You cracked the chaos, you unhinged fuck!');
+                alert('Chaos unlocked, you absolute legend!');
             } else {
-                alert('Wrong fucking key. It’s one digit. Get it together.');
+                alert('Wrong key. One digit, try again.');
             }
         }
 
         // Copy Code
         function copyCode(id) {
             const code = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
+            navigator.clipboard.writeText(code).then(() => alert('Code copied, you chaotic genius!'));
         }
 
         // Lightning Flashes
@@ -540,7 +635,7 @@ if __name__ == "__main__":
                 lCtx.strokeStyle = '#ffff00';
                 lCtx.lineWidth = 6;
                 lCtx.shadowBlur = 20;
-                lCtx.shadowColor = '#9900ff';
+                lCtx.shadowColor = '#ff00ff';
                 lCtx.beginPath();
                 let x = Math.random() * lightningCanvas.width;
                 let y = 0;
@@ -563,7 +658,6 @@ if __name__ == "__main__":
                 lCtx.stroke();
                 document.body.style.opacity = '0.8';
                 document.querySelectorAll('.neon-text, .text-white, .hint').forEach(el => el.classList.add('lightning-flash'));
-                // Lightning trails
                 setTimeout(() => {
                     lCtx.globalAlpha = 0.4;
                     lCtx.stroke();
@@ -574,9 +668,6 @@ if __name__ == "__main__":
                         document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash'));
                     }, 100);
                 }, 100);
-                // Optional thunder/glitch sounds (uncomment to enable)
-                // new Audio('https://example.com/thunder.mp3').play();
-                // if (Math.random() < 0.3) new Audio('https://example.com/glitch.mp3').play();
             }
         }
         setInterval(drawLightning, 100);
@@ -612,15 +703,15 @@ if __name__ == "__main__":
         const asciiCtx = asciiCanvas.getContext('2d');
         asciiCanvas.width = window.innerWidth;
         asciiCanvas.height = window.innerHeight;
-        const asciiChars = ['∆', '⚡', '*', '8==D'];
+        const asciiChars = ['∆', '⚡', '*', '8==D', 'Ω', '∑'];
         const drops = [];
         for (let i = 0; i < 50; i++) {
             drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
         }
         function drawAsciiRain() {
             asciiCtx.clearRect(0, 0, asciiCanvas.width, asciiCanvas.height);
-            asciiCtx.fillStyle = '#9900ff';
-            asciiCtx.font = '12px monospace';
+            asciiCtx.fillStyle = '#ff00ff';
+            asciiCtx.font = '14px monospace';
             drops.forEach(drop => {
                 asciiCtx.fillText(drop.char, drop.x, drop.y);
                 drop.y += drop.speed;
@@ -639,10 +730,10 @@ if __name__ == "__main__":
         hudCanvas.height = 120;
         function drawHUD() {
             hudCtx.clearRect(0, 0, hudCanvas.width, hudCanvas.height);
-            hudCtx.strokeStyle = '#9900ff';
+            hudCtx.strokeStyle = '#ff00ff';
             hudCtx.lineWidth = 1;
-            hudCtx.font = '10px monospace';
-            hudCtx.fillStyle = '#9900ff';
+            hudCtx.font = '12px monospace';
+            hudCtx.fillStyle = '#ff00ff';
             hudCtx.fillText(`BCI SYNC: ${Math.floor(Math.random() * 100)}%`, 10, 20);
             hudCtx.fillText(`NEURAL LOAD: ${Math.random().toFixed(2)} THz`, 10, 40);
             hudCtx.fillText(`CHAOS RATE: ${Math.floor(Math.random() * 1000)}`, 10, 60);
@@ -679,7 +770,7 @@ if __name__ == "__main__":
             glyphCtx.stroke();
             if (Math.random() < 0.1 || shockwaveRadius > 0) {
                 glyphCtx.globalAlpha = 0.8;
-                glyphCtx.fillStyle = '#9900ff';
+                glyphCtx.fillStyle = '#ff00ff';
                 glyphCtx.fill();
                 glyphCtx.globalAlpha = 1;
             }
@@ -711,13 +802,12 @@ if __name__ == "__main__":
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth * 0.5, window.innerHeight * 0.5);
         document.getElementById('neural-orb').appendChild(renderer.domElement);
         const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
-        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
+        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true });
         const orb = new THREE.Mesh(orbGeometry, orbMaterial);
         scene.add(orb);
-        // Triad nodes
         const triadNodes = [
             new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
             new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
@@ -786,7 +876,7 @@ if __name__ == "__main__":
         canvas.height = window.innerHeight;
         function drawNeuralNet() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = `rgba(153, 0, 255, ${Math.min(1, window.scrollY / 500)})`;
+            ctx.strokeStyle = `rgba(255, 0, 255, ${Math.min(1, window.scrollY / 500)})`;
             ctx.lineWidth = 3;
             for (let i = 0; i < 6; i++) {
                 ctx.beginPath();
@@ -809,17 +899,17 @@ if __name__ == "__main__":
                 const textElements = document.querySelectorAll('.neon-text');
                 textElements.forEach(el => {
                     const original = el.textContent;
-                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡';
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡Ω∑';
                     let glitched = '';
                     for (let char of original) {
                         if (Math.random() < 0.3 && char !== ' ') glitched += chars[Math.floor(Math.random() * chars.length)];
                         else glitched += char;
                     }
                     el.textContent = glitched;
-                    el.style.textShadow = '0 0 10px #ffff00';
+                    el.style.textShadow = '0 0 15px #ffff00';
                     setTimeout(() => {
                         el.textContent = original;
-                        el.style.textShadow = '0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff';
+                        el.style.textShadow = '0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff';
                     }, 150);
                 });
             }
