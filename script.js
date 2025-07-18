@@ -1,4 +1,3 @@
-// Debug: Check if Three.js is loaded
 console.log('Three.js loaded:', typeof THREE !== 'undefined' ? 'Yes' : 'No');
 
 window.onload = () => {
@@ -64,16 +63,6 @@ function drawLightning() {
             x += (Math.random() - 0.5) * 150;
             y += lightningCanvas.height / 8;
             lCtx.lineTo(x, y);
-            if (Math.random() < 0.4) {
-                let forkX = x;
-                let forkY = y;
-                lCtx.moveTo(forkX, forkY);
-                for (let j = 0; j < 5; j++) {
-                    forkX += (Math.random() - 0.5) * 100;
-                    forkY += lightningCanvas.height / 16;
-                    lCtx.lineTo(forkX, forkY);
-                }
-            }
         }
         lCtx.stroke();
         document.body.style.background = 'linear-gradient(45deg, #9900ff, #ffff00)';
@@ -95,16 +84,7 @@ function drawLightning() {
     }
 }
 setInterval(drawLightning, 100);
-setInterval(() => {
-    if (Math.random() < 0.01) {
-        stormMode = true;
-        document.body.style.background = 'linear-gradient(45deg, #ff3333, #ffff00)';
-        setTimeout(() => {
-            stormMode = false;
-            document.body.style.background = 'linear-gradient(45deg, #666666, #999999)';
-        }, 3000);
-    }
-}, 5000);
+setInterval(() => { if (Math.random() < 0.01) { stormMode = true; setTimeout(() => stormMode = false, 3000); } }, 5000);
 
 const shockwaveCanvas = document.getElementById('shockwave-canvas');
 const swCtx = shockwaveCanvas.getContext('2d');
@@ -112,10 +92,7 @@ shockwaveCanvas.width = window.innerWidth;
 shockwaveCanvas.height = window.innerHeight;
 let shockwaveRadius = 0;
 function drawShockwave() {
-    if (Math.random() < 0.1 || stormMode) {
-        shockwaveRadius = 10;
-        setTimeout(() => { shockwaveRadius = 0; }, 500);
-    }
+    if (Math.random() < 0.1 || stormMode) { shockwaveRadius = 10; setTimeout(() => shockwaveRadius = 0, 500); }
     if (shockwaveRadius > 0) {
         swCtx.clearRect(0, 0, shockwaveCanvas.width, shockwaveCanvas.height);
         swCtx.beginPath();
@@ -135,10 +112,7 @@ pulseCanvas.width = window.innerWidth;
 pulseCanvas.height = window.innerHeight;
 let pulseRadius = 0;
 function drawNeonPulse() {
-    if (stormMode || shockwaveRadius > 0) {
-        pulseRadius = 10;
-        setTimeout(() => { pulseRadius = 0; }, 500);
-    }
+    if (stormMode || shockwaveRadius > 0) { pulseRadius = 10; setTimeout(() => pulseRadius = 0, 500); }
     if (pulseRadius > 0) {
         pulseCtx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
         pulseCtx.beginPath();
@@ -168,17 +142,14 @@ function drawAsciiRain() {
     drops.forEach(drop => {
         asciiCtx.fillText(drop.char, drop.x, drop.y);
         drop.y += drop.speed;
-        if (drop.y > asciiCanvas.height) {
-            drop.y = 0;
-            drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
-        }
-        if ((shockwaveRadius > 0 || stormMode) && (drop.char === '∆∆∆' || drop.char === '8==D')) {
-            drop.char = '*';
+        if (drop.y > asciiCanvas.height) { drop.y = 0; drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; }
+        if ((stormMode || shockwaveRadius > 0) && (drop.char === '8==D')) {
+            drop.char = '∆∆∆';
             drop.speed += 5;
             for (let i = 0; i < 5; i++) {
                 let sparkX = drop.x + (Math.random() - 0.5) * 20;
                 let sparkY = drop.y + (Math.random() - 0.5) * 20;
-                asciiCtx.fillText('*', sparkX, sparkY);
+                asciiCtx.fillText('⚡', sparkX, sparkY);
             }
             setTimeout(() => { drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; drop.speed = Math.random() * 5 + 2; }, 200);
         }
@@ -198,12 +169,8 @@ function drawMatrixGrid() {
     for (let x = 0; x < matrixCanvas.width; x += gridSize) {
         for (let y = 0; y < matrixCanvas.height; y += gridSize) {
             matrixCtx.beginPath();
-            matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002 + (pulseRadius > 0 ? pulseRadius * 0.01 : 0)) * 2, 0, Math.PI * 2);
+            matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002) * 2, 0, Math.PI * 2);
             matrixCtx.stroke();
-            if (Math.random() < 0.05 || pulseRadius > 0) {
-                matrixCtx.lineTo(x + Math.random() * gridSize, y + Math.random() * gridSize);
-                matrixCtx.stroke();
-            }
         }
     }
 }
@@ -228,18 +195,8 @@ function drawHUD() {
     hudCtx.fillStyle = shockwaveRadius > 0 ? '#ffff00' : '#9900ff';
     hudCtx.fill();
     hudCtx.stroke();
-    if (Math.random() < 0.1 || stormMode) {
-        hudCtx.globalAlpha = 0.6;
-        hudCtx.fillStyle = '#ffff00';
-        hudCtx.fillRect(0, 0, hudCanvas.width, hudCanvas.height);
-        hudCtx.globalAlpha = 1;
-    }
 }
 setInterval(drawHUD, 100);
-hudCanvas.addEventListener('touchstart', () => {
-    hudCanvas.style.transform = 'scale(1.1)';
-    setTimeout(() => { hudCanvas.style.transform = 'scale(1)'; }, 200);
-});
 
 const glyphCanvas = document.getElementById('triad-glyph');
 const glyphCtx = glyphCanvas.getContext('2d');
@@ -256,24 +213,8 @@ function drawGlyph() {
     glyphCtx.lineTo(glyphCanvas.width / 2 - 30 - offset, glyphCanvas.height - 30);
     glyphCtx.closePath();
     glyphCtx.stroke();
-    if (stormMode || shockwaveRadius > 0) {
-        glyphCtx.beginPath();
-        glyphCtx.arc(glyphCanvas.width / 2, glyphCanvas.height / 2, 40, 0, Math.PI * 2);
-        glyphCtx.strokeStyle = '#ffff00';
-        glyphCtx.globalAlpha = 0.5;
-        glyphCtx.stroke();
-        glyphCtx.globalAlpha = 1;
-        glyphCtx.fillStyle = '#9900ff';
-        for (let i = 0; i < 5; i++) {
-            glyphCtx.fillRect(Math.random() * glyphCanvas.width, Math.random() * glyphCanvas.height, 3, 3);
-        }
-    }
 }
 setInterval(drawGlyph, 50);
-glyphCanvas.addEventListener('touchstart', () => {
-    glyphCanvas.style.transform = 'scale(1.2)';
-    setTimeout(() => { glyphCanvas.style.transform = 'scale(1)'; }, 200);
-});
 
 const cyberDicks = document.getElementById('cyber-dicks');
 function addCyberDick() {
@@ -284,20 +225,11 @@ function addCyberDick() {
         dick.textContent = '8==D';
         const posX = Math.random() * (window.innerWidth - 50);
         const posY = Math.random() * (window.innerHeight - 50);
-        if (stormMode && count > 1) {
-            const offset = i * 20 - (count - 1) * 10;
-            dick.style.left = `${window.innerWidth / 2 + offset}px`;
-            dick.style.top = `${window.innerHeight / 2 + offset * 0.5}px`;
-        } else {
-            dick.style.left = `${posX}px`;
-            dick.style.top = `${posY}px`;
-        }
+        dick.style.left = `${posX}px`;
+        dick.style.top = `${posY}px`;
         cyberDicks.appendChild(dick);
         dick.style.opacity = '1';
-        setTimeout(() => {
-            dick.style.opacity = '0';
-            setTimeout(() => dick.remove(), 200);
-        }, 300);
+        setTimeout(() => { dick.style.opacity = '0'; setTimeout(() => dick.remove(), 200); }, 300);
     }
 }
 setInterval(addCyberDick, 100);
@@ -311,123 +243,15 @@ const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
 const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
 const orb = new THREE.Mesh(orbGeometry, orbMaterial);
 scene.add(orb);
-const triadNodes = [
-    new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
-    new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
-    new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 }))
-];
-triadNodes[0].position.set(2, 2, 0);
-triadNodes[1].position.set(-2, 2, 0);
-triadNodes[2].position.set(0, -2, 0);
-triadNodes.forEach(node => scene.add(node));
-const superNode = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffff00 }));
-superNode.position.set(0, 0, 0);
-scene.add(superNode);
-const particles = new THREE.Points(
-    new THREE.BufferGeometry().setFromPoints(
-        Array.from({ length: window.innerWidth < 430 ? 500 : 1000 }, () => new THREE.Vector3(
-            Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5
-        ))
-    ),
-    new THREE.PointsMaterial({ color: 0xff3333, size: window.innerWidth < 430 ? 0.03 : 0.05 })
-);
-scene.add(particles);
 camera.position.z = 5;
 function animate() {
     requestAnimationFrame(animate);
-    if (!renderer || !orb) {
-        console.error('Renderer or orb not initialized!');
-        return;
+    if (renderer && orb) {
+        orb.rotation.z += 0.007;
+        renderer.render(scene, camera);
     }
-    orb.rotation.z += 0.007;
-    particles.rotation.z += 0.004;
-    if (Math.random() < 0.15 || stormMode) {
-        particles.geometry.attributes.position.array.forEach((_, i) => {
-            if (i % 3 === 0) {
-                particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
-                particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.5;
-            }
-        });
-        particles.geometry.attributes.position.needsUpdate = true;
-    }
-    renderer.render(scene, camera);
 }
 animate();
-document.addEventListener('mousemove', (e) => {
-    orb.rotation.x = e.clientY * 0.005;
-    orb.rotation.y = e.clientX * 0.005;
-    triadNodes.forEach((node, i) => {
-        const t = Date.now() * 0.003 + i;
-        node.position.x = Math.sin(t) * 2.5;
-        node.position.y = Math.cos(t) * 2.5;
-        if (Math.random() < 0.15 || stormMode) {
-            node.position.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-            node.material.color.set(0xffff00);
-            setTimeout(() => node.material.color.set(0xff3333), 200);
-        }
-    });
-});
-document.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    orb.rotation.x = touch.clientY * 0.005;
-    orb.rotation.y = touch.clientX * 0.005;
-    orb.style.transform = 'scale(1.1)';
-    setTimeout(() => { orb.style.transform = 'scale(1)'; }, 200);
-});
-
-const canvas = document.createElement('canvas');
-canvas.style.position = 'absolute';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.zIndex = '-1';
-canvas.style.opacity = '0.4';
-document.querySelector('main').appendChild(canvas);
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-function drawNeuralNet() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = `rgba(153, 0, 255, ${Math.min(1, window.scrollY / 500)})`;
-    ctx.lineWidth = 3;
-    const nodeCount = window.innerWidth < 430 ? 4 : 6;
-    for (let i = 0; i < nodeCount; i++) {
-        ctx.beginPath();
-        ctx.arc(100 + i * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40, 12, 0, Math.PI * 2);
-        ctx.stroke();
-        if (i < nodeCount - 1) {
-            ctx.moveTo(100 + i * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40);
-            ctx.lineTo(100 + (i + 1) * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40);
-            ctx.stroke();
-        }
-    }
-}
-drawNeuralNet();
-window.addEventListener('scroll', drawNeuralNet);
-setInterval(drawNeuralNet, 50);
-
-function glitchText() {
-    if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
-        const textElements = document.querySelectorAll('.neon-text');
-        textElements.forEach(el => {
-            const original = el.textContent;
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡';
-            let glitched = '';
-            for (let char of original) {
-                if (Math.random() < 0.3 && char !== ' ') glitched += chars[Math.floor(Math.random() * chars.length)];
-                else glitched += char;
-            }
-            el.textContent = glitched;
-            el.style.textShadow = '0 0 10px #ffff00';
-            setTimeout(() => {
-                el.textContent = original;
-                el.style.textShadow = '0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff';
-            }, 150);
-        });
-    }
-}
-setInterval(glitchText, 100);
 
 document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.nav-menu').classList.toggle('active');
@@ -448,8 +272,6 @@ window.addEventListener('resize', () => {
     hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
     glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
     glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
