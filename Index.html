@@ -16,11 +16,11 @@
     <!-- Neural Orb (Base Layer) -->
     <div id="neural-orb" class="neural-orb"></div>
 
-    <!-- Canvases -->
+    <!-- Canvases in Correct Order -->
+    <canvas id="neural-matrix" class="neural-matrix"></canvas>
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
     <canvas id="shockwave-canvas" class="shockwave-canvas"></canvas>
     <canvas id="ascii-rain" class="ascii-rain"></canvas>
-    <canvas id="neural-matrix" class="neural-matrix"></canvas>
     <canvas id="neon-pulse" class="neon-pulse"></canvas>
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
     <canvas id="triad-glyph" class="triad-glyph"></canvas>
@@ -29,15 +29,15 @@
     <div class="content-container">
         <!-- Navigation Menu -->
         <nav class="nav-menu fixed top-0 w-full z-20 bg-gray-900 border-b-2 border-[#9900ff] p-4">
-            <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="max-w-7xl mx-auto flex items-center justify-center">
                 <div class="hamburger text-white text-2xl cursor-pointer">☰</div>
-                <ul class="flex space-x-6 text-white items-center">
-                    <li><a href="index.html" class="neon-text">Home</a></li>
-                    <li><a href="about.html" class="neon-text">About</a></li>
-                    <li><a href="specs.html" class="neon-text">Specs</a></li>
-                    <li><a href="team.html" class="neon-text">Team</a></li>
+                <ul class="flex space-x-4 text-white items-center menu-list">
+                    <li><a href="index.html" class="neon-text menu-item">Home</a></li>
+                    <li><a href="about.html" class="neon-text menu-item">About</a></li>
+                    <li><a href="specs.html" class="neon-text menu-item">Specs</a></li>
+                    <li><a href="team.html" class="neon-text menu-item">Team</a></li>
                     <li class="relative">
-                        <a href="#" class="neon-text">Crowdfunding</a>
+                        <a href="#" class="neon-text menu-item">Crowdfunding</a>
                         <div class="dropdown-menu absolute hidden bg-gray-900 border-2 border-[#9900ff] mt-2">
                             <a href="https://www.gofundme.com/f/hnfc-chaos-project" class="block px-4 py-2 neon-text">GoFundMe</a>
                             <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project" class="block px-4 py-2 neon-text">Kickstarter</a>
