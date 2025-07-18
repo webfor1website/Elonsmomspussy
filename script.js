@@ -80,7 +80,6 @@ let shockwaveRadius = 0;
 function drawShockwave() {
     if (Math.random() < 0.1 || stormMode) { shockwaveRadius = 10; setTimeout(() => shockwaveRadius = 0, 500); }
     if (shockwaveRadius > 0) {
-        swCtx.clearRect(0, 0, shockwaveCanvas.width, shockwaveCanvas.height);
         swCtx.beginPath();
         swCtx.arc(window.innerWidth / 2, window.innerHeight / 2, shockwaveRadius, 0, Math.PI * 2);
         swCtx.strokeStyle = '#ffff00';
@@ -100,7 +99,6 @@ let pulseRadius = 0;
 function drawNeonPulse() {
     if (stormMode || shockwaveRadius > 0) { pulseRadius = 10; setTimeout(() => pulseRadius = 0, 500); }
     if (pulseRadius > 0) {
-        pulseCtx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
         pulseCtx.beginPath();
         pulseCtx.arc(window.innerWidth / 2, window.innerHeight / 2, pulseRadius, 0, Math.PI * 2);
         pulseCtx.strokeStyle = '#ffff00';
@@ -147,7 +145,6 @@ const matrixCtx = matrixCanvas.getContext('2d');
 matrixCanvas.width = window.innerWidth;
 matrixCanvas.height = window.innerHeight;
 function drawMatrixGrid() {
-    matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
     matrixCtx.strokeStyle = '#9900ff';
     matrixCtx.lineWidth = 1;
     const gridSize = window.innerWidth < 430 ? 30 : 50;
@@ -166,7 +163,6 @@ const hudCtx = hudCanvas.getContext('2d');
 hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
 hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
 function drawHUD() {
-    hudCtx.clearRect(0, 0, hudCanvas.width, hudCanvas.height);
     hudCtx.strokeStyle = '#9900ff';
     hudCtx.lineWidth = 1;
     hudCtx.font = window.innerWidth < 430 ? '8px monospace' : '10px monospace';
@@ -188,7 +184,6 @@ const glyphCtx = glyphCanvas.getContext('2d');
 glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
 glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
 function drawGlyph() {
-    glyphCtx.clearRect(0, 0, glyphCanvas.width, glyphCanvas.height);
     glyphCtx.strokeStyle = '#ffff00';
     glyphCtx.lineWidth = 3;
     glyphCtx.beginPath();
@@ -228,7 +223,7 @@ if (!renderer) {
 } else {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('neural-orb').appendChild(renderer.domElement);
-    const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const orbGeometry = new THREE.SphereGeometry(3, 32, 32); // Increased size for visibility
     const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
     const orb = new THREE.Mesh(orbGeometry, orbMaterial);
     scene.add(orb);
@@ -236,6 +231,7 @@ if (!renderer) {
     function animate() {
         requestAnimationFrame(animate);
         if (renderer && orb) {
+            orb.rotation.x += 0.005; // Added x rotation for better visibility
             orb.rotation.z += 0.007;
             renderer.render(scene, camera);
         }
