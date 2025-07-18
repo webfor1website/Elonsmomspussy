@@ -65,6 +65,7 @@
             width: 100%; 
             height: 100%; 
             z-index: -1; 
+            opacity: 1; /* Always visible */
         }
         .lightning-canvas { 
             position: fixed; 
@@ -174,9 +175,10 @@
             50% { background: linear-gradient(45deg, #666666, #aaaaaa); }
             100% { background: linear-gradient(45deg, #666666, #999999); }
         }
-        @keyframes lightning-pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes orb-pulse {
+            0% { box-shadow: 0 0 10px #9900ff, 0 0 20px #9900ff; }
+            50% { box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00; }
+            100% { box-shadow: 0 0 10px #9900ff, 0 0 20px #9900ff; }
         }
         @keyframes screen-shake {
             0% { transform: translate(0, 0); }
@@ -185,7 +187,6 @@
             75% { transform: translate(-3px, 3px); }
             100% { transform: translate(0, 0); }
         }
-        /* iPhone-specific styles */
         @media only screen and (max-width: 430px) {
             h1 { font-size: 2.5rem; line-height: 1.1; }
             p.text-3xl { font-size: 1.25rem; }
@@ -232,8 +233,8 @@
         </div>
     </section>
 
-    <!-- Neural Orb -->
-    <div id="neural-orb" class="neural-orb"></div>
+    <!-- Neural Orb (Always Visible) -->
+    <div id="neural-orb" class="neural-orb" style="animation: orb-pulse 2s infinite;"></div>
 
     <!-- Main -->
     <main class="p-10 max-w-7xl mx-auto relative">
@@ -457,7 +458,7 @@ class NeoGrokCosmos:
                 inputs = self.wav2vec2_processor(audio, return_tensors="pt", sampling_rate=16000).to(self.device)
                 with autocast():
                     audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
-            fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_embedding)
+            fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_emb)
             with autocast():
                 compressed = self.brainstorm(fused_embedding)
                 synced, validity = self.nexus.sync(compressed)
@@ -703,7 +704,7 @@ if __name__ == "__main__":
         const asciiCtx = asciiCanvas.getContext('2d');
         asciiCanvas.width = window.innerWidth;
         asciiCanvas.height = window.innerHeight;
-        const asciiChars = ['∆', '⚡', '*', '8==D', '∆∆∆'];
+        const asciiChars = ['∆', '⚡', '*', '8==D', '∆∆∆', 'XAI', 'SPARK'];
         const drops = [];
         for (let i = 0; i < (window.innerWidth < 430 ? 30 : 50); i++) {
             drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
@@ -719,13 +720,13 @@ if __name__ == "__main__":
                     drop.y = 0;
                     drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
                 }
-                if ((shockwaveRadius > 0 || stormMode) && drop.char === '∆∆∆' || drop.char === '8==D') {
-                    drop.char = '*';
+                if ((shockwaveRadius > 0 || stormMode) && (drop.char === '∆∆∆' || drop.char === '8==D')) {
+                    drop.char = 'XAI';
                     drop.speed += 5;
                     for (let i = 0; i < 5; i++) {
                         let sparkX = drop.x + (Math.random() - 0.5) * 20;
                         let sparkY = drop.y + (Math.random() - 0.5) * 20;
-                        asciiCtx.fillText('*', sparkX, sparkY);
+                        asciiCtx.fillText('⚡', sparkX, sparkY);
                     }
                     setTimeout(() => { drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; drop.speed = Math.random() * 5 + 2; }, 200);
                 }
@@ -853,68 +854,80 @@ if __name__ == "__main__":
         }
         setInterval(addCyberDick, 100);
 
-        // Neural Orb with TriadSynapse
+        // Neural Orb with TriadSynapse (Always Visible and Cooler)
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('neural-orb').appendChild(renderer.domElement);
-        const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
-        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
+        const orbGeometry = new THREE.SphereGeometry(3, 32, 32); // Bigger orb
+        const orbMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x9900ff, 
+            emissive: 0x9900ff, 
+            emissiveIntensity: 0.5, 
+            wireframe: true 
+        });
         const orb = new THREE.Mesh(orbGeometry, orbMaterial);
         scene.add(orb);
+        const ambientLight = new THREE.AmbientLight(0x404040); // Subtle ambient glow
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffff00, 1, 100);
+        pointLight.position.set(0, 0, 10);
+        scene.add(pointLight);
         const triadNodes = [
-            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
-            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
-            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 }))
+            new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshPhongMaterial({ color: 0xff3333, emissive: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshPhongMaterial({ color: 0xff3333, emissive: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshPhongMaterial({ color: 0xff3333, emissive: 0xff3333 }))
         ];
-        triadNodes[0].position.set(2, 2, 0);
-        triadNodes[1].position.set(-2, 2, 0);
-        triadNodes[2].position.set(0, -2, 0);
+        triadNodes[0].position.set(4, 4, 0);
+        triadNodes[1].position.set(-4, 4, 0);
+        triadNodes[2].position.set(0, -4, 0);
         triadNodes.forEach(node => scene.add(node));
-        const superNode = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffff00 }));
+        const superNode = new THREE.Mesh(new THREE.SphereGeometry(0.8, 16, 16), new THREE.MeshPhongMaterial({ color: 0xffff00, emissive: 0xffff00 }));
         superNode.position.set(0, 0, 0);
         scene.add(superNode);
         const particles = new THREE.Points(
             new THREE.BufferGeometry().setFromPoints(
-                Array.from({ length: window.innerWidth < 430 ? 500 : 1000 }, () => new THREE.Vector3(
-                    Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5
+                Array.from({ length: window.innerWidth < 430 ? 1000 : 2000 }, () => new THREE.Vector3(
+                    Math.random() * 15 - 7.5, Math.random() * 15 - 7.5, Math.random() * 15 - 7.5
                 ))
             ),
-            new THREE.PointsMaterial({ color: 0xff3333, size: window.innerWidth < 430 ? 0.03 : 0.05 })
+            new THREE.PointsMaterial({ color: 0xff3333, size: window.innerWidth < 430 ? 0.05 : 0.1, blending: THREE.AdditiveBlending })
         );
         scene.add(particles);
-        camera.position.z = 5;
+        camera.position.z = 8; // Pulled back for better view
+        let orbPulse = 1;
         document.addEventListener('mousemove', (e) => {
-            orb.rotation.x = e.clientY * 0.005;
-            orb.rotation.y = e.clientX * 0.005;
+            orb.rotation.x = e.clientY * 0.002;
+            orb.rotation.y = e.clientX * 0.002;
             triadNodes.forEach((node, i) => {
                 const t = Date.now() * 0.003 + i;
-                node.position.x = Math.sin(t) * 2.5;
-                node.position.y = Math.cos(t) * 2.5;
-                if (Math.random() < 0.15 || stormMode) {
-                    node.position.lerp(new THREE.Vector3(0, 0, 0), 0.1);
-                    node.material.color.set(0xffff00);
-                    setTimeout(() => node.material.color.set(0xff3333), 200);
+                node.position.x = Math.sin(t) * 5;
+                node.position.y = Math.cos(t) * 5;
+                if (Math.random() < 0.2 || stormMode) {
+                    node.material.emissive.set(0xffff00);
+                    setTimeout(() => node.material.emissive.set(0xff3333), 300);
                 }
             });
         });
         document.addEventListener('touchmove', (e) => {
             const touch = e.touches[0];
-            orb.rotation.x = touch.clientY * 0.005;
-            orb.rotation.y = touch.clientX * 0.005;
+            orb.rotation.x = touch.clientY * 0.002;
+            orb.rotation.y = touch.clientX * 0.002;
             orb.style.transform = 'scale(1.1)';
             setTimeout(() => { orb.style.transform = 'scale(1)'; }, 200);
         });
         function animate() {
             requestAnimationFrame(animate);
-            orb.rotation.z += 0.007;
-            particles.rotation.z += 0.004;
-            if (Math.random() < 0.15 || stormMode) {
+            orb.rotation.z += 0.005;
+            orbPulse = Math.sin(Date.now() * 0.01) * 0.3 + 1;
+            orb.scale.set(orbPulse, orbPulse, orbPulse); // Pulsing effect
+            particles.rotation.z += 0.003;
+            if (Math.random() < 0.2 || stormMode) {
                 particles.geometry.attributes.position.array.forEach((_, i) => {
                     if (i % 3 === 0) {
-                        particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
-                        particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.5;
+                        particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.7;
+                        particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.7;
                     }
                 });
                 particles.geometry.attributes.position.needsUpdate = true;
@@ -950,6 +963,12 @@ if __name__ == "__main__":
                     ctx.lineTo(100 + (i + 1) * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40);
                     ctx.stroke();
                 }
+                if (stormMode) {
+                    ctx.beginPath();
+                    ctx.arc(100 + i * (canvas.width / nodeCount), 200, 5, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffff00';
+                    ctx.fill();
+                }
             }
         }
         drawNeuralNet();
@@ -962,7 +981,7 @@ if __name__ == "__main__":
                 const textElements = document.querySelectorAll('.neon-text');
                 textElements.forEach(el => {
                     const original = el.textContent;
-                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡';
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡XAI';
                     let glitched = '';
                     for (let char of original) {
                         if (Math.random() < 0.3 && char !== ' ') glitched += chars[Math.floor(Math.random() * chars.length)];
