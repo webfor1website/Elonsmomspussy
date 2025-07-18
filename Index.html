@@ -7,6 +7,8 @@
     <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
     <title>HyperChaoticNeuralCodec - Fucking Unhinged Chaos</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Three.js CDN for neural orb -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
     <!-- Navigation Menu -->
@@ -30,29 +32,17 @@
         </div>
     </nav>
 
-    <!-- Lightning Canvas -->
+    <!-- Canvases -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
-
-    <!-- Shockwave Canvas -->
     <canvas id="shockwave-canvas" class="shockwave-canvas"></canvas>
-
-    <!-- ASCII Art Rain -->
     <canvas id="ascii-rain" class="ascii-rain"></canvas>
-
-    <!-- Neural Matrix Grid -->
     <canvas id="neural-matrix" class="neural-matrix"></canvas>
-
-    <!-- Neon Pulse Wave -->
     <canvas id="neon-pulse" class="neon-pulse"></canvas>
-
-    <!-- Holographic HUD -->
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
-
-    <!-- TriadSynapse Glyph -->
     <canvas id="triad-glyph" class="triad-glyph"></canvas>
 
-    <!-- Cyber-Dicks -->
-    <div id="cyber-dicks"></div>
+    <!-- Neural Orb Container -->
+    <div id="neural-orb" class="neural-orb"></div>
 
     <!-- Hero -->
     <section class="parallax flex items-center justify-center">
@@ -62,10 +52,6 @@
         </div>
     </section>
 
-    <!-- Neural Orb -->
-    <div id="neural-orb" class="neural-orb"></div>
-
-    <!-- Main -->
     <main class="p-10 max-w-7xl mx-auto relative pt-20">
         <!-- Puzzle-Locked Code -->
         <section class="mb-16">
@@ -141,14 +127,8 @@ class BrainStorm(nn.Module):
     def forward(self, data):
         return self.compressor(data)
 
-# TriadSynapse with NAS (dick shape in comments)
+# TriadSynapse with NAS
 class TriadSynapse(nn.Module):
-    #   _____
-    #  /     \
-    # /_______\
-    # |  ***  | 
-    # |  ***  | 
-    # |_______|
     def __init__(self, input_dim=512, hidden_dim=256):
         super().__init__()
         self.generator_candidates = [
@@ -182,14 +162,14 @@ class TriadSynapse(nn.Module):
         self.candidate_performances[candidate_idx] = (self.candidate_performances[candidate_idx] + validity) / 2
         return current, validity
 
-# NeuroCosmicNexus (dick shape in variable names)
+# NeuroCosmicNexus
 class NeuroCosmicNexus(nn.Module):
     def __init__(self, input_dim=512):
         super().__init__()
         self.triad = TriadSynapse(input_dim)
         self.cock_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
         self.shaft_rate = 0.001
-        self.head_space = torch.zeros(input_dim).to(self.device)  # Sneaky dick variable
+        self.head_space = torch.zeros(input_dim).to(self.device)
 
     def sync(self, input_data):
         refined, validity = self.triad.refine(input_data)
@@ -218,17 +198,8 @@ class MultiModalFusion(nn.Module):
         fused, _ = self.fusion(combined, combined, combined)
         return fused.mean(dim=0)
 
-# NeoGrokCosmos (super dick from three dicks)
+# NeoGrokCosmos
 class NeoGrokCosmos:
-    #   _____      _____      _____  
-    #  /     \    /     \    /     \ 
-    # /_______\  /_______\  /_______\
-    # |  ***  |  |  ***  |  |  ***  | 
-    # |  ***  |  |  ***  |  |  ***  | 
-    # |_______|  |_______|  |_______|
-    #          \  |  ***  |  /
-    #           \ |  ***  | /
-    #            \|_______|/
     def __init__(self, train_csv="path/to/train.csv"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.brainstorm = nn.parallel.DistributedDataParallel(BrainStorm().to(self.device), device_ids=[self.device])
@@ -375,13 +346,7 @@ if __name__ == "__main__":
         </section>
     </main>
 
-    <!-- Footer (dick shape in comments) -->
-    <!--   _____  -->
-    <!--  /     \ -->
-    <!-- /_______\ -->
-    <!-- |  ***  | -->
-    <!-- |  ***  | -->
-    <!-- |_______| -->
+    <!-- Footer -->
     <footer class="p-6 text-center bg-gray-800">
         <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
     </footer>
