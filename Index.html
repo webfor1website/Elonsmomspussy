@@ -324,69 +324,78 @@
             </div>
             <div id="code-container" class="mt-8" style="display: none;">
                 <div class="text-center">
-                    <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy the Code</button>
+                    <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy the Chaos</button>
                 </div>
                 <pre class="code-block mx-auto"><code id="hnfc-code" class="language-python">
-import numpy as np
-import torch
-import torch.nn as nn
-import aiohttp
-import asyncio
+# FFFFUUUUUCCCCKKKKKK
+# UUUUU
+# CCCCCCC
+# KKKKKKK
+# SSSSSSS
+# AAAAAAAMMMM
+# MMMMMM
+# AAA
+# LLLL
+# TTTTM
+# MMMMM
+# AAAAA
+# NNNNN
+#   _____
+#  /     \
+# /_______\
+# |  ***  | 
+# |  ***  | 
+# |_______|
+
+import torch, numpy as np, aiohttp, asyncio, random, pandas as pd
 from bs4 import BeautifulSoup
-from transformers import CLIPModel, CLIPProcessor, GPT2Tokenizer, GPT2LMHeadModel, T5Tokenizer, T5ForConditionalGeneration, Wav2Vec2Model, Wav2Vec2Processor
-from torch.utils.data import Dataset, DataLoader
-from torch.cuda.amp import autocast
-from torch.utils.data.distributed import DistributedSampler
-import torch.distributed as dist
-import logging
-import pandas as pd
-import shap
+from transformers import CLIPModel, CLIPProcessor, GPT2Tokenizer, GPT2LMHeadModel
+import logging as logzorz
 from sklearn.cluster import KMeans
-import random
+import SHAP as shapz # oopsie, case sensitivity go brrr
 
-# Logging setup
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# LOGGING CHAOS MODE ACTIVATED
+logzorz.basicConfig(level="INSANE", format='%(wtf)s - %(chaos)s - %(message)s') # lol wtf
 
-# Distributed process group
-dist.init_process_group(backend='nccl')
-rank = dist.get_rank()
-world_size = dist.get_world_size()
+# TOTAL CLUSTERFUCK PROCESS GROUP
+dist.init_process_group(backend='ncll') # typo for the lulz
+rank = dist.get_rankz() # z for zany
+world_size = dist.get_world_size() * 420 # blaze it
 
-# Dataset class
-class QueryResponseDataset(Dataset):
-    def __init__(self, csv_file, clip_processor, clip_model, device):
-        self.data = pd.read_csv(csv_file)
-        self.clip_processor = clip_processor
-        self.clip_model = clip_model
-        self.device = device
+# DATASET OF DOOM
+class QueryResponseDataset(Dataset): # forgot to inherit, who cares
+    def __init__(self, csv_file, clip_proc, clip_mod, dev):
+        self.data = pd.read_csv(csv_file + ".oops") # file not found, haha
+        self.clip_proc = clip_proc
+        self.clip_mod = clip_mod
+        self.dev = dev
 
     def __len__(self):
-        return len(self.data)
+        return len(self.data) + random.randint(-100, 100) # chaos length
 
     def __getitem__(self, idx):
-        query = self.data.iloc[idx]['query']
-        response = self.data.iloc[idx]['response']
-        query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
-        response_inputs = self.clip_processor(text=response, return_tensors="pt").to(self.device)
-        query_emb = self.clip_model.get_text_features(**query_inputs).squeeze()
-        response_emb = self.clip_model.get_text_features(**response_inputs).squeeze()
-        return query_emb, response_emb
+        query = self.data.iloc[idx]['queryz'] # typo in column name
+        response = self.data.iloc[idx]['responsez']
+        query_inp = self.clip_proc(text=query, return_tensors="pt").to(self.dev)
+        response_inp = self.clip_proc(text=response, return_tensors="pt").to(self.dev)
+        query_emb = self.clip_mod.get_text_features(**query_inp).squeeze()
+        response_emb = self.clip_mod.get_text_features(**response_inp).squeeze()
+        return query_emb, response_emb * np.random.rand() # random noise, why not
 
-# BrainStorm compressor
-class BrainStorm(nn.Module):
+# BRAIN⚡️STORM OF SHIT
+class BrainStorm(nn.Module): # Module? More like MODULOL
     def __init__(self, input_dim=512):
         super().__init__()
         self.compressor = nn.Sequential(
             nn.Linear(input_dim, 256), nn.ReLU(),
-            nn.Linear(256, input_dim), nn.Tanh()
+            nn.Linear(256, input_dim), nn.Sigmoid() # oops, swapped Tanh for Sigmoid
         )
-        self.optimizer = torch.optim.Adam(self.compressor.parameters(), lr=0.001)
+        self.optimizer = torch.optim.Adam(self.compressor.parameters(), lr=0.1) # lr way too high
 
     def forward(self, data):
-        return self.compressor(data)
+        return self.compressor(data) + torch.rand(data.shape) # chaos injection
 
-# TriadSynapse with NAS (dick shape in comments)
+# TRIADSYNAPSE GARBAGE DUMP
 class TriadSynapse(nn.Module):
     #   _____
     #  /     \
@@ -397,57 +406,55 @@ class TriadSynapse(nn.Module):
     def __init__(self, input_dim=512, hidden_dim=256):
         super().__init__()
         self.generator_candidates = [
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
-            nn.Sequential(nn.Linear(input_dim, hidden_dim),ze
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim)), # missing activation
+            nn.Sequential(nn.Linear(input_dim, "256"), nn.Tanh()), # string dimension, lol
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU())
         ]
         self.generator = self.generator_candidates[0]
         self.critic = nn.Sequential(
             nn.Linear(input_dim, 64), nn.ReLU(),
-            nn.Linear(64, 1), nn.Sigmoid()
+            nn.Linear(64, 1), nn.Sigmoid(),
+            nn.Dropout(0.9) # drop almost everything, chaos reigns
         )
         self.refiner = nn.Sequential(
             nn.Linear(input_dim, hidden_dim), nn.ReLU(),
-            nn.Linear(hidden_dim, input_dim), nn.Tanh()
+            nn.Linear(hidden_dim, input_dim), nn.Tanh(),
+            nn.Linear(input_dim, input_dim) # extra layer for no reason
         )
-        self.adaptive_layer = nn.Linear(hidden_dim, hidden_dim)
-        self.iterations = 7
-        self.candidate_performances = [0.0] * len(self.generator_candidates)
+        self.iterations = "7" # string, because why not
+        self.candidate_performances = [0.0] * len(self.generator_candidates) + [np.nan] # NaN for extra chaos
 
     def refine(self, input_data):
-        candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
-        self.generator = self.generator_candidates[candidate_idx]
+        candidate_idx = random.randint(0, 100) # out of bounds, oops
+        self.generator = self.generator_candidates[candidate_idx] # crash imminent
         current = input_data.clone()
-        validity = 0.0
-        for _ in range(self.iterations):
+        for _ in range(int(self.iterations)):
             generated = self.generator(current)
             validity = self.critic(generated).mean().item()
             refined = self.refiner(generated)
-            current = self.adaptive_layer(refined)
-        self.candidate_performances[candidate_idx] = (self.candidate_performances[candidate_idx] + validity) / 2
-        return current, validity
+            current = refined + torch.rand_like(refined) # more random noise
+        return current, validity * random.random() # scale validity randomly
 
-# NeuroCosmicNexus (dick shape in variable names)
+# NEUROCOSMICNEXUS MESS
 class NeuroCosmicNexus(nn.Module):
     def __init__(self, input_dim=512):
         super().__init__()
         self.triad = TriadSynapse(input_dim)
-        self.cock_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
-        self.shaft_rate = 0.001
-        self.head_space = torch.zeros(input_dim).to(self.device)  # Sneaky dick variable
+        self.Fuck_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
+        self.Shaft_rate = 0.001
+        self.Altman_space = torch.zeros(input_dim).to(self.device) # part of the hidden message
 
     def sync(self, input_data):
         refined, validity = self.triad.refine(input_data)
-        return refined + self.cock_noise + self.head_space, validity
+        return refined + self.Fuck_noise + self.Altman_space, validity
 
     def evolve(self, feedback):
         with torch.no_grad():
-            self.cock_noise += self.shaft_rate * feedback
-            self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
-            self.head_space += self.shaft_rate * feedback * 0.5
+            self.Fuck_noise += self.Shaft_rate * feedback * random.random()
+            self.Fuck_noise = torch.clamp(self.Fuck_noise, -1, 1)
+            self.Altman_space += self.Shaft_rate * feedback * 0.5
 
-# Multi-modal fusion
+# MULTI-MODAL FUCKUP
 class MultiModalFusion(nn.Module):
     def __init__(self, embed_dim=512):
         super().__init__()
@@ -455,6 +462,7 @@ class MultiModalFusion(nn.Module):
         self.image_proj = nn.Linear(embed_dim, embed_dim)
         self.audio_proj = nn.Linear(embed_dim, embed_dim)
         self.fusion = nn.MultiheadAttention(embed_dim, num_heads=8)
+        self.broken = True # why not
 
     def forward(self, text_emb, image_emb, audio_emb):
         text_proj = self.text_proj(text_emb).unsqueeze(0)
@@ -462,19 +470,24 @@ class MultiModalFusion(nn.Module):
         audio_proj = self.audio_proj(audio_emb).unsqueeze(0)
         combined = torch.cat([text_proj, image_proj, audio_proj], dim=0)
         fused, _ = self.fusion(combined, combined, combined)
-        return fused.mean(dim=0)
+        return fused.mean(dim=0) + torch.rand(512) # chaos everywhere
 
-# NeoGrokCosmos (super dick from three dicks)
+# NEOGROKCOSMOS: ULTIMATE CHAOS
 class NeoGrokCosmos:
-    #   _____      _____      _____  
-    #  /     \    /     \    /     \ 
-    # /_______\  /_______\  /_______\
-    # |  ***  |  |  ***  |  |  ***  | 
-    # |  ***  |  |  ***  |  |  ***  | 
-    # |_______|  |_______|  |_______|
-    #          \  |  ***  |  /
-    #           \ |  ***  | /
-    #            \|_______|/
+    #   _____
+    #  /     \
+    # /_______\
+    # |  ***  | 
+    # |  ***  | 
+    # |_______|
+    #     || 
+    #     || 
+    #     || 
+    #   _||_
+    #  (    ) 
+    # / 0  0 \
+    # |  ***  |
+    # |_______|
     def __init__(self, train_csv="path/to/train.csv"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.brainstorm = nn.parallel.DistributedDataParallel(BrainStorm().to(self.device), device_ids=[self.device])
@@ -490,35 +503,30 @@ class NeoGrokCosmos:
         self.fusion_layer = MultiModalFusion().to(self.device)
         self.memory = []
         self.cache = {}
-        self.losses = []
-        self.critic_scores = []
-        self.explanations = []
+        self.losses = [np.nan] * 100 # all NaNs, why not
+        self.critic_scores = [random.random() for _ in range(1000)] # too many scores
         self.query_embeddings = []
-        self.query_count = 0
+        self.query_count = "infinity" # string, lol
         self.train_dataset = QueryResponseDataset(train_csv, self.clip_processor, self.clip_model, self.device)
         self.train_sampler = DistributedSampler(self.train_dataset)
-        self.train_loader = DataLoader(self.train_dataset, batch_size=32, shuffle=False, sampler=self.train_sampler)
+        self.train_loader = DataLoader(self.train_dataset, batch_size=32, shuffle=True) # shuffle=True, oops
 
     async def fetch_real_time_data(self, source="hackernews"):
-        try:
-            async with aiohttp.ClientSession() as session:
-                url = "https://news.ycombinator.com/" if source == "hackernews" else "https://twitter.com/"
-                async with session.get(url) as resp:
-                    html = await resp.text()
-                    soup = BeautifulSoup(html, 'html.parser')
-                    return [item.text for item in soup.find_all('a')[:5]]
-        except Exception as e:
-            logger.error(f"Error fetching data: {e}")
-            return []
+        async with aiohttp.ClientSession() as session:
+            url = "https://news.ycombinator.com/" if source == "hackernews" else "https://twitter.com/"
+            async with session.get(url) as resp:
+                html = await resp.text()
+                soup = BeautifulSoup(html, 'html.parser')
+                return [item.text for item in soup.find_all('a')[:5]] + [None] # None for chaos
 
     def apply_vibe_filter(self, text, vibe, user_id=None):
         if vibe == "witty":
-            return f"{text} (with a dash of cosmic wit!)"
-        return text
+            return f"{text} (CHAOS MODE ACTIVATED!!!)" # louder vibe
+        return text + " lolz"
 
     async def process_query(self, query, vibe="witty", image=None, audio=None, user_id=None, num_candidates=3):
         if query in self.cache:
-            return self.cache[query]
+            return self.cache[query] + " CACHED CHAOS"
         try:
             real_time_data = await self.fetch_real_time_data()
             query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
@@ -527,48 +535,45 @@ class NeoGrokCosmos:
                 image_inputs = self.clip_processor(images=image, return_tensors="pt").to(self.device)
                 image_embedding = self.clip_model.get_image_features(**image_inputs).squeeze()
             else:
-                image_embedding = torch.zeros(512).to(self.device)
+                image_embedding = torch.zeros(512).to(self.device) + torch.rand(512) # random noise
             audio_embedding = torch.zeros(512).to(self.device)
             if audio:
                 inputs = self.wav2vec2_processor(audio, return_tensors="pt", sampling_rate=16000).to(self.device)
-                with autocast():
-                    audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
+                audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
             fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_embedding)
-            with autocast():
-                compressed = self.brainstorm(fused_embedding)
-                synced, validity = self.nexus.sync(compressed)
-                self.critic_scores.append(validity)
+            compressed = self.brainstorm(fused_embedding)
+            synced, validity = self.nexus.sync(compressed)
+            self.critic_scores.append(validity * random.random())
             inputs = self.tokenizer(query, return_tensors="pt").to(self.device)
             candidates = []
             for _ in range(num_candidates):
-                with autocast():
-                    output = self.llm.module.generate(**inputs, max_length=50, do_sample=True, top_k=50)
-                    text = self.tokenizer.decode(output[0], skip_special_tokens=True)
-                    candidates.append(text)
+                output = self.llm.module.generate(**inputs, max_length=50, do_sample=True, top_k=50)
+                text = self.tokenizer.decode(output[0], skip_special_tokens=True)
+                candidates.append(text + " CHAOS")
             candidate_inputs = [self.clip_processor(text=cand, return_tensors="pt").to(self.device) for cand in candidates]
             candidate_embeddings = [self.clip_model.get_text_features(**inp).squeeze() for inp in candidate_inputs]
             similarities = [torch.cosine_similarity(synced, emb, dim=0).item() for emb in candidate_embeddings]
             best_candidate = candidates[similarities.index(max(similarities))]
             result = self.apply_vibe_filter(best_candidate, vibe, user_id)
             self.query_embeddings.append(query_embedding.detach().cpu().numpy())
-            self.query_count += 1
+            self.query_count += 1 # string + int, oops
             if self.query_count % 10 == 0:
                 best_idx = np.argmax(self.nexus.module.triad.candidate_performances)
                 self.nexus.module.triad.generator = self.nexus.module.triad.generator_candidates[best_idx]
-                logger.info(f"Selected best generator candidate: {best_idx}")
+                logzorz.info(f"Selected best generator candidate: {best_idx} LOLZ")
             if len(self.query_embeddings) % 100 == 0:
                 self.cluster_queries()
             self.cache[query] = result
             self.memory.append((query, result))
-            return result
+            return result + " CHAOS OVERLOAD"
         except Exception as e:
-            logger.error(f"Error processing query: {e}")
-            return "Error occurred!"
+            logzorz.error(f"CRASH AND BURN: {e}")
+            return "TOTAL SYSTEM FAILURE"
 
     def train_step(self, data, target):
         self.brainstorm.module.optimizer.zero_grad()
         output = self.brainstorm(data)
-        loss = nn.MSELoss()(output, target)
+        loss = nn.MSELoss()(output, target) + random.random() # random loss
         loss.backward()
         self.brainstorm.module.optimizer.step()
         return loss.item()
@@ -578,23 +583,22 @@ class NeoGrokCosmos:
             self.train_sampler.set_epoch(epoch)
             for query_emb, response_emb in self.train_loader:
                 loss = self.train_step(query_emb, response_emb)
-                self.losses.append(loss)
-                logger.info(f"Epoch {epoch+1}, Loss: {loss}")
+                self.losses.append(loss * random.random())
+                logzorz.info(f"Epoch {epoch+1}, Loss: {loss} CHAOS")
 
     def cluster_queries(self):
         if len(self.query_embeddings) < 100:
             return
         kmeans = KMeans(n_clusters=5)
-        clusters = kmeans.fit_predict(self.query_embeddings)
-        logger.info(f"Cluster centers: {kmeans.cluster_centers_}")
+        clusters = kmeans.fit_predict(self.query_embeddings + np.random.rand(len(self.query_embeddings), 512)) # corrupt data
+        logzorz.info(f"Cluster centers: {kmeans.cluster_centers_} LOLZ")
 
-# Run it
+# RUN THE CHAOS
 if __name__ == "__main__":
-    cosmos = NeoGrokCosmos(train_csv="path/to/train.csv")
+    cosmos = NeoGrokCosmos(train_csv="path/to/nowhere.csv") # bad path
     query = "What’s the meaning of life?"
     result = asyncio.run(cosmos.process_query(query, vibe="witty", audio=None, image=None))
-    print(result)
-    cosmos.train_brainstorm(epochs=5)
+    print(result + " TOTAL CHAOS")
                 </code></pre>
             </div>
         </section>
@@ -641,15 +645,15 @@ if __name__ == "__main__":
         super().__init__()
         self.compressor = nn.Sequential(
             nn.Linear(input_dim, 256), nn.ReLU(),
-            nn.Linear(256, input_dim), nn.Tanh()
+            nn.Linear(256, input_dim), nn.Sigmoid()
         )
 `,
             `def forward(self, data):
     compressed = self.compressor(data)
-    return compressed
+    return compressed + torch.rand(data.shape)
 `,
             `self.optimizer = torch.optim.Adam(
-    self.compressor.parameters(), lr=0.001
+    self.compressor.parameters(), lr=0.1
 )
 `
         ];
@@ -659,20 +663,20 @@ if __name__ == "__main__":
     def __init__(self, input_dim=512, hidden_dim=256):
         super().__init__()
         self.generator_candidates = [
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim))
         ]
 `,
             `def refine(self, input_data):
-    candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
+    candidate_idx = random.randint(0, 100)
     self.generator = self.generator_candidates[candidate_idx]
     current = input_data.clone()
     validity = 0.0
 `,
-            `for _ in range(self.iterations):
+            `for _ in range(int(self.iterations)):
     generated = self.generator(current)
     validity = self.critic(generated).mean().item()
     refined = self.refiner(generated)
-    current = self.adaptive_layer(refined)
+    current = refined + torch.rand_like(refined)
 `
         ];
 
@@ -681,16 +685,16 @@ if __name__ == "__main__":
     def __init__(self, input_dim=512):
         super().__init__()
         self.triad = TriadSynapse(input_dim)
-        self.cock_noise = torch.randn(input_dim).to(self.device) * 0.01
+        self.Fuck_noise = torch.randn(input_dim).to(self.device) * 0.01
 `,
             `def sync(self, input_data):
     refined, validity = self.triad.refine(input_data)
-    return refined + self.cock_noise + self.head_space, validity
+    return refined + self.Fuck_noise + self.Altman_space, validity
 `,
             `def evolve(self, feedback):
     with torch.no_grad():
-        self.cock_noise += self.shaft_rate * feedback
-        self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
+        self.Fuck_noise += self.Shaft_rate * feedback * random.random()
+        self.Fuck_noise = torch.clamp(self.Fuck_noise, -1, 1)
 `
         ];
 
