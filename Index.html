@@ -43,11 +43,12 @@
         .code-block {
             background: #1a1a1a;
             border: 3px solid #ff00ff;
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             max-height: 600px;
             overflow-y: auto;
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            font-size: 0.9rem;
         }
         .parallax {
             background-attachment: fixed;
@@ -94,7 +95,6 @@
             position: fixed;
             top: 20px;
             right: 20px;
-           gaben
             width: 250px;
             height: 120px;
             z-index: 1;
@@ -134,10 +134,22 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             background: rgba(26, 26, 26, 0.9);
             border: 2px solid #ff00ff;
+            border-radius: 12px;
+            overflow: hidden;
         }
         .feature-card:hover {
             transform: scale(1.05) rotate(2deg);
             box-shadow: 0 0 40px #ff00ff, 0 0 80px #ff00ff;
+        }
+        .feature-code {
+            background: #1a1a1a;
+            border-top: 2px solid #ff00ff;
+            padding: 15px;
+            font-size: 0.8rem;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            color: #ffffff;
         }
         .lightning-flash {
             text-shadow: 0 0 15px #ffff00 !important;
@@ -155,7 +167,7 @@
             color: #ff00ff;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 12px 20px;
+            padding: 12px 16px;
             transition: all 0.3s ease;
         }
         .nav-tab:hover, .nav-tab.active {
@@ -180,13 +192,37 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .text-9xl { font-size: 4rem; }
+            .text-5xl { font-size: 2.5rem; }
+            .text-4xl { font-size: 2rem; }
+            .text-2xl { font-size: 1.5rem; }
+            .neon-text { letter-spacing: 1px; }
+            .feature-card { padding: 12px; }
+            .feature-code { font-size: 0.7rem; max-height: 120px; }
+            .nav-tab { padding: 8px 12px; font-size: 0.9rem; }
+            .neural-orb { top: 15%; transform: translateX(-50%) scale(0.7); }
+            .code-block { font-size: 0.8rem; padding: 15px; }
+            .puzzle-input { font-size: 0.9rem; }
+            .neon-button { padding: 10px 20px; font-size: 0.9rem; }
+        }
+        @media (max-width: 480px) {
+            .text-9xl { font-size: 3rem; }
+            .text-5xl { font-size: 2rem; }
+            .text-4xl { font-size: 1.5rem; }
+            .text-2xl { font-size: 1.2rem; }
+            .nav-tab { padding: 6px 8px; font-size: 0.8rem; }
+            .feature-code { font-size: 0.6rem; }
+            .navbar ul { flex-wrap: wrap; }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="max-w-7xl mx-auto px-4">
-            <ul class="flex justify-center space-x-4">
+            <ul class="flex justify-center space-x-2 flex-wrap">
                 <li><a href="#project-info" class="nav-tab active" onclick="switchTab('project-info')">Project Info</a></li>
                 <li><a href="#team" class="nav-tab" onclick="switchTab('team')">Team</a></li>
                 <li><a href="#invest" class="nav-tab" onclick="switchTab('invest')">Invest</a></li>
@@ -214,17 +250,17 @@
     </section>
 
     <!-- Main -->
-    <main id="main-content" class="p-10 max-w-7xl mx-auto relative">
+    <main id="main-content" class="p-4 sm:p-6 md:p-10 max-w-7xl mx-auto relative">
         <!-- Project Info Section -->
         <section id="project-info" class="tab-content">
             <h2 class="text-5xl neon-text mb-8 text-center">Project Information</h2>
-            <p class="text-white text-lg mb-6">HyperChaoticNeuralCodec is a groundbreaking fusion of XAI and Neuralink-inspired tech, designed to harness chaotic neural patterns for next-gen BCI applications. Powered by SPARK, it’s a wild ride into the future of human-machine synergy.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+            <p class="text-white text-lg mb-6 text-center">HyperChaoticNeuralCodec is a groundbreaking fusion of XAI and Neuralink-inspired tech, designed to harness chaotic neural patterns for next-gen BCI applications. Powered by SPARK, it’s a wild ride into the future of human-machine synergy.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 feature-card">
                     <h3 class="text-2xl neon-text mb-4">Core Technology</h3>
                     <p class="text-white">TriadSynapse NAS, multi-modal fusion, and distributed computing drive this beast.</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                <div class="p-6 feature-card">
                     <h3 class="text-2xl neon-text mb-4">Mission</h3>
                     <p class="text-white">To push the boundaries of chaos-driven intelligence and make BCI accessible to the masses.</p>
                 </div>
@@ -234,17 +270,17 @@
         <!-- Team Section -->
         <section id="team" class="tab-content hidden">
             <h2 class="text-5xl neon-text mb-8 text-center">Our Team</h2>
-            <p class="text-white text-lg mb-6">Meet the chaotic minds behind HyperChaoticNeuralCodec, a crew of renegade coders, neuroscientists, and visionaries.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+            <p class="text-white text-lg mb-6 text-center">Meet the chaotic minds behind HyperChaoticNeuralCodec, a crew of renegade coders, neuroscientists, and visionaries.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="p-6 feature-card">
                     <h3 class="text-2xl neon-text mb-4">Dr. Chaos</h3>
                     <p class="text-white">Lead Neuroscientist. Master of neural storms.</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                <div class="p-6 feature-card">
                     <h3 class="text-2xl neon-text mb-4">CodeSlinger</h3>
                     <p class="text-white">Chief Architect. Writes code faster than lightning.</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-lg feature-card">
+                <div class="p-6 feature-card">
                     <h3 class="text-2xl neon-text mb-4">NeonVibe</h3>
                     <p class="text-white">UI/UX Wizard. Crafts chaos into beauty.</p>
                 </div>
@@ -254,7 +290,7 @@
         <!-- Invest Section -->
         <section id="invest" class="tab-content hidden">
             <h2 class="text-5xl neon-text mb-8 text-center">Invest in the Chaos</h2>
-            <p class="text-white text-lg mb-6">Join the revolution. Invest in the future of chaotic intelligence and BCI innovation.</p>
+            <p class="text-white text-lg mb-6 text-center">Join the revolution. Invest in the future of chaotic intelligence and BCI innovation.</p>
             <div class="text-center">
                 <a href="mailto:invest@hnfc.io" class="neon-button">Get Investment Details</a>
             </div>
@@ -263,7 +299,7 @@
         <!-- Contact Us Section -->
         <section id="contact" class="tab-content hidden">
             <h2 class="text-5xl neon-text mb-8 text-center">Contact Us</h2>
-            <p class="text-white text-lg mb-6">Got questions? Want to join the chaos? Reach out to us.</p>
+            <p class="text-white text-lg mb-6 text-center">Got questions? Want to join the chaos? Reach out to us.</p>
             <form class="max-w-lg mx-auto">
                 <input type="text" placeholder="Name" class="puzzle-input w-full mb-4" />
                 <input type="email" placeholder="Email" class="puzzle-input w-full mb-4" />
@@ -362,6 +398,7 @@ class TriadSynapse(nn.Module):
         super().__init__()
         self.generator_candidates = [
             nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+            nn.Sequential(nn.Linear(input_dim, hidden_dim),ze
             nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
             nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
         ]
@@ -565,18 +602,21 @@ if __name__ == "__main__":
         <!-- Features -->
         <section id="features" class="tab-content mt-16">
             <h2 class="text-5xl neon-text mb-8 text-center">Core Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="p-8 feature-card">
-                    <h3 class="text-2xl neon-text mb-4">TriadSynapse NAS</h3>
-                    <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="feature-card p-6">
+                    <h3 id="brainstorm-heading" class="text-2xl neon-text mb-4">Brain⚡️Storm</h3>
+                    <p class="text-white mb-4">Neural compression for chaotic data streams, optimized for BCI.</p>
+                    <div id="brainstorm-code" class="feature-code"></div>
                 </div>
-                <div class="p-8 feature-card">
-                    <h3 class="text-2xl neon-text mb-4">Multi-Modal Fusion</h3>
-                    <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
+                <div class="feature-card p-6">
+                    <h3 id="triadsynapse-heading" class="text-2xl neon-text mb-4">TriadSynapse</h3>
+                    <p class="text-white mb-4">Neural architecture search for adaptive intelligence.</p>
+                    <div id="triadsynapse-code" class="feature-code"></div>
                 </div>
-                <div class="p-8 feature-card">
-                    <h3 class="text-2xl neon-text mb-4">Distributed Computing</h3>
-                    <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+                <div class="feature-card p-6">
+                    <h3 id="neurocosmicnexus-heading" class="text-2xl neon-text mb-4">NeuroCosmicNexus</h3>
+                    <p class="text-white mb-4">Fuses multi-modal inputs for cosmic-level processing.</p>
+                    <div id="neurocosmicnexus-code" class="feature-code"></div>
                 </div>
             </div>
         </section>
@@ -594,6 +634,96 @@ if __name__ == "__main__":
 
     <!-- Scripts -->
     <script>
+        // Code Snippets for Dynamic Headings
+        const brainstormSnippets = [
+            `class BrainStorm(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.compressor = nn.Sequential(
+            nn.Linear(input_dim, 256), nn.ReLU(),
+            nn.Linear(256, input_dim), nn.Tanh()
+        )
+`,
+            `def forward(self, data):
+    compressed = self.compressor(data)
+    return compressed
+`,
+            `self.optimizer = torch.optim.Adam(
+    self.compressor.parameters(), lr=0.001
+)
+`
+        ];
+
+        const triadsynapseSnippets = [
+            `class TriadSynapse(nn.Module):
+    def __init__(self, input_dim=512, hidden_dim=256):
+        super().__init__()
+        self.generator_candidates = [
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
+        ]
+`,
+            `def refine(self, input_data):
+    candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
+    self.generator = self.generator_candidates[candidate_idx]
+    current = input_data.clone()
+    validity = 0.0
+`,
+            `for _ in range(self.iterations):
+    generated = self.generator(current)
+    validity = self.critic(generated).mean().item()
+    refined = self.refiner(generated)
+    current = self.adaptive_layer(refined)
+`
+        ];
+
+        const neurocosmicnexusSnippets = [
+            `class NeuroCosmicNexus(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.triad = TriadSynapse(input_dim)
+        self.cock_noise = torch.randn(input_dim).to(self.device) * 0.01
+`,
+            `def sync(self, input_data):
+    refined, validity = self.triad.refine(input_data)
+    return refined + self.cock_noise + self.head_space, validity
+`,
+            `def evolve(self, feedback):
+    with torch.no_grad():
+        self.cock_noise += self.shaft_rate * feedback
+        self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
+`
+        ];
+
+        function cycleCodeSnippets() {
+            const brainstormEl = document.getElementById('brainstorm-code');
+            const triadsynapseEl = document.getElementById('triadsynapse-code');
+            const neurocosmicnexusEl = document.getElementById('neurocosmicnexus-code');
+            
+            const brainstormIdx = Math.floor(Math.random() * brainstormSnippets.length);
+            const triadsynapseIdx = Math.floor(Math.random() * triadsynapseSnippets.length);
+            const neurocosmicnexusIdx = Math.floor(Math.random() * neurocosmicnexusSnippets.length);
+
+            brainstormEl.textContent = brainstormSnippets[brainstormIdx];
+            triadsynapseEl.textContent = triadsynapseSnippets[triadsynapseIdx];
+            neurocosmicnexusEl.textContent = neurocosmicnexusSnippets[neurocosmicnexusIdx];
+
+            Prism.highlightElement(brainstormEl);
+            Prism.highlightElement(triadsynapseEl);
+            Prism.highlightElement(neurocosmicnexusEl);
+
+            if (Math.random() < 0.3) {
+                [brainstormEl, triadsynapseEl, neurocosmicnexusEl].forEach(el => {
+                    el.style.textShadow = '0 0 15px #ffff00';
+                    setTimeout(() => {
+                        el.style.textShadow = 'none';
+                    }, 150);
+                });
+            }
+        }
+
+        setInterval(cycleCodeSnippets, 3000);
+        cycleCodeSnippets();
+
         // Tab Switching
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
