@@ -1,6 +1,7 @@
 console.log('Three.js loaded:', typeof THREE !== 'undefined' ? 'Yes' : 'No');
 
 window.onload = () => {
+    document.getElementById('loading').style.display = 'none';
     alert('3 hints over 60 seconds, crack the cipher or you don’t deserve the code, fucker!');
     document.getElementById('hint-0').style.display = 'block';
 };
@@ -50,11 +51,6 @@ let stormMode = false;
 function drawLightning() {
     let lightningChance = stormMode ? 0.2 : 0.1;
     if (Math.random() < lightningChance) {
-        lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
-        lCtx.strokeStyle = '#ffff00';
-        lCtx.lineWidth = 6;
-        lCtx.shadowBlur = 20;
-        lCtx.shadowColor = '#9900ff';
         lCtx.beginPath();
         let x = Math.random() * lightningCanvas.width;
         let y = 0;
@@ -64,23 +60,13 @@ function drawLightning() {
             y += lightningCanvas.height / 8;
             lCtx.lineTo(x, y);
         }
+        lCtx.strokeStyle = '#ffff00';
+        lCtx.lineWidth = 6;
+        lCtx.shadowBlur = 20;
+        lCtx.shadowColor = '#9900ff';
         lCtx.stroke();
-        document.body.style.background = 'linear-gradient(45deg, #9900ff, #ffff00)';
-        document.body.style.opacity = '0.8';
-        document.body.style.animation = 'screen-shake 0.2s';
         document.querySelectorAll('.neon-text, .text-white, .hint, .cipher-text').forEach(el => el.classList.add('lightning-flash'));
-        setTimeout(() => {
-            lCtx.globalAlpha = 0.4;
-            lCtx.stroke();
-            setTimeout(() => {
-                lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
-                lCtx.globalAlpha = 1;
-                document.body.style.background = 'linear-gradient(45deg, #666666, #999999)';
-                document.body.style.opacity = '1';
-                document.body.style.animation = '';
-                document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash'));
-            }, 200);
-        }, 100);
+        setTimeout(() => document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash')), 300);
     }
 }
 setInterval(drawLightning, 100);
@@ -136,14 +122,13 @@ for (let i = 0; i < (window.innerWidth < 430 ? 30 : 50); i++) {
     drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
 }
 function drawAsciiRain() {
-    asciiCtx.clearRect(0, 0, asciiCanvas.width, asciiCanvas.height);
     asciiCtx.fillStyle = '#9900ff';
     asciiCtx.font = window.innerWidth < 430 ? '10px monospace' : '12px monospace';
     drops.forEach(drop => {
         asciiCtx.fillText(drop.char, drop.x, drop.y);
         drop.y += drop.speed;
         if (drop.y > asciiCanvas.height) { drop.y = 0; drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; }
-        if ((stormMode || shockwaveRadius > 0) && (drop.char === '8==D')) {
+        if ((stormMode || shockwaveRadius > 0) && drop.char === '8==D') {
             drop.char = '∆∆∆';
             drop.speed += 5;
             for (let i = 0; i < 5; i++) {
