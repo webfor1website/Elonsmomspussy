@@ -27,7 +27,16 @@
         .neon-text { 
             text-shadow: 0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff; 
             animation: glitch 0.5s linear infinite; 
-            word-break: break-all;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        .feature-heading { 
+            transition: text-shadow 0.3s ease, color 0.3s ease;
+        }
+        .feature-heading.flash-code { 
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
         }
         .neon-button { 
             background: #9900ff; 
@@ -149,8 +158,18 @@
             color: #000000; 
             font-size: 1em; 
             text-shadow: none; 
+            font-weight: bold;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
-        .hint.lightning-flash { 
+        .cipher-text {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            font-weight: bold;
+        }
+        .hint.lightning-flash, .cipher-text.lightning-flash { 
             text-shadow: 0 0 5px #ffff00; 
         }
         .feature-card { 
@@ -164,6 +183,30 @@
             text-shadow: 0 0 10px #ffff00 !important; 
             transition: text-shadow 0.1s ease; 
         }
+        .nav-menu {
+            background: #1a1a1a;
+            border-bottom: 3px solid #9900ff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: env(safe-area-inset-top) 0;
+        }
+        .nav-menu a {
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .nav-menu a:hover {
+            text-shadow: 0 0 10px #9900ff;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            background: #1a1a1a;
+            border: 2px solid #9900ff;
+        }
+        .hamburger { display: none; }
         @keyframes glitch {
             0%, 100% { transform: translate(0); }
             10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); }
@@ -187,19 +230,47 @@
         }
         /* iPhone-specific styles */
         @media only screen and (max-width: 430px) {
-            h1 { font-size: 2.5rem; line-height: 1.1; }
+            h1 { font-size: 2rem; line-height: 1.1; }
             p.text-3xl { font-size: 1.25rem; }
             .neon-button { padding: 8px 16px; font-size: 0.9rem; }
             .code-block { padding: 15px; max-height: 400px; }
-            .hud-overlay { width: 150px; height: 80px; top: env(safe-area-inset-top, 10px); right: 10px; }
+            .hint, .cipher-text { font-size: 1.5rem; font-weight: bold; }
+            .hud-overlay { width: 150px; height: 80px; top: calc(env(safe-area-inset-top, 10px) + 60px); right: 10px; }
             .triad-glyph { width: 80px; height: 80px; bottom: env(safe-area-inset-bottom, 10px); left: 10px; }
             .feature-card { padding: 12px; }
             .parallax { min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); padding: env(safe-area-inset-top) 5px env(safe-area-inset-bottom); }
             canvas { transform: scale(0.9); }
+            .nav-menu { padding: calc(env(safe-area-inset-top) + 10px) 0; }
+            .nav-menu ul { display: none; }
+            .nav-menu.active ul { display: block; background: #1a1a1a; position: absolute; top: 60px; width: 100%; }
+            .nav-menu li { display: block; padding: 10px; }
+            .hamburger { display: block; color: #ffffff; font-size: 1.5rem; cursor: pointer; padding: 10px; }
+            .dropdown-menu { position: static; width: 100%; }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <div class="hamburger">☰</div>
+            <ul class="flex space-x-4">
+                <li><a href="index.html" class="neon-text">Home</a></li>
+                <li><a href="about.html" class="neon-text">About</a></li>
+                <li><a href="specs.html" class="neon-text">Specs</a></li>
+                <li><a href="team.html" class="neon-text">Team</a></li>
+                <li class="dropdown relative">
+                    <a href="#" class="neon-text">Crowdfunding</a>
+                    <div class="dropdown-menu hidden absolute z-10">
+                        <a href="https://www.gofundme.com/f/hnfc-chaos-project" class="block px-4 py-2 neon-text">GoFundMe</a>
+                        <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project" class="block px-4 py-2 neon-text">Kickstarter</a>
+                        <a href="https://venmo.com/hnfc-chaos" class="block px-4 py-2 neon-text">Venmo Donation</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Lightning Canvas -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
 
@@ -236,7 +307,7 @@
     <div id="neural-orb" class="neural-orb"></div>
 
     <!-- Main -->
-    <main class="p-10 max-w-7xl mx-auto relative">
+    <main class="p-10 max-w-7xl mx-auto relative pt-20">
         <!-- Puzzle-Locked Code -->
         <section class="mb-16">
             <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
@@ -526,15 +597,15 @@ if __name__ == "__main__":
         <!-- Features -->
         <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">TriadSynapse NAS</h3>
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-1">TriadSynapse</h3>
                 <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
             </div>
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">Multi-Modal Fusion</h3>
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-2">MultiModalFusion</h3>
                 <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
             </div>
             <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-2xl neon-text mb-4">Distributed Computing</h3>
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-3">DistributedChaos</h3>
                 <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
             </div>
         </section>
@@ -582,6 +653,27 @@ if __name__ == "__main__":
             navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
         }
 
+        // Feature Heading Flash
+        const featureHeadings = [
+            { id: 'feature-1', name: 'TriadSynapse', code: 'Q⚡B85URZJR92 SLL' },
+            { id: 'feature-2', name: 'MultiModalFusion', code: 'C1U3R⚡RNSYP C37MKF' },
+            { id: 'feature-3', name: 'DistributedChaos', code: 'HYXB3TREQQ∆ E3NFYH9ZK' }
+        ];
+        function flashFeatureHeadings() {
+            featureHeadings.forEach(feature => {
+                const el = document.getElementById(feature.id);
+                if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
+                    el.textContent = feature.code;
+                    el.classList.add('flash-code');
+                    setTimeout(() => {
+                        el.textContent = feature.name;
+                        el.classList.remove('flash-code');
+                    }, 1000);
+                }
+            });
+        }
+        setInterval(flashFeatureHeadings, 2000);
+
         // Lightning Flashes
         const lightningCanvas = document.getElementById('lightning-canvas');
         const lCtx = lightningCanvas.getContext('2d');
@@ -619,7 +711,7 @@ if __name__ == "__main__":
                 document.body.style.background = 'linear-gradient(45deg, #9900ff, #ffff00)';
                 document.body.style.opacity = '0.8';
                 document.body.style.animation = 'screen-shake 0.2s';
-                document.querySelectorAll('.neon-text, .text-white, .hint').forEach(el => el.classList.add('lightning-flash'));
+                document.querySelectorAll('.neon-text, .text-white, .hint, .cipher-text').forEach(el => el.classList.add('lightning-flash'));
                 setTimeout(() => {
                     lCtx.globalAlpha = 0.4;
                     lCtx.stroke();
@@ -719,7 +811,7 @@ if __name__ == "__main__":
                     drop.y = 0;
                     drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
                 }
-                if ((shockwaveRadius > 0 || stormMode) && drop.char === '∆∆∆' || drop.char === '8==D') {
+                if ((shockwaveRadius > 0 || stormMode) && (drop.char === '∆∆∆' || drop.char === '8==D')) {
                     drop.char = '*';
                     drop.speed += 5;
                     for (let i = 0; i < 5; i++) {
@@ -978,6 +1070,1113 @@ if __name__ == "__main__":
             }
         }
         setInterval(glitchText, 100);
+
+        // Hamburger Menu Toggle
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Resize Handler for Mobile
+        window.addEventListener('resize', () => {
+            lightningCanvas.width = window.innerWidth;
+            lightningCanvas.height = window.innerHeight;
+            shockwaveCanvas.width = window.innerWidth;
+            shockwaveCanvas.height = window.innerHeight;
+            asciiCanvas.width = window.innerWidth;
+            asciiCanvas.height = window.innerHeight;
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+            pulseCanvas.width = window.innerWidth;
+            pulseCanvas.height = window.innerHeight;
+            hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
+            hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
+            glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
+            glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="HyperChaoticNeuralCodec: A neon-yellow lightning-fucked XAI dream for Neuralink chaos.">
+    <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
+    <title>HyperChaoticNeuralCodec - Fucking Unhinged Chaos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <style>
+        html, body { 
+            background: linear-gradient(45deg, #666666, #999999) !important; 
+            color: #333333; 
+            font-family: 'Courier New', monospace; 
+            overflow-x: hidden; 
+            position: relative;
+            animation: pulse-bg 5s infinite;
+            margin: 0;
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+            transition: background 0.2s ease;
+        }
+        .neon-text { 
+            text-shadow: 0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff; 
+            animation: glitch 0.5s linear infinite; 
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        .feature-heading { 
+            transition: text-shadow 0.3s ease, color 0.3s ease;
+        }
+        .feature-heading.flash-code { 
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+        }
+        .neon-button { 
+            background: #9900ff; 
+            border: 3px solid #9900ff; 
+            color: #ffffff; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            transition: all 0.3s ease; 
+        }
+        .neon-button:hover { 
+            box-shadow: 0 0 20px #9900ff, 0 0 40px #9900ff; 
+            background: #333333; 
+            color: #9900ff; 
+        }
+        .code-block { 
+            background: #1a1a1a; 
+            border: 3px solid #9900ff; 
+            padding: 25px; 
+            border-radius: 12px; 
+            max-height: 600px; 
+            overflow-y: auto; 
+            box-shadow: 0 0 30px rgba(153, 0, 255, 0.4); 
+        }
+        .parallax { 
+            background-position: center; 
+            background-size: cover; 
+            background-image: url('https://example.com/cyberpunk-dark-bg.jpg'); 
+            min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            padding: env(safe-area-inset-top) 10px env(safe-area-inset-bottom);
+        }
+        .neural-orb { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
+        }
+        .lightning-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -2; 
+            opacity: 0.8; 
+        }
+        .shockwave-canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -3; 
+            opacity: 0.5; 
+        }
+        .ascii-rain { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -4; 
+            opacity: 0.3; 
+        }
+        .neural-matrix { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -5; 
+            opacity: 0.2; 
+        }
+        .neon-pulse { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -6; 
+            opacity: 0.4; 
+        }
+        .hud-overlay { 
+            position: fixed; 
+            top: env(safe-area-inset-top, 20px); 
+            right: 20px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 1; 
+            opacity: 0.6; 
+        }
+        .triad-glyph { 
+            position: fixed; 
+            bottom: env(safe-area-inset-bottom, 20px); 
+            left: 20px; 
+            width: 120px; 
+            height: 120px; 
+            z-index: 1; 
+            opacity: 0.8; 
+        }
+        .cyber-dick { 
+            position: fixed; 
+            font-size: 12px; 
+            font-family: monospace; 
+            color: #9900ff; 
+            text-shadow: 0 0 5px #ffff00; 
+            opacity: 0; 
+            transition: opacity 0.2s ease; 
+        }
+        .puzzle-input { 
+            background: #1a1a1a; 
+            border: 3px solid #9900ff; 
+            padding: 12px; 
+            color: #333333; 
+            border-radius: 8px; 
+        }
+        .hint { 
+            color: #000000; 
+            font-size: 1em; 
+            text-shadow: none; 
+            font-weight: bold;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        .cipher-text {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            font-weight: bold;
+        }
+        .hint.lightning-flash, .cipher-text.lightning-flash { 
+            text-shadow: 0 0 5px #ffff00; 
+        }
+        .feature-card { 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .feature-card:hover { 
+            transform: scale(1.1); 
+            box-shadow: 0 0 30px #9900ff; 
+        }
+        .lightning-flash { 
+            text-shadow: 0 0 10px #ffff00 !important; 
+            transition: text-shadow 0.1s ease; 
+        }
+        .nav-menu {
+            background: #1a1a1a;
+            border-bottom: 3px solid #9900ff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: env(safe-area-inset-top) 0;
+        }
+        .nav-menu a {
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .nav-menu a:hover {
+            text-shadow: 0 0 10px #9900ff;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            background: #1a1a1a;
+            border: 2px solid #9900ff;
+        }
+        .hamburger { display: none; }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-3px, 3px) skew(3deg); }
+            20%, 40%, 60%, 80% { transform: translate(3px, -3px) skew(-3deg); }
+        }
+        @keyframes pulse-bg {
+            0% { background: linear-gradient(45deg, #666666, #999999); }
+            50% { background: linear-gradient(45deg, #666666, #aaaaaa); }
+            100% { background: linear-gradient(45deg, #666666, #999999); }
+        }
+        @keyframes lightning-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes screen-shake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 5px); }
+            50% { transform: translate(5px, -5px); }
+            75% { transform: translate(-3px, 3px); }
+            100% { transform: translate(0, 0); }
+        }
+        /* iPhone-specific styles */
+        @media only screen and (max-width: 430px) {
+            h1 { font-size: 2rem; line-height: 1.1; }
+            p.text-3xl { font-size: 1.25rem; }
+            .neon-button { padding: 8px 16px; font-size: 0.9rem; }
+            .code-block { padding: 15px; max-height: 400px; }
+            .hint, .cipher-text { font-size: 1.5rem; font-weight: bold; }
+            .hud-overlay { width: 150px; height: 80px; top: calc(env(safe-area-inset-top, 10px) + 60px); right: 10px; }
+            .triad-glyph { width: 80px; height: 80px; bottom: env(safe-area-inset-bottom, 10px); left: 10px; }
+            .feature-card { padding: 12px; }
+            .parallax { min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); padding: env(safe-area-inset-top) 5px env(safe-area-inset-bottom); }
+            canvas { transform: scale(0.9); }
+            .nav-menu { padding: calc(env(safe-area-inset-top) + 10px) 0; }
+            .nav-menu ul { display: none; }
+            .nav-menu.active ul { display: block; background: #1a1a1a; position: absolute; top: 60px; width: 100%; }
+            .nav-menu li { display: block; padding: 10px; }
+            .hamburger { display: block; color: #ffffff; font-size: 1.5rem; cursor: pointer; padding: 10px; }
+            .dropdown-menu { position: static; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <div class="hamburger">☰</div>
+            <ul class="flex space-x-4">
+                <li><a href="index.html" class="neon-text">Home</a></li>
+                <li><a href="about.html" class="neon-text">About</a></li>
+                <li><a href="specs.html" class="neon-text">Specs</a></li>
+                <li><a href="team.html" class="neon-text">Team</a></li>
+                <li class="dropdown relative">
+                    <a href="#" class="neon-text">Crowdfunding</a>
+                    <div class="dropdown-menu hidden absolute z-10">
+                        <a href="https://www.gofundme.com/f/hnfc-chaos-project" class="block px-4 py-2 neon-text">GoFundMe</a>
+                        <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project" class="block px-4 py-2 neon-text">Kickstarter</a>
+                        <a href="https://venmo.com/hnfc-chaos" class="block px-4 py-2 neon-text">Venmo Donation</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Lightning Canvas -->
+    <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
+
+    <!-- Shockwave Canvas -->
+    <canvas id="shockwave-canvas" class="shockwave-canvas"></canvas>
+
+    <!-- ASCII Art Rain -->
+    <canvas id="ascii-rain" class="ascii-rain"></canvas>
+
+    <!-- Neural Matrix Grid -->
+    <canvas id="neural-matrix" class="neural-matrix"></canvas>
+
+    <!-- Neon Pulse Wave -->
+    <canvas id="neon-pulse" class="neon-pulse"></canvas>
+
+    <!-- Holographic HUD -->
+    <canvas id="hud-overlay" class="hud-overlay"></canvas>
+
+    <!-- TriadSynapse Glyph -->
+    <canvas id="triad-glyph" class="triad-glyph"></canvas>
+
+    <!-- Cyber-Dicks -->
+    <div id="cyber-dicks"></div>
+
+    <!-- Hero -->
+    <section class="parallax flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
+            <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
+        </div>
+    </section>
+
+    <!-- Neural Orb -->
+    <div id="neural-orb" class="neural-orb"></div>
+
+    <!-- Main -->
+    <main class="p-10 max-w-7xl mx-auto relative pt-20">
+        <!-- Puzzle-Locked Code -->
+        <section class="mb-16">
+            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
+            <p class="text-white mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
+            <p class="text-neon-text mb-6 cipher-text">“Ixpvgu xli kwwl jkyf ymj: 7”</p>
+            <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
+            <button class="neon-button" onclick="checkKey()">Unlock the Fucking Chaos</button>
+            <div id="hint-container" class="mt-6">
+                <p class="hint" id="hint-0">Hint (0s): Prime number between 5-10.</p>
+                <p class="hint" id="hint-20" style="display: none;">Hint (20s): Two hands minus three, asshole.</p>
+                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</p>
+            </div>
+            <div id="code-container" style="display: none;">
+                <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
+                <pre class="code-block"><code id="hnfc-code" class="language-python">
+import numpy as np
+import torch
+import torch.nn as nn
+import aiohttp
+import asyncio
+from bs4 import BeautifulSoup
+from transformers import CLIPModel, CLIPProcessor, GPT2Tokenizer, GPT2LMHeadModel, T5Tokenizer, T5ForConditionalGeneration, Wav2Vec2Model, Wav2Vec2Processor
+from torch.utils.data import Dataset, DataLoader
+from torch.cuda.amp import autocast
+from torch.utils.data.distributed import DistributedSampler
+import torch.distributed as dist
+import logging
+import pandas as pd
+import shap
+from sklearn.cluster import KMeans
+import random
+
+# Logging setup
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Distributed process group
+dist.init_process_group(backend='nccl')
+rank = dist.get_rank()
+world_size = dist.get_world_size()
+
+# Dataset class
+class QueryResponseDataset(Dataset):
+    def __init__(self, csv_file, clip_processor, clip_model, device):
+        self.data = pd.read_csv(csv_file)
+        self.clip_processor = clip_processor
+        self.clip_model = clip_model
+        self.device = device
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        query = self.data.iloc[idx]['query']
+        response = self.data.iloc[idx]['response']
+        query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
+        response_inputs = self.clip_processor(text=response, return_tensors="pt").to(self.device)
+        query_emb = self.clip_model.get_text_features(**query_inputs).squeeze()
+        response_emb = self.clip_model.get_text_features(**response_inputs).squeeze()
+        return query_emb, response_emb
+
+# BrainStorm compressor
+class BrainStorm(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.compressor = nn.Sequential(
+            nn.Linear(input_dim, 256), nn.ReLU(),
+            nn.Linear(256, input_dim), nn.Tanh()
+        )
+        self.optimizer = torch.optim.Adam(self.compressor.parameters(), lr=0.001)
+
+    def forward(self, data):
+        return self.compressor(data)
+
+# TriadSynapse with NAS (dick shape in comments)
+class TriadSynapse(nn.Module):
+    #   _____
+    #  /     \
+    # /_______\
+    # |  ***  | 
+    # |  ***  | 
+    # |_______|
+    def __init__(self, input_dim=512, hidden_dim=256):
+        super().__init__()
+        self.generator_candidates = [
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
+        ]
+        self.generator = self.generator_candidates[0]
+        self.critic = nn.Sequential(
+            nn.Linear(input_dim, 64), nn.ReLU(),
+            nn.Linear(64, 1), nn.Sigmoid()
+        )
+        self.refiner = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, input_dim), nn.Tanh()
+        )
+        self.adaptive_layer = nn.Linear(hidden_dim, hidden_dim)
+        self.iterations = 7
+        self.candidate_performances = [0.0] * len(self.generator_candidates)
+
+    def refine(self, input_data):
+        candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
+        self.generator = self.generator_candidates[candidate_idx]
+        current = input_data.clone()
+        validity = 0.0
+        for _ in range(self.iterations):
+            generated = self.generator(current)
+            validity = self.critic(generated).mean().item()
+            refined = self.refiner(generated)
+            current = self.adaptive_layer(refined)
+        self.candidate_performances[candidate_idx] = (self.candidate_performances[candidate_idx] + validity) / 2
+        return current, validity
+
+# NeuroCosmicNexus (dick shape in variable names)
+class NeuroCosmicNexus(nn.Module):
+    def __init__(self, input_dim=512):
+        super().__init__()
+        self.triad = TriadSynapse(input_dim)
+        self.cock_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
+        self.shaft_rate = 0.001
+        self.head_space = torch.zeros(input_dim).to(self.device)  # Sneaky dick variable
+
+    def sync(self, input_data):
+        refined, validity = self.triad.refine(input_data)
+        return refined + self.cock_noise + self.head_space, validity
+
+    def evolve(self, feedback):
+        with torch.no_grad():
+            self.cock_noise += self.shaft_rate * feedback
+            self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
+            self.head_space += self.shaft_rate * feedback * 0.5
+
+# Multi-modal fusion
+class MultiModalFusion(nn.Module):
+    def __init__(self, embed_dim=512):
+        super().__init__()
+        self.text_proj = nn.Linear(embed_dim, embed_dim)
+        self.image_proj = nn.Linear(embed_dim, embed_dim)
+        self.audio_proj = nn.Linear(embed_dim, embed_dim)
+        self.fusion = nn.MultiheadAttention(embed_dim, num_heads=8)
+
+    def forward(self, text_emb, image_emb, audio_emb):
+        text_proj = self.text_proj(text_emb).unsqueeze(0)
+        image_proj = self.image_proj(image_emb).unsqueeze(0)
+        audio_proj = self.audio_proj(audio_emb).unsqueeze(0)
+        combined = torch.cat([text_proj, image_proj, audio_proj], dim=0)
+        fused, _ = self.fusion(combined, combined, combined)
+        return fused.mean(dim=0)
+
+# NeoGrokCosmos (super dick from three dicks)
+class NeoGrokCosmos:
+    #   _____      _____      _____  
+    #  /     \    /     \    /     \ 
+    # /_______\  /_______\  /_______\
+    # |  ***  |  |  ***  |  |  ***  | 
+    # |  ***  |  |  ***  |  |  ***  | 
+    # |_______|  |_______|  |_______|
+    #          \  |  ***  |  /
+    #           \ |  ***  | /
+    #            \|_______|/
+    def __init__(self, train_csv="path/to/train.csv"):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.brainstorm = nn.parallel.DistributedDataParallel(BrainStorm().to(self.device), device_ids=[self.device])
+        self.nexus = nn.parallel.DistributedDataParallel(NeuroCosmicNexus().to(self.device), device_ids=[self.device])
+        self.clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(self.device)
+        self.clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+        self.wav2vec2_model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h").to(self.device)
+        self.wav2vec2_processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
+        self.tokenizer = GPT2Tokenizer.from_pretrained('distilgpt2')
+        self.llm = nn.parallel.DistributedDataParallel(GPT2LMHeadModel.from_pretrained('distilgpt2').to(self.device), device_ids=[self.device])
+        self.t5_tokenizer = T5Tokenizer.from_pretrained('t5-small')
+        self.t5_model = nn.parallel.DistributedDataParallel(T5ForConditionalGeneration.from_pretrained('t5-small').to(self.device), device_ids=[self.device])
+        self.fusion_layer = MultiModalFusion().to(self.device)
+        self.memory = []
+        self.cache = {}
+        self.losses = []
+        self.critic_scores = []
+        self.explanations = []
+        self.query_embeddings = []
+        self.query_count = 0
+        self.train_dataset = QueryResponseDataset(train_csv, self.clip_processor, self.clip_model, self.device)
+        self.train_sampler = DistributedSampler(self.train_dataset)
+        self.train_loader = DataLoader(self.train_dataset, batch_size=32, shuffle=False, sampler=self.train_sampler)
+
+    async def fetch_real_time_data(self, source="hackernews"):
+        try:
+            async with aiohttp.ClientSession() as session:
+                url = "https://news.ycombinator.com/" if source == "hackernews" else "https://twitter.com/"
+                async with session.get(url) as resp:
+                    html = await resp.text()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    return [item.text for item in soup.find_all('a')[:5]]
+        except Exception as e:
+            logger.error(f"Error fetching data: {e}")
+            return []
+
+    def apply_vibe_filter(self, text, vibe, user_id=None):
+        if vibe == "witty":
+            return f"{text} (with a dash of cosmic wit!)"
+        return text
+
+    async def process_query(self, query, vibe="witty", image=None, audio=None, user_id=None, num_candidates=3):
+        if query in self.cache:
+            return self.cache[query]
+        try:
+            real_time_data = await self.fetch_real_time_data()
+            query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
+            query_embedding = self.clip_model.get_text_features(**query_inputs).squeeze()
+            if image:
+                image_inputs = self.clip_processor(images=image, return_tensors="pt").to(self.device)
+                image_embedding = self.clip_model.get_image_features(**image_inputs).squeeze()
+            else:
+                image_embedding = torch.zeros(512).to(self.device)
+            audio_embedding = torch.zeros(512).to(self.device)
+            if audio:
+                inputs = self.wav2vec2_processor(audio, return_tensors="pt", sampling_rate=16000).to(self.device)
+                with autocast():
+                    audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
+            fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_embedding)
+            with autocast():
+                compressed = self.brainstorm(fused_embedding)
+                synced, validity = self.nexus.sync(compressed)
+                self.critic_scores.append(validity)
+            inputs = self.tokenizer(query, return_tensors="pt").to(self.device)
+            candidates = []
+            for _ in range(num_candidates):
+                with autocast():
+                    output = self.llm.module.generate(**inputs, max_length=50, do_sample=True, top_k=50)
+                    text = self.tokenizer.decode(output[0], skip_special_tokens=True)
+                    candidates.append(text)
+            candidate_inputs = [self.clip_processor(text=cand, return_tensors="pt").to(self.device) for cand in candidates]
+            candidate_embeddings = [self.clip_model.get_text_features(**inp).squeeze() for inp in candidate_inputs]
+            similarities = [torch.cosine_similarity(synced, emb, dim=0).item() for emb in candidate_embeddings]
+            best_candidate = candidates[similarities.index(max(similarities))]
+            result = self.apply_vibe_filter(best_candidate, vibe, user_id)
+            self.query_embeddings.append(query_embedding.detach().cpu().numpy())
+            self.query_count += 1
+            if self.query_count % 10 == 0:
+                best_idx = np.argmax(self.nexus.module.triad.candidate_performances)
+                self.nexus.module.triad.generator = self.nexus.module.triad.generator_candidates[best_idx]
+                logger.info(f"Selected best generator candidate: {best_idx}")
+            if len(self.query_embeddings) % 100 == 0:
+                self.cluster_queries()
+            self.cache[query] = result
+            self.memory.append((query, result))
+            return result
+        except Exception as e:
+            logger.error(f"Error processing query: {e}")
+            return "Error occurred!"
+
+    def train_step(self, data, target):
+        self.brainstorm.module.optimizer.zero_grad()
+        output = self.brainstorm(data)
+        loss = nn.MSELoss()(output, target)
+        loss.backward()
+        self.brainstorm.module.optimizer.step()
+        return loss.item()
+
+    def train_brainstorm(self, epochs=5):
+        for epoch in range(epochs):
+            self.train_sampler.set_epoch(epoch)
+            for query_emb, response_emb in self.train_loader:
+                loss = self.train_step(query_emb, response_emb)
+                self.losses.append(loss)
+                logger.info(f"Epoch {epoch+1}, Loss: {loss}")
+
+    def cluster_queries(self):
+        if len(self.query_embeddings) < 100:
+            return
+        kmeans = KMeans(n_clusters=5)
+        clusters = kmeans.fit_predict(self.query_embeddings)
+        logger.info(f"Cluster centers: {kmeans.cluster_centers_}")
+
+# Run it
+if __name__ == "__main__":
+    cosmos = NeoGrokCosmos(train_csv="path/to/train.csv")
+    query = "What’s the meaning of life?"
+    result = asyncio.run(cosmos.process_query(query, vibe="witty", audio=None, image=None))
+    print(result)
+    cosmos.train_brainstorm(epochs=5)
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-1">TriadSynapse</h3>
+                <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
+            </div>
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-2">MultiModalFusion</h3>
+                <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
+            </div>
+            <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                <h3 class="text-2xl neon-text mb-4 feature-heading" id="feature-3">DistributedChaos</h3>
+                <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="text-center mb-16">
+            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
+        </section>
+    </main>
+
+    <!-- Footer (dick shape in comments) -->
+    <!--   _____  -->
+    <!--  /     \ -->
+    <!-- /_______\ -->
+    <!-- |  ***  | -->
+    <!-- |  ***  | -->
+    <!-- |_______| -->
+    <footer class="p-6 text-center bg-gray-800">
+        <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Puzzle Logic
+        window.onload = () => {
+            alert('3 hints over 60 seconds, crack the cipher or you don’t deserve the code, fucker!');
+            document.getElementById('hint-0').style.display = 'block';
+        };
+        setTimeout(() => document.getElementById('hint-20').style.display = 'block', 20000);
+        setTimeout(() => document.getElementById('hint-40').style.display = 'block', 40000);
+
+        function checkKey() {
+            const key = document.getElementById('key-input').value;
+            if (key === '7') {
+                document.getElementById('code-container').style.display = 'block';
+                alert('You cracked the chaos, you unhinged fuck!');
+            } else {
+                alert('Wrong fucking key. It’s one digit. Get it together.');
+            }
+        }
+
+        // Copy Code
+        function copyCode(id) {
+            const code = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(code).then(() => alert('Code’s yours, you chaotic motherfucker!'));
+        }
+
+        // Feature Heading Flash
+        const featureHeadings = [
+            { id: 'feature-1', name: 'TriadSynapse', code: 'Q⚡B85URZJR92 SLL' },
+            { id: 'feature-2', name: 'MultiModalFusion', code: 'C1U3R⚡RNSYP C37MKF' },
+            { id: 'feature-3', name: 'DistributedChaos', code: 'HYXB3TREQQ∆ E3NFYH9ZK' }
+        ];
+        function flashFeatureHeadings() {
+            featureHeadings.forEach(feature => {
+                const el = document.getElementById(feature.id);
+                if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
+                    el.textContent = feature.code;
+                    el.classList.add('flash-code');
+                    setTimeout(() => {
+                        el.textContent = feature.name;
+                        el.classList.remove('flash-code');
+                    }, 1000);
+                }
+            });
+        }
+        setInterval(flashFeatureHeadings, 2000);
+
+        // Lightning Flashes
+        const lightningCanvas = document.getElementById('lightning-canvas');
+        const lCtx = lightningCanvas.getContext('2d');
+        lightningCanvas.width = window.innerWidth;
+        lightningCanvas.height = window.innerHeight;
+        let stormMode = false;
+        function drawLightning() {
+            let lightningChance = stormMode ? 0.2 : 0.1;
+            if (Math.random() < lightningChance) {
+                lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
+                lCtx.strokeStyle = '#ffff00';
+                lCtx.lineWidth = 6;
+                lCtx.shadowBlur = 20;
+                lCtx.shadowColor = '#9900ff';
+                lCtx.beginPath();
+                let x = Math.random() * lightningCanvas.width;
+                let y = 0;
+                lCtx.moveTo(x, y);
+                for (let i = 0; i < 8; i++) {
+                    x += (Math.random() - 0.5) * 150;
+                    y += lightningCanvas.height / 8;
+                    lCtx.lineTo(x, y);
+                    if (Math.random() < 0.4) {
+                        let forkX = x;
+                        let forkY = y;
+                        lCtx.moveTo(forkX, forkY);
+                        for (let j = 0; j < 5; j++) {
+                            forkX += (Math.random() - 0.5) * 100;
+                            forkY += lightningCanvas.height / 16;
+                            lCtx.lineTo(forkX, forkY);
+                        }
+                    }
+                }
+                lCtx.stroke();
+                document.body.style.background = 'linear-gradient(45deg, #9900ff, #ffff00)';
+                document.body.style.opacity = '0.8';
+                document.body.style.animation = 'screen-shake 0.2s';
+                document.querySelectorAll('.neon-text, .text-white, .hint, .cipher-text').forEach(el => el.classList.add('lightning-flash'));
+                setTimeout(() => {
+                    lCtx.globalAlpha = 0.4;
+                    lCtx.stroke();
+                    setTimeout(() => {
+                        lCtx.clearRect(0, 0, lightningCanvas.width, lightningCanvas.height);
+                        lCtx.globalAlpha = 1;
+                        document.body.style.background = 'linear-gradient(45deg, #666666, #999999)';
+                        document.body.style.opacity = '1';
+                        document.body.style.animation = '';
+                        document.querySelectorAll('.lightning-flash').forEach(el => el.classList.remove('lightning-flash'));
+                    }, 200);
+                }, 100);
+            }
+        }
+        setInterval(drawLightning, 100);
+        setInterval(() => {
+            if (Math.random() < 0.01) {
+                stormMode = true;
+                document.body.style.background = 'linear-gradient(45deg, #ff3333, #ffff00)';
+                setTimeout(() => {
+                    stormMode = false;
+                    document.body.style.background = 'linear-gradient(45deg, #666666, #999999)';
+                }, 3000);
+            }
+        }, 5000);
+
+        // Neural Pulse Shockwave
+        const shockwaveCanvas = document.getElementById('shockwave-canvas');
+        const swCtx = shockwaveCanvas.getContext('2d');
+        shockwaveCanvas.width = window.innerWidth;
+        shockwaveCanvas.height = window.innerHeight;
+        let shockwaveRadius = 0;
+        function drawShockwave() {
+            if (Math.random() < 0.1 || stormMode) {
+                shockwaveRadius = 10;
+                setTimeout(() => {
+                    shockwaveRadius = 0;
+                }, 500);
+            }
+            if (shockwaveRadius > 0) {
+                swCtx.clearRect(0, 0, shockwaveCanvas.width, shockwaveCanvas.height);
+                swCtx.beginPath();
+                swCtx.arc(window.innerWidth / 2, window.innerHeight / 2, shockwaveRadius, 0, Math.PI * 2);
+                swCtx.strokeStyle = '#ffff00';
+                swCtx.lineWidth = 3;
+                swCtx.globalAlpha = 0.5;
+                swCtx.stroke();
+                shockwaveRadius += 10;
+            }
+        }
+        setInterval(drawShockwave, 50);
+
+        // Neon Pulse Wave
+        const pulseCanvas = document.getElementById('neon-pulse');
+        const pulseCtx = pulseCanvas.getContext('2d');
+        pulseCanvas.width = window.innerWidth;
+        pulseCanvas.height = window.innerHeight;
+        let pulseRadius = 0;
+        function drawNeonPulse() {
+            if (stormMode || shockwaveRadius > 0) {
+                pulseRadius = 10;
+                setTimeout(() => {
+                    pulseRadius = 0;
+                }, 500);
+            }
+            if (pulseRadius > 0) {
+                pulseCtx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
+                pulseCtx.beginPath();
+                pulseCtx.arc(window.innerWidth / 2, window.innerHeight / 2, pulseRadius, 0, Math.PI * 2);
+                pulseCtx.strokeStyle = '#ffff00';
+                pulseCtx.lineWidth = 5;
+                pulseCtx.globalAlpha = 0.7;
+                pulseCtx.stroke();
+                pulseRadius += 15;
+            }
+        }
+        setInterval(drawNeonPulse, 50);
+
+        // ASCII Art Rain
+        const asciiCanvas = document.getElementById('ascii-rain');
+        const asciiCtx = asciiCanvas.getContext('2d');
+        asciiCanvas.width = window.innerWidth;
+        asciiCanvas.height = window.innerHeight;
+        const asciiChars = ['∆', '⚡', '*', '8==D', '∆∆∆'];
+        const drops = [];
+        for (let i = 0; i < (window.innerWidth < 430 ? 30 : 50); i++) {
+            drops.push({ x: Math.random() * asciiCanvas.width, y: Math.random() * asciiCanvas.height, char: asciiChars[Math.floor(Math.random() * asciiChars.length)], speed: Math.random() * 5 + 2 });
+        }
+        function drawAsciiRain() {
+            asciiCtx.clearRect(0, 0, asciiCanvas.width, asciiCanvas.height);
+            asciiCtx.fillStyle = '#9900ff';
+            asciiCtx.font = window.innerWidth < 430 ? '10px monospace' : '12px monospace';
+            drops.forEach(drop => {
+                asciiCtx.fillText(drop.char, drop.x, drop.y);
+                drop.y += drop.speed;
+                if (drop.y > asciiCanvas.height) {
+                    drop.y = 0;
+                    drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
+                }
+                if ((shockwaveRadius > 0 || stormMode) && (drop.char === '∆∆∆' || drop.char === '8==D')) {
+                    drop.char = '*';
+                    drop.speed += 5;
+                    for (let i = 0; i < 5; i++) {
+                        let sparkX = drop.x + (Math.random() - 0.5) * 20;
+                        let sparkY = drop.y + (Math.random() - 0.5) * 20;
+                        asciiCtx.fillText('*', sparkX, sparkY);
+                    }
+                    setTimeout(() => { drop.char = asciiChars[Math.floor(Math.random() * asciiChars.length)]; drop.speed = Math.random() * 5 + 2; }, 200);
+                }
+            });
+        }
+        setInterval(drawAsciiRain, 50);
+
+        // Neural Matrix Grid
+        const matrixCanvas = document.getElementById('neural-matrix');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        function drawMatrixGrid() {
+            matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            matrixCtx.strokeStyle = '#9900ff';
+            matrixCtx.lineWidth = 1;
+            const gridSize = window.innerWidth < 430 ? 30 : 50;
+            for (let x = 0; x < matrixCanvas.width; x += gridSize) {
+                for (let y = 0; y < matrixCanvas.height; y += gridSize) {
+                    matrixCtx.beginPath();
+                    matrixCtx.arc(x, y, 5 + Math.sin(Date.now() * 0.002 + (pulseRadius > 0 ? pulseRadius * 0.01 : 0)) * 2, 0, Math.PI * 2);
+                    matrixCtx.stroke();
+                    if (Math.random() < 0.05 || pulseRadius > 0) {
+                        matrixCtx.lineTo(x + Math.random() * gridSize, y + Math.random() * gridSize);
+                        matrixCtx.stroke();
+                    }
+                }
+            }
+        }
+        setInterval(drawMatrixGrid, 100);
+
+        // Holographic HUD
+        const hudCanvas = document.getElementById('hud-overlay');
+        const hudCtx = hudCanvas.getContext('2d');
+        hudCanvas.width = window.innerWidth < 430 ? 150 : 250;
+        hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
+        function drawHUD() {
+            hudCtx.clearRect(0, 0, hudCanvas.width, hudCanvas.height);
+            hudCtx.strokeStyle = '#9900ff';
+            hudCtx.lineWidth = 1;
+            hudCtx.font = window.innerWidth < 430 ? '8px monospace' : '10px monospace';
+            hudCtx.fillStyle = '#9900ff';
+            hudCtx.fillText(`BCI SYNC: ${Math.floor(Math.random() * 100)}%`, 10, 20);
+            hudCtx.fillText(`NEURAL LOAD: ${Math.random().toFixed(2)} THz`, 10, 40);
+            hudCtx.fillText(`CHAOS METER: ${(stormMode || shockwaveRadius > 0) ? 100 : Math.floor(Math.random() * 100)}%`, 10, 60);
+            hudCtx.beginPath();
+            const barWidth = hudCanvas.width - 20;
+            hudCtx.rect(10, 70, barWidth * ((stormMode || shockwaveRadius > 0) ? 1 : Math.random() * 0.5 + 0.5), 10);
+            hudCtx.fillStyle = shockwaveRadius > 0 ? '#ffff00' : '#9900ff';
+            hudCtx.fill();
+            hudCtx.stroke();
+            if (Math.random() < 0.1 || stormMode) {
+                hudCtx.globalAlpha = 0.6;
+                hudCtx.fillStyle = '#ffff00';
+                hudCtx.fillRect(0, 0, hudCanvas.width, hudCanvas.height);
+                hudCtx.globalAlpha = 1;
+            }
+        }
+        setInterval(drawHUD, 100);
+        hudCanvas.addEventListener('touchstart', () => {
+            hudCanvas.style.transform = 'scale(1.1)';
+            setTimeout(() => { hudCanvas.style.transform = 'scale(1)'; }, 200);
+        });
+
+        // TriadSynapse Glyph
+        const glyphCanvas = document.getElementById('triad-glyph');
+        const glyphCtx = glyphCanvas.getContext('2d');
+        glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
+        glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
+        function drawGlyph() {
+            glyphCtx.clearRect(0, 0, glyphCanvas.width, glyphCanvas.height);
+            glyphCtx.strokeStyle = '#ffff00';
+            glyphCtx.lineWidth = 3;
+            glyphCtx.beginPath();
+            const offset = Math.sin(Date.now() * (stormMode ? 0.006 : 0.003)) * 7;
+            glyphCtx.moveTo(glyphCanvas.width / 2, 20 + offset);
+            glyphCtx.lineTo(glyphCanvas.width / 2 + 30 + offset, glyphCanvas.height - 30);
+            glyphCtx.lineTo(glyphCanvas.width / 2 - 30 - offset, glyphCanvas.height - 30);
+            glyphCtx.closePath();
+            glyphCtx.stroke();
+            if (stormMode || shockwaveRadius > 0) {
+                glyphCtx.beginPath();
+                glyphCtx.arc(glyphCanvas.width / 2, glyphCanvas.height / 2, 40, 0, Math.PI * 2);
+                glyphCtx.strokeStyle = '#ffff00';
+                glyphCtx.globalAlpha = 0.5;
+                glyphCtx.stroke();
+                glyphCtx.globalAlpha = 1;
+                glyphCtx.fillStyle = '#9900ff';
+                for (let i = 0; i < 5; i++) {
+                    glyphCtx.fillRect(Math.random() * glyphCanvas.width, Math.random() * glyphCanvas.height, 3, 3);
+                }
+            }
+        }
+        setInterval(drawGlyph, 50);
+        glyphCanvas.addEventListener('touchstart', () => {
+            glyphCanvas.style.transform = 'scale(1.2)';
+            setTimeout(() => { glyphCanvas.style.transform = 'scale(1)'; }, 200);
+        });
+
+        // Cyber-Dick Swarm
+        const cyberDicks = document.getElementById('cyber-dicks');
+        function addCyberDick() {
+            let count = (stormMode || shockwaveRadius > 0) ? 6 : 1;
+            for (let i = 0; i < count; i++) {
+                const dick = document.createElement('div');
+                dick.className = 'cyber-dick';
+                dick.textContent = '8==D';
+                const posX = Math.random() * (window.innerWidth - 50);
+                const posY = Math.random() * (window.innerHeight - 50);
+                if (stormMode && count > 1) {
+                    const offset = i * 20 - (count - 1) * 10;
+                    dick.style.left = `${window.innerWidth / 2 + offset}px`;
+                    dick.style.top = `${window.innerHeight / 2 + offset * 0.5}px`;
+                } else {
+                    dick.style.left = `${posX}px`;
+                    dick.style.top = `${posY}px`;
+                }
+                cyberDicks.appendChild(dick);
+                dick.style.opacity = '1';
+                setTimeout(() => {
+                    dick.style.opacity = '0';
+                    setTimeout(() => dick.remove(), 200);
+                }, 300);
+            }
+        }
+        setInterval(addCyberDick, 100);
+
+        // Neural Orb with TriadSynapse
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('neural-orb').appendChild(renderer.domElement);
+        const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
+        const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
+        const orb = new THREE.Mesh(orbGeometry, orbMaterial);
+        scene.add(orb);
+        const triadNodes = [
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 })),
+            new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshBasicMaterial({ color: 0xff3333 }))
+        ];
+        triadNodes[0].position.set(2, 2, 0);
+        triadNodes[1].position.set(-2, 2, 0);
+        triadNodes[2].position.set(0, -2, 0);
+        triadNodes.forEach(node => scene.add(node));
+        const superNode = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffff00 }));
+        superNode.position.set(0, 0, 0);
+        scene.add(superNode);
+        const particles = new THREE.Points(
+            new THREE.BufferGeometry().setFromPoints(
+                Array.from({ length: window.innerWidth < 430 ? 500 : 1000 }, () => new THREE.Vector3(
+                    Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5
+                ))
+            ),
+            new THREE.PointsMaterial({ color: 0xff3333, size: window.innerWidth < 430 ? 0.03 : 0.05 })
+        );
+        scene.add(particles);
+        camera.position.z = 5;
+        document.addEventListener('mousemove', (e) => {
+            orb.rotation.x = e.clientY * 0.005;
+            orb.rotation.y = e.clientX * 0.005;
+            triadNodes.forEach((node, i) => {
+                const t = Date.now() * 0.003 + i;
+                node.position.x = Math.sin(t) * 2.5;
+                node.position.y = Math.cos(t) * 2.5;
+                if (Math.random() < 0.15 || stormMode) {
+                    node.position.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+                    node.material.color.set(0xffff00);
+                    setTimeout(() => node.material.color.set(0xff3333), 200);
+                }
+            });
+        });
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            orb.rotation.x = touch.clientY * 0.005;
+            orb.rotation.y = touch.clientX * 0.005;
+            orb.style.transform = 'scale(1.1)';
+            setTimeout(() => { orb.style.transform = 'scale(1)'; }, 200);
+        });
+        function animate() {
+            requestAnimationFrame(animate);
+            orb.rotation.z += 0.007;
+            particles.rotation.z += 0.004;
+            if (Math.random() < 0.15 || stormMode) {
+                particles.geometry.attributes.position.array.forEach((_, i) => {
+                    if (i % 3 === 0) {
+                        particles.geometry.attributes.position.array[i] += (Math.random() - 0.5) * 0.5;
+                        particles.geometry.attributes.position.array[i + 1] += (Math.random() - 0.5) * 0.5;
+                    }
+                });
+                particles.geometry.attributes.position.needsUpdate = true;
+            }
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Neural Net Canvas
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
+        canvas.style.opacity = '0.4';
+        document.querySelector('main').appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        function drawNeuralNet() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = `rgba(153, 0, 255, ${Math.min(1, window.scrollY / 500)})`;
+            ctx.lineWidth = 3;
+            const nodeCount = window.innerWidth < 430 ? 4 : 6;
+            for (let i = 0; i < nodeCount; i++) {
+                ctx.beginPath();
+                ctx.arc(100 + i * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40, 12, 0, Math.PI * 2);
+                ctx.stroke();
+                if (i < nodeCount - 1) {
+                    ctx.moveTo(100 + i * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40);
+                    ctx.lineTo(100 + (i + 1) * (canvas.width / nodeCount), 200 + Math.sin(Date.now() * 0.002) * 40);
+                    ctx.stroke();
+                }
+            }
+        }
+        drawNeuralNet();
+        window.addEventListener('scroll', drawNeuralNet);
+        setInterval(drawNeuralNet, 50);
+
+        // Glitchy Text Swap
+        function glitchText() {
+            if (Math.random() < (window.innerWidth < 430 ? 0.15 : 0.25)) {
+                const textElements = document.querySelectorAll('.neon-text');
+                textElements.forEach(el => {
+                    const original = el.textContent;
+                    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∆⚡';
+                    let glitched = '';
+                    for (let char of original) {
+                        if (Math.random() < 0.3 && char !== ' ') glitched += chars[Math.floor(Math.random() * chars.length)];
+                        else glitched += char;
+                    }
+                    el.textContent = glitched;
+                    el.style.textShadow = '0 0 10px #ffff00';
+                    setTimeout(() => {
+                        el.textContent = original;
+                        el.style.textShadow = '0 0 5px #9900ff, 0 0 10px #9900ff, 0 0 20px #9900ff';
+                    }, 150);
+                });
+            }
+        }
+        setInterval(glitchText, 100);
+
+        // Hamburger Menu Toggle
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
 
         // Resize Handler for Mobile
         window.addEventListener('resize', () => {
