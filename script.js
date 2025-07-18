@@ -222,21 +222,26 @@ setInterval(addCyberDick, 100);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('neural-orb').appendChild(renderer.domElement);
-const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
-const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
-const orb = new THREE.Mesh(orbGeometry, orbMaterial);
-scene.add(orb);
-camera.position.z = 5;
-function animate() {
-    requestAnimationFrame(animate);
-    if (renderer && orb) {
-        orb.rotation.z += 0.007;
-        renderer.render(scene, camera);
+if (!renderer) {
+    console.error('WebGLRenderer failed to initialize!');
+    document.getElementById('loading').textContent = 'WebGL Error - Chaos Aborted!';
+} else {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('neural-orb').appendChild(renderer.domElement);
+    const orbGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const orbMaterial = new THREE.MeshBasicMaterial({ color: 0x9900ff, wireframe: true });
+    const orb = new THREE.Mesh(orbGeometry, orbMaterial);
+    scene.add(orb);
+    camera.position.z = 5;
+    function animate() {
+        requestAnimationFrame(animate);
+        if (renderer && orb) {
+            orb.rotation.z += 0.007;
+            renderer.render(scene, camera);
+        }
     }
+    animate();
 }
-animate();
 
 document.querySelector('.hamburger').addEventListener('click', () => {
     document.querySelector('.nav-menu').classList.toggle('active');
@@ -257,7 +262,9 @@ window.addEventListener('resize', () => {
     hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
     glyphCanvas.width = window.innerWidth < 430 ? 80 : 120;
     glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+    if (renderer) {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    }
 });
