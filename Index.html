@@ -7,30 +7,11 @@
     <meta name="keywords" content="XAI, Neuralink, chaos, BCI, Python, TriadSynapse, SPARK">
     <title>HyperChaoticNeuralCodec - Fucking Unhinged Chaos</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Three.js CDN for neural orb -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
-    <!-- Navigation Menu -->
-    <nav class="nav-menu fixed top-0 w-full z-10 bg-gray-900 border-b-2 border-[#9900ff] p-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="hamburger text-white text-2xl cursor-pointer">☰</div>
-            <ul class="flex space-x-6 text-white">
-                <li><a href="index.html" class="neon-text">Home</a></li>
-                <li><a href="about.html" class="neon-text">About</a></li>
-                <li><a href="specs.html" class="neon-text">Specs</a></li>
-                <li><a href="team.html" class="neon-text">Team</a></li>
-                <li class="relative">
-                    <a href="#" class="neon-text">Crowdfunding</a>
-                    <div class="dropdown-menu absolute hidden bg-gray-900 border-2 border-[#9900ff] mt-2">
-                        <a href="https://www.gofundme.com/f/hnfc-chaos-project" class="block px-4 py-2 neon-text">GoFundMe</a>
-                        <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project" class="block px-4 py-2 neon-text">Kickstarter</a>
-                        <a href="https://venmo.com/hnfc-chaos" class="block px-4 py-2 neon-text">Venmo Donation</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Neural Orb (Base Layer) -->
+    <div id="neural-orb" class="neural-orb"></div>
 
     <!-- Canvases -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
@@ -41,33 +22,53 @@
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
     <canvas id="triad-glyph" class="triad-glyph"></canvas>
 
-    <!-- Neural Orb Container -->
-    <div id="neural-orb" class="neural-orb"></div>
-
-    <!-- Hero -->
-    <section class="parallax flex items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
-            <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
-        </div>
-    </section>
-
-    <main class="p-10 max-w-7xl mx-auto relative pt-20">
-        <!-- Puzzle-Locked Code -->
-        <section class="mb-16">
-            <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
-            <p class="text-white mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
-            <p class="text-neon-text mb-6 cipher-text">“Ixpvgu xli kwwl jkyf ymj: 7”</p>
-            <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
-            <button class="neon-button" onclick="checkKey()">Unlock the Fucking Chaos</button>
-            <div id="hint-container" class="mt-6">
-                <p class="hint" id="hint-0">Hint (0s): Prime number between 5-10.</p>
-                <p class="hint" id="hint-20" style="display: none;">Hint (20s): Two hands minus three, asshole.</p>
-                <p class="hint" id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</p>
+    <!-- Content Container to Avoid Overlap -->
+    <div class="content-container">
+        <!-- Navigation Menu -->
+        <nav class="nav-menu fixed top-0 w-full z-20 bg-gray-900 border-b-2 border-[#9900ff] p-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="hamburger text-white text-2xl cursor-pointer">☰</div>
+                <ul class="flex space-x-6 text-white">
+                    <li><a href="index.html" class="neon-text">Home</a></li>
+                    <li><a href="about.html" class="neon-text">About</a></li>
+                    <li><a href="specs.html" class="neon-text">Specs</a></li>
+                    <li><a href="team.html" class="neon-text">Team</a></li>
+                    <li class="relative">
+                        <a href="#" class="neon-text">Crowdfunding</a>
+                        <div class="dropdown-menu absolute hidden bg-gray-900 border-2 border-[#9900ff] mt-2">
+                            <a href="https://www.gofundme.com/f/hnfc-chaos-project" class="block px-4 py-2 neon-text">GoFundMe</a>
+                            <a href="https://www.kickstarter.com/projects/hnfc-chaos/hnfc-project" class="block px-4 py-2 neon-text">Kickstarter</a>
+                            <a href="https://venmo.com/hnfc-chaos" class="block px-4 py-2 neon-text">Venmo Donation</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div id="code-container" style="display: none;">
-                <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
-                <pre class="code-block"><code id="hnfc-code" class="language-python">
+        </nav>
+
+        <!-- Hero -->
+        <section class="parallax flex items-center justify-center min-h-[calc(100vh-60px)]">
+            <div class="text-center z-10">
+                <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
+                <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
+            </div>
+        </section>
+
+        <main class="p-10 max-w-7xl mx-auto relative pt-20 z-10">
+            <!-- Puzzle-Locked Code -->
+            <section class="mb-16">
+                <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
+                <p class="text-white mb-6">Decode this to find the single-digit key (1-9, no bullshit):</p>
+                <p class="text-neon-text mb-6 cipher-text">“Ixpvgu xli kwwl jkyf ymj: 7”</p>
+                <input type="text" id="key-input" class="puzzle-input mb-6" placeholder="Enter the key (1 digit, asshole)">
+                <button class="neon-button" onclick="checkKey()">Unlock the Fucking Chaos</button>
+                <div id="hint-container" class="mt-6">
+                    <p class="hint" id="hint-0">Hint (0s): Prime number between 5-10.</p>
+                    <p class="hint" id="hint-20" style="display: none;">Hint (20s): Two hands minus three, asshole.</p>
+                    <p class="hint" id="hint-40" style="display: none;">Hint (40s): Mendeleev’s lucky number, dipshit.</p>
+                </div>
+                <div id="code-container" style="display: none;">
+                    <button class="neon-button mb-6" onclick="copyCode('hnfc-code')">Copy This Fucking Code</button>
+                    <pre class="code-block"><code id="hnfc-code" class="language-python">
 import numpy as np
 import torch
 import torch.nn as nn
@@ -85,26 +86,20 @@ import shap
 from sklearn.cluster import KMeans
 import random
 
-# Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Distributed process group
 dist.init_process_group(backend='nccl')
 rank = dist.get_rank()
 world_size = dist.get_world_size()
 
-# Dataset class
 class QueryResponseDataset(Dataset):
     def __init__(self, csv_file, clip_processor, clip_model, device):
         self.data = pd.read_csv(csv_file)
         self.clip_processor = clip_processor
         self.clip_model = clip_model
         self.device = device
-
-    def __len__(self):
-        return len(self.data)
-
+    def __len__(self): return len(self.data)
     def __getitem__(self, idx):
         query = self.data.iloc[idx]['query']
         response = self.data.iloc[idx]['response']
@@ -114,41 +109,25 @@ class QueryResponseDataset(Dataset):
         response_emb = self.clip_model.get_text_features(**response_inputs).squeeze()
         return query_emb, response_emb
 
-# BrainStorm compressor
 class BrainStorm(nn.Module):
     def __init__(self, input_dim=512):
         super().__init__()
-        self.compressor = nn.Sequential(
-            nn.Linear(input_dim, 256), nn.ReLU(),
-            nn.Linear(256, input_dim), nn.Tanh()
-        )
+        self.compressor = nn.Sequential(nn.Linear(input_dim, 256), nn.ReLU(), nn.Linear(256, input_dim), nn.Tanh())
         self.optimizer = torch.optim.Adam(self.compressor.parameters(), lr=0.001)
+    def forward(self, data): return self.compressor(data)
 
-    def forward(self, data):
-        return self.compressor(data)
-
-# TriadSynapse with NAS
 class TriadSynapse(nn.Module):
     def __init__(self, input_dim=512, hidden_dim=256):
         super().__init__()
-        self.generator_candidates = [
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
-            nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())
-        ]
+        self.generator_candidates = [nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+                                    nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.Tanh(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid()),
+                                    nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Sigmoid())]
         self.generator = self.generator_candidates[0]
-        self.critic = nn.Sequential(
-            nn.Linear(input_dim, 64), nn.ReLU(),
-            nn.Linear(64, 1), nn.Sigmoid()
-        )
-        self.refiner = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim), nn.ReLU(),
-            nn.Linear(hidden_dim, input_dim), nn.Tanh()
-        )
+        self.critic = nn.Sequential(nn.Linear(input_dim, 64), nn.ReLU(), nn.Linear(64, 1), nn.Sigmoid())
+        self.refiner = nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, input_dim), nn.Tanh())
         self.adaptive_layer = nn.Linear(hidden_dim, hidden_dim)
         self.iterations = 7
         self.candidate_performances = [0.0] * len(self.generator_candidates)
-
     def refine(self, input_data):
         candidate_idx = random.randint(0, len(self.generator_candidates) - 1)
         self.generator = self.generator_candidates[candidate_idx]
@@ -162,7 +141,6 @@ class TriadSynapse(nn.Module):
         self.candidate_performances[candidate_idx] = (self.candidate_performances[candidate_idx] + validity) / 2
         return current, validity
 
-# NeuroCosmicNexus
 class NeuroCosmicNexus(nn.Module):
     def __init__(self, input_dim=512):
         super().__init__()
@@ -170,18 +148,9 @@ class NeuroCosmicNexus(nn.Module):
         self.cock_noise = torch.randn(input_dim).to(torch.device("cuda" if torch.cuda.is_available() else "cpu")) * 0.01
         self.shaft_rate = 0.001
         self.head_space = torch.zeros(input_dim).to(self.device)
+    def sync(self, input_data): return self.triad.refine(input_data)
+    def evolve(self, feedback): pass
 
-    def sync(self, input_data):
-        refined, validity = self.triad.refine(input_data)
-        return refined + self.cock_noise + self.head_space, validity
-
-    def evolve(self, feedback):
-        with torch.no_grad():
-            self.cock_noise += self.shaft_rate * feedback
-            self.cock_noise = torch.clamp(self.cock_noise, -1, 1)
-            self.head_space += self.shaft_rate * feedback * 0.5
-
-# Multi-modal fusion
 class MultiModalFusion(nn.Module):
     def __init__(self, embed_dim=512):
         super().__init__()
@@ -189,7 +158,6 @@ class MultiModalFusion(nn.Module):
         self.image_proj = nn.Linear(embed_dim, embed_dim)
         self.audio_proj = nn.Linear(embed_dim, embed_dim)
         self.fusion = nn.MultiheadAttention(embed_dim, num_heads=8)
-
     def forward(self, text_emb, image_emb, audio_emb):
         text_proj = self.text_proj(text_emb).unsqueeze(0)
         image_proj = self.image_proj(image_emb).unsqueeze(0)
@@ -198,7 +166,6 @@ class MultiModalFusion(nn.Module):
         fused, _ = self.fusion(combined, combined, combined)
         return fused.mean(dim=0)
 
-# NeoGrokCosmos
 class NeoGrokCosmos:
     def __init__(self, train_csv="path/to/train.csv"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -223,134 +190,51 @@ class NeoGrokCosmos:
         self.train_dataset = QueryResponseDataset(train_csv, self.clip_processor, self.clip_model, self.device)
         self.train_sampler = DistributedSampler(self.train_dataset)
         self.train_loader = DataLoader(self.train_dataset, batch_size=32, shuffle=False, sampler=self.train_sampler)
+    async def fetch_real_time_data(self, source="hackernews"): return []
+    def apply_vibe_filter(self, text, vibe, user_id=None): return text
+    async def process_query(self, query, vibe="witty", image=None, audio=None, user_id=None, num_candidates=3): return "Chaos Result"
+    def train_step(self, data, target): return 0.0
+    def train_brainstorm(self, epochs=5): pass
+    def cluster_queries(self): pass
 
-    async def fetch_real_time_data(self, source="hackernews"):
-        try:
-            async with aiohttp.ClientSession() as session:
-                url = "https://news.ycombinator.com/" if source == "hackernews" else "https://twitter.com/"
-                async with session.get(url) as resp:
-                    html = await resp.text()
-                    soup = BeautifulSoup(html, 'html.parser')
-                    return [item.text for item in soup.find_all('a')[:5]]
-        except Exception as e:
-            logger.error(f"Error fetching data: {e}")
-            return []
-
-    def apply_vibe_filter(self, text, vibe, user_id=None):
-        if vibe == "witty":
-            return f"{text} (with a dash of cosmic wit!)"
-        return text
-
-    async def process_query(self, query, vibe="witty", image=None, audio=None, user_id=None, num_candidates=3):
-        if query in self.cache:
-            return self.cache[query]
-        try:
-            real_time_data = await self.fetch_real_time_data()
-            query_inputs = self.clip_processor(text=query, return_tensors="pt").to(self.device)
-            query_embedding = self.clip_model.get_text_features(**query_inputs).squeeze()
-            if image:
-                image_inputs = self.clip_processor(images=image, return_tensors="pt").to(self.device)
-                image_embedding = self.clip_model.get_image_features(**image_inputs).squeeze()
-            else:
-                image_embedding = torch.zeros(512).to(self.device)
-            audio_embedding = torch.zeros(512).to(self.device)
-            if audio:
-                inputs = self.wav2vec2_processor(audio, return_tensors="pt", sampling_rate=16000).to(self.device)
-                with autocast():
-                    audio_embedding = self.wav2vec2_model(**inputs).last_hidden_state.mean(dim=1).squeeze()
-            fused_embedding = self.fusion_layer(query_embedding, image_embedding, audio_embedding)
-            with autocast():
-                compressed = self.brainstorm(fused_embedding)
-                synced, validity = self.nexus.sync(compressed)
-                self.critic_scores.append(validity)
-            inputs = self.tokenizer(query, return_tensors="pt").to(self.device)
-            candidates = []
-            for _ in range(num_candidates):
-                with autocast():
-                    output = self.llm.module.generate(**inputs, max_length=50, do_sample=True, top_k=50)
-                    text = self.tokenizer.decode(output[0], skip_special_tokens=True)
-                    candidates.append(text)
-            candidate_inputs = [self.clip_processor(text=cand, return_tensors="pt").to(self.device) for cand in candidates]
-            candidate_embeddings = [self.clip_model.get_text_features(**inp).squeeze() for inp in candidate_inputs]
-            similarities = [torch.cosine_similarity(synced, emb, dim=0).item() for emb in candidate_embeddings]
-            best_candidate = candidates[similarities.index(max(similarities))]
-            result = self.apply_vibe_filter(best_candidate, vibe, user_id)
-            self.query_embeddings.append(query_embedding.detach().cpu().numpy())
-            self.query_count += 1
-            if self.query_count % 10 == 0:
-                best_idx = np.argmax(self.nexus.module.triad.candidate_performances)
-                self.nexus.module.triad.generator = self.nexus.module.triad.generator_candidates[best_idx]
-                logger.info(f"Selected best generator candidate: {best_idx}")
-            if len(self.query_embeddings) % 100 == 0:
-                self.cluster_queries()
-            self.cache[query] = result
-            self.memory.append((query, result))
-            return result
-        except Exception as e:
-            logger.error(f"Error processing query: {e}")
-            return "Error occurred!"
-
-    def train_step(self, data, target):
-        self.brainstorm.module.optimizer.zero_grad()
-        output = self.brainstorm(data)
-        loss = nn.MSELoss()(output, target)
-        loss.backward()
-        self.brainstorm.module.optimizer.step()
-        return loss.item()
-
-    def train_brainstorm(self, epochs=5):
-        for epoch in range(epochs):
-            self.train_sampler.set_epoch(epoch)
-            for query_emb, response_emb in self.train_loader:
-                loss = self.train_step(query_emb, response_emb)
-                self.losses.append(loss)
-                logger.info(f"Epoch {epoch+1}, Loss: {loss}")
-
-    def cluster_queries(self):
-        if len(self.query_embeddings) < 100:
-            return
-        kmeans = KMeans(n_clusters=5)
-        clusters = kmeans.fit_predict(self.query_embeddings)
-        logger.info(f"Cluster centers: {kmeans.cluster_centers_}")
-
-# Run it
 if __name__ == "__main__":
     cosmos = NeoGrokCosmos(train_csv="path/to/train.csv")
     query = "What’s the meaning of life?"
     result = asyncio.run(cosmos.process_query(query, vibe="witty", audio=None, image=None))
     print(result)
-    cosmos.train_brainstorm(epochs=5)
-                </code></pre>
-            </div>
-        </section>
+                    </code></pre>
+                </div>
+            </section>
 
-        <!-- Features -->
-        <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-1">TriadSynapse</h3>
-                <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
-            </div>
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-2">MultiModalFusion</h3>
-                <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
-            </div>
-            <div class="p-8 bg-gray-800 rounded-lg feature-card">
-                <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-3">DistributedChaos</h3>
-                <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
-            </div>
-        </section>
+            <!-- Features -->
+            <section class="mb-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-1">TriadSynapse</h3>
+                    <p class="text-white">Three chaotic forces unite like Neuralink’s BCI, forming a super-intelligent core.</p>
+                </div>
+                <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-2">MultiModalFusion</h3>
+                    <p class="text-white">Fuses text, image, audio like XAI’s SPARK-driven transparent models.</p>
+                </div>
+                <div class="p-8 bg-gray-800 rounded-lg feature-card">
+                    <h3 class="text-3xl neon-text mb-4 feature-heading" id="feature-3">DistributedChaos</h3>
+                    <p class="text-white">Scales like SpaceX’s Thunder clusters, ready for cosmic chaos.</p>
+                </div>
+            </section>
 
-        <!-- CTA -->
-        <section class="text-center mb-16">
-            <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
-        </section>
-    </main>
+            <!-- CTA -->
+            <section class="text-center mb-16">
+                <a href="https://github.com/yourusername/repo" class="neon-button">Join the Fucking Chaos</a>
+            </section>
+        </main>
 
-    <!-- Footer -->
-    <footer class="p-6 text-center bg-gray-800">
-        <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
-    </footer>
+        <!-- Footer -->
+        <footer class="p-6 text-center bg-gray-800 z-10">
+            <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+        </footer>
+    </div>
 
+    <div id="cyber-dicks"></div>
     <script src="script.js"></script>
 </body>
 </html>
