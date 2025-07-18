@@ -119,7 +119,10 @@
             width: 250px; 
             height: 120px; 
             z-index: 1; 
-            opacity: 0.6; 
+            opacity: 0.9; /* Increased opacity for readability */
+            background: rgba(26, 26, 26, 0.7); /* Dark background for contrast */
+            border: 2px solid #9900ff;
+            border-radius: 8px;
         }
         .triad-glyph { 
             position: fixed; 
@@ -128,7 +131,13 @@
             width: 120px; 
             height: 120px; 
             z-index: 1; 
-            opacity: 0.8; 
+            opacity: 0.9; /* Increased opacity */
+            background: rgba(26, 26, 26, 0.7); /* Dark background */
+            border: 2px solid #ffff00;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .cyber-dick { 
             position: fixed; 
@@ -143,13 +152,15 @@
             background: #1a1a1a; 
             border: 3px solid #9900ff; 
             padding: 12px; 
-            color: #333333; 
-            border-radius: 8px; 
+            color: #ffffff; /* White for readability */
+            border-radius: 8px;
         }
         .hint { 
-            color: #000000; 
-            font-size: 1em; 
-            text-shadow: none; 
+            color: #ffffff; /* White for readability */
+            font-size: 1.2em; /* Larger text */
+            text-shadow: none;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.7); /* Dark background */
         }
         .hint.lightning-flash { 
             text-shadow: 0 0 5px #ffff00; 
@@ -201,6 +212,16 @@
     </style>
 </head>
 <body>
+    <!-- Top Navigation Menu -->
+    <nav class="bg-gray-800 p-4 fixed top-0 w-full z-10">
+        <ul class="flex space-x-6 justify-center text-white text-xl">
+            <li><a href="information.html" class="neon-text hover:text-yellow-300">Information</a></li>
+            <li><a href="team.html" class="neon-text hover:text-yellow-300">Team</a></li>
+            <li><a href="donate.html" class="neon-text hover:text-yellow-300">Donate</a></li>
+            <li><a href="contact-us.html" class="neon-text hover:text-yellow-300">Contact Us</a></li>
+        </ul>
+    </nav>
+
     <!-- Lightning Canvas -->
     <canvas id="lightning-canvas" class="lightning-canvas"></canvas>
 
@@ -220,13 +241,15 @@
     <canvas id="hud-overlay" class="hud-overlay"></canvas>
 
     <!-- TriadSynapse Glyph -->
-    <canvas id="triad-glyph" class="triad-glyph"></canvas>
+    <canvas id="triad-glyph" class="triad-glyph">
+        <p class="text-white text-center text-lg">Triad Sync: 75%</p>
+    </canvas>
 
     <!-- Cyber-Dicks -->
     <div id="cyber-dicks"></div>
 
     <!-- Hero -->
-    <section class="parallax flex items-center justify-center">
+    <section class="parallax flex items-center justify-center mt-16"> <!-- Offset for top nav -->
         <div class="text-center">
             <h1 class="text-8xl neon-text">HyperChaoticNeuralCodec</h1>
             <p class="text-3xl text-white mt-4">Neon-Yellow Lightning-Fucked XAI Chaos</p>
@@ -237,7 +260,7 @@
     <div id="neural-orb" class="neural-orb" style="animation: orb-pulse 2s infinite;"></div>
 
     <!-- Main -->
-    <main class="p-10 max-w-7xl mx-auto relative">
+    <main class="p-10 max-w-7xl mx-auto relative mt-16"> <!-- Offset for top nav -->
         <!-- Puzzle-Locked Code -->
         <section class="mb-16">
             <h2 class="text-4xl neon-text mb-6">Crack This Cipher, You Unhinged Motherfucker</h2>
@@ -554,7 +577,13 @@ if __name__ == "__main__":
     <!-- |  ***  | -->
     <!-- |_______| -->
     <footer class="p-6 text-center bg-gray-800">
-        <p class="text-white">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+        <p class="text-white text-lg">© 2025 HNFC Team - Powered by SPARK, Motherfuckers</p>
+        <ul class="flex justify-center space-x-6 mt-2 text-white text-lg">
+            <li><a href="information.html" class="hover:text-yellow-300">Info</a></li>
+            <li><a href="team.html" class="hover:text-yellow-300">Team</a></li>
+            <li><a href="donate.html" class="hover:text-yellow-300">Donate</a></li>
+            <li><a href="contact-us.html" class="hover:text-yellow-300">Contact</a></li>
+        </ul>
     </footer>
 
     <!-- Scripts -->
@@ -765,10 +794,8 @@ if __name__ == "__main__":
         hudCanvas.height = window.innerWidth < 430 ? 80 : 120;
         function drawHUD() {
             hudCtx.clearRect(0, 0, hudCanvas.width, hudCanvas.height);
-            hudCtx.strokeStyle = '#9900ff';
-            hudCtx.lineWidth = 1;
-            hudCtx.font = window.innerWidth < 430 ? '8px monospace' : '10px monospace';
-            hudCtx.fillStyle = '#9900ff';
+            hudCtx.fillStyle = '#ffffff'; // White text for readability
+            hudCtx.font = window.innerWidth < 430 ? '10px monospace' : '12px monospace';
             hudCtx.fillText(`BCI SYNC: ${Math.floor(Math.random() * 100)}%`, 10, 20);
             hudCtx.fillText(`NEURAL LOAD: ${Math.random().toFixed(2)} THz`, 10, 40);
             hudCtx.fillText(`CHAOS METER: ${(stormMode || shockwaveRadius > 0) ? 100 : Math.floor(Math.random() * 100)}%`, 10, 60);
@@ -798,6 +825,9 @@ if __name__ == "__main__":
         glyphCanvas.height = window.innerWidth < 430 ? 80 : 120;
         function drawGlyph() {
             glyphCtx.clearRect(0, 0, glyphCanvas.width, glyphCanvas.height);
+            glyphCtx.fillStyle = '#ffffff'; // White text for readability
+            glyphCtx.font = window.innerWidth < 430 ? '10px monospace' : '12px monospace';
+            glyphCtx.fillText(`Triad Sync: 75%`, glyphCanvas.width / 4, glyphCanvas.height / 2);
             glyphCtx.strokeStyle = '#ffff00';
             glyphCtx.lineWidth = 3;
             glyphCtx.beginPath();
@@ -854,13 +884,13 @@ if __name__ == "__main__":
         }
         setInterval(addCyberDick, 100);
 
-        // Neural Orb with TriadSynapse (Always Visible and Cooler)
+        // Neural Orb with TriadSynapse (Always Visible and Fixed)
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('neural-orb').appendChild(renderer.domElement);
-        const orbGeometry = new THREE.SphereGeometry(3, 32, 32); // Bigger orb
+        document.getElementById('neural-orb').appendChild(renderer.domElement); // Ensured to append and stay visible
+        const orbGeometry = new THREE.SphereGeometry(3, 32, 32);
         const orbMaterial = new THREE.MeshPhongMaterial({ 
             color: 0x9900ff, 
             emissive: 0x9900ff, 
@@ -869,7 +899,7 @@ if __name__ == "__main__":
         });
         const orb = new THREE.Mesh(orbGeometry, orbMaterial);
         scene.add(orb);
-        const ambientLight = new THREE.AmbientLight(0x404040); // Subtle ambient glow
+        const ambientLight = new THREE.AmbientLight(0x404040);
         scene.add(ambientLight);
         const pointLight = new THREE.PointLight(0xffff00, 1, 100);
         pointLight.position.set(0, 0, 10);
@@ -895,7 +925,7 @@ if __name__ == "__main__":
             new THREE.PointsMaterial({ color: 0xff3333, size: window.innerWidth < 430 ? 0.05 : 0.1, blending: THREE.AdditiveBlending })
         );
         scene.add(particles);
-        camera.position.z = 8; // Pulled back for better view
+        camera.position.z = 8;
         let orbPulse = 1;
         document.addEventListener('mousemove', (e) => {
             orb.rotation.x = e.clientY * 0.002;
@@ -921,7 +951,7 @@ if __name__ == "__main__":
             requestAnimationFrame(animate);
             orb.rotation.z += 0.005;
             orbPulse = Math.sin(Date.now() * 0.01) * 0.3 + 1;
-            orb.scale.set(orbPulse, orbPulse, orbPulse); // Pulsing effect
+            orb.scale.set(orbPulse, orbPulse, orbPulse);
             particles.rotation.z += 0.003;
             if (Math.random() < 0.2 || stormMode) {
                 particles.geometry.attributes.position.array.forEach((_, i) => {
@@ -934,7 +964,7 @@ if __name__ == "__main__":
             }
             renderer.render(scene, camera);
         }
-        animate();
+        animate(); // Ensured animation runs continuously
 
         // Neural Net Canvas
         const canvas = document.createElement('canvas');
